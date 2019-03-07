@@ -1,29 +1,29 @@
-# {SUBJECT NAME}. [ЛЕКЦИИ](https://tgjmjgj.github.io/reveal-template/dist/index.html "Лекции")
+# Веб программирование. Фронтенд. [ЛЕКЦИИ](https://tgjmjgj.github.io/js/dist/index.html "Лекции")
 
 ***
 
-### Тема 1. {LECTURE NAME}
+### Тема 1. Браузерные скрипты
 
-{LECTURE DESCRIPTION}
+Скриптовые языки программирования. Интерпретация кода. Программирование для веба. Настройка окружения. Основы JS.
 
-[Лекция](https://tgjmjgj.github.io/reveal-template/dist/lecture/1_lect_name/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/js/dist/lecture/1_scripting/index.html "Лекция")
 
-### Тема 2. {LECTURE NAME}
+### Тема 2. Основы JS
 
-{LECTURE DESCRIPTION}
+Синтаксис JavaScript. Динамическая типизация. Стандартны EcmaScript.
 
-[Лекция](https://tgjmjgj.github.io/reveal-template/dist/lecture/2_lect_name/index.html "Лекция")
+[Лекция](https://tgjmjgj.github.io/js/dist/lecture/2_js_intro/index.html "Лекция")
 
 ## Задания
 
 * Задание 1.
 
-[*{TASK NAME}*](https://tgjmjgj.github.io/reveal-template/dist/task/task_1/task_1.pdf "{TASK NAME}")
+[*Настройка окружения*](https://tgjmjgj.github.io/js/dist/task/task_1/task_1.pdf "Настройка окружения")
 
 * Задание 2.
 
-[*{TASK NAME}*](https://tgjmjgj.github.io/reveal-template/dist/task/task_2/task_2.pdf "{TASK NAME}")
+[*Основы синтаксиса*](https://tgjmjgj.github.io/js/dist/task/task_2/task_2.pdf "Основы синтаксиса")
 
-* Задание 3 <sup>*[мутненькое]*</sup>.
+* Задание 3.
 
-[*{TASK NAME}*](https://tgjmjgj.github.io/reveal-template/dist/task/task_3/task_3.pdf "{TASK NAME}")
+[*Взаимодействие с DOM моделью*](https://tgjmjgj.github.io/js/dist/task/task_3/task_3.pdf "Взаимодействие с DOM моделью")

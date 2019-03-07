@@ -26,7 +26,6 @@
 
         }
         let codeBlocks = document.getElementsByTagName("code");
-        debugger;
         if (codeBlocks) {
 
             let worker = new Worker("../../js/worker.js");
