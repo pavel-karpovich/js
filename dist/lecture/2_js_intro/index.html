@@ -355,12 +355,11 @@ a = true;  // а теперь boolean
 						Изначально в нём была реализована прототипно-ориентированная парадигма программирования.
 					</p>
 					<p>
-						Это та ещё дичь, просто забейте на неё. Она такая стрёмная, что даже разработчики забили на неё,
-						ей никто не пользуется.
-					</p>
-					<p>
 						В 2009 году, поверх прототипно-ориентированной модели, в язык были добавлены классические конструкции
 						для ООП, такие как классы, наследование классов, геттеры-сеттеры и т.д.
+					</p>
+					<p>
+						На самом деле это довольно интересно, так что можно самостоятельно изучить прототипную модель.
 					</p>
 				</section>
 			</section>
@@ -535,13 +534,13 @@ let v3 = (a === b);
 					<pre>
 						<code class="js">
 1 == "1";		// true
-1 === "1";		// true
+1 === "1";		// false
 
 '0' == false;		// true
 '0' === false;		// false
 
 [] != true;			// true
-[] !== true;			// true
+[] !== true;		// true
 						</code>
 					</pre>
 				</section>
@@ -1015,6 +1014,292 @@ let arr2 = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 						</code>
 					</pre>
 				</section>
+				<section>
+					<h2>Массив как объект</h2>
+					<p>
+						Поскольку массив это объект, с его элементами можно работать как со свойствами объекта.
+					</p>
+					<p>
+						Но так делать не рекомендуется, потому что это ломает внутреннюю логику его работы как массива.
+					</p>
+					<p>
+						Например, свойство <span class="purple">length</span> у объекта массива всегда равно значению
+						его максимального числового ключа - 1.
+					</p>
+					<pre>
+						<code class="js">
+let arr = ["t", "e"];
+arr[10000000] = "ы";
+console.log(arr.length);			// 9999999
+						</code>
+					</pre>
+					<p>
+						Добавили один элемент, увеличили размер массива на 10 миллионов. Профит!
+					</p>
+				</section>
+				<section>
+					<h2>Добавление элементов в массив</h2>
+					<p>
+						Правильно добавлять элементы в массив нужно с помощью встроенных в объект методов. 
+					</p>
+					<ul>
+						<li>Метод <span class="purple">unshift</span> - добавление в начало массива</li>
+						<li>Метод <span class="purple">push</span> - добавление в конец массива</li>
+						<li>Метод <span class="purple">splice</span> - добавление в определённую позицию массива</li>
+					</ul>
+					<p>
+						Все эти методы могут добавлять любое количество элементов за раз - т.е. столько, сколько в них
+						передать парамектров.
+					</p>
+				</section>
+				<section>
+					<h3>Примеры добавления</h3>
+					<pre>
+						<code class="js">
+let arr1 = [1, 2, 3];
+arr1.unshift("a");					// ["a", 1, 2, 3]
+arr1.unshift("b", "c", "d");				// ["b", "c", "d", "a", 1, 2, 3]
+
+let arr2 = [true, false, null];
+arr2.push(2);						// [true, false, null, 2]
+arr2.push("o", "oop", arr1);				// [true, false, null, 2, "o", "oop", ["b", "c", "d", "a", 1, 2, 3]]
+
+let arr3 = ["Pol", "Roger", "Tom"];
+arr3.splice(1, 0, "Nolan");				// ["Pol", "Nolan", "Roger", "Tom"]
+arr3.splice(2, 0, "Mickey", "Bred", "Sergio");		// ["Pol", "Nolan", "Mickey", "Bred", "Sergio", "Roger", "Tom"]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Удаление элементов из массива</h2>
+					<p>
+						С удалением всё по аналогии, как и с добавлением - 3 варианта методов.
+					</p>
+					<ul>
+						<li>Метод <span class="purple">shift</span> - удаление из начала массива</li>
+						<li>Метод <span class="purple">pop</span> - удаление из конец массива</li>
+						<li>Метод <span class="purple">splice</span> - удаление из определённой позиции массива</li>
+					</ul>
+					<p>
+						С помощью метода splice можно удалить указанное количество подряд идущих элементов.
+						Shift и pop удаляют только по одному за раз.
+					</p>
+					<p>
+						Эти методы возвращают удалённые из массива значения.
+					</p>
+				</section>
+				<section>
+					<h3>Примеры удаления</h3>
+					<pre>
+						<code class="js">
+let people = [
+		{ name: "George", city: "London" }, 
+		{ name: "Ralf", city: "Copenhagen" }, 
+		{ name: "John", age: 33 }, 
+		{ id: "Golden Eagle", location: "Russia" },
+		{ name: "Melissa", city: "Cambridge" }
+	];
+
+people.shift();				// delete George
+let man = people.shift();		// delete Ralf
+console.log(man);			// { name: "Ralf", city: "Copenhagen" }
+console.log(people);			// [{ name: "John", age: 33 }, { id: "Golden Eagle", location: "Russia" }, { name: "Melissa", city: "Cambridge" }]
+			
+people.pop();				// delete Melissa
+people.pop();				// delete Golden Eagle
+console.log(people);			// [{ name: "John", age: 33 }]
+
+let mas = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+mas.splice(2, 1);			// [1, 2, 4, 5, 6, 7, 8, 9]
+let del = mas.splice(4, 3);		// [1, 2, 4, 5, 9]
+console.log(del);			// [6, 7, 8]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Методы массива</h2>
+					<p>
+						В объекте массива содержится большой набор стандартных методов для работы с ним.
+					</p>
+					<p>
+						Важно отметить, что многие методы (и не только в этом объекте) в JS могут работать 
+						по-разному, в зависимости от количества и типов переданных в них параметров.
+					</p>
+					<p>
+						Методы массива можно условно разделить на:
+					</p>
+					<ul>
+						<li>Простые методы</li>
+						<li>Функциональные методы</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Методы массива</h2>
+					<p>
+						Некоторые методы массива:
+					</p>
+					<table>
+						<tr>
+							<td>concat()</td>
+							<td>Объединяет несколько массивов в один</td>
+						</tr>
+						<tr>
+							<td>fill()</td>
+							<td>Заполняет все элементы массива одним значением</td>
+						</tr>
+						<tr>
+							<td>flat()</td>
+							<td>Возвращает новый одномерный массив из массива с подмассивами</td>
+						</tr>
+						<tr>
+							<td>includes()</td>
+							<td>Проверяет, содержит ли массив элемент с указанным значением</td>
+						</tr>
+						<tr>
+							<td>indexOf()</td>
+							<td>Ищет в массиве индекс первого элемента с указанным значением</td>
+						</tr>
+						<tr>
+							<td>lastIndexOf()</td>
+							<td>Тоже самое, только с конца</td>
+						</tr>
+						<tr>
+							<td>reverse()</td>
+							<td>Меняет порядок элементов в исходном массиве</td>
+						</tr>
+						<tr>
+							<td>slice()</td>
+							<td>Получает подмассив из исходного массива</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Использование</h3>
+					<pre>
+						<code class="js">
+let students = ["Markus", "Elly", "Tim"];
+let other = ["Jacky", "Sol", "Regina"];
+
+let all = students.concat(other);
+let allAndMore = students.concat(other, "Benjamin", ["Lorenzo", "Grim"]);
+
+allAndMore.fill("Unknown");					// ["Unknown" x9]
+
+let dimArr = [ [[1],[2]], [[[3]]], [4]];
+dimArr.flat(3);							// [1, 2, 3, 4]
+
+if (students.includes("Elly")) {
+
+	let indexElly = students.indexOf("Elly"); 
+	console.log("Hello Elly! Your index is " + indexElly);
+
+}
+
+all.push("Jacky");
+let firstIndex = all.indexOf("Jacky");				// 3
+let secondIndex = all.indexOf("Jacky", firstIndex + 1);		// 6
+
+let lastIndex = all.lastIndexOf("Jacky");			// 6
+
+other.reverse();						// ["Regina", "Sol", "Jacky"]
+
+let arr = [0, 5, 2, 7, 6, 2, 1, 75, 37, 1, 22, 10, 3];
+arr.sort();				// !!!
+console.log(arr);			// [0, 1, 1, 10, 2, 2, 22, 3, 37, 5, 6, 7, 75]
+
+arr.sort((x, y) => x > y);
+console.log(arr);			// [0, 1, 1, 2, 2, 3, 5, 6, 7, 10, 22, 37, 75]
+
+let subArray = arr.slice(1, 9);		// [1, 1, 2, 2, 3, 5, 6, 7]
+let subArray2 = arr.slice(6);		// [5, 6, 7, 10, 22, 37, 75]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Всемогущий метод splice</h2>
+					<p>
+						Ну, во-первых, методы splice и slice - это 2 разных метода.
+					</p>
+					<p>
+						Метод <span class="purple">splice</span> позволяет удалить любое количество элементов из 
+						любого места в массиве, а затем вставить в это место любое количество элементов.
+					</p>
+					<pre>
+						<code class="js">
+arr.splice(позиция, сколько_удалять, добавляемые элементы...)
+						</code>
+					</pre>
+					<pre>
+						<code class="js">
+let animals = ["cow", "cat", "dog", "bear", "tiger"];
+let deleted = animals.splice(1);
+console.log(animals);					// ["cow"]
+console.log(deleted);					// ["cat", "dog", "bear", "tiger"]
+
+deleted.splice(0, 2);					// ["bear", "tiger"]
+animals.splice(1, 0, ...deleted);			// ["cow", "bear", "tiger"]
+animals.splice(0, 2, "horse", "pig", "elephant");	// ["horse", "pig", "elephant", "tiger"]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Функциональные методы массива</h2>
+					<p>
+						Функциональные методы - методы в стиле функционального программирования, принимающие параметром другую функцию.
+					</p>
+					<table>
+							<tr>
+								<td>filter</td>
+								<td>Фильтрует элементы массива в соответствии с переданной функцией</td>
+							</tr>
+							<tr>
+								<td>find</td>
+								<td>Ищет первый элемент массива, удовлетворяющий условию в переданной функции</td>
+							</tr>
+							<tr>
+								<td>forEach</td>
+								<td>Функциональный вариант цикла for, выполняет указанную функцию для каждого элемента</td>
+							</tr>
+							<tr>
+								<td>map</td>
+								<td>Создаёт новый массив из старого, выполняя переданную функцию для каждого элемента</td>
+							</tr>
+							<tr>
+								<td>reduce</td>
+								<td>Преобразует массив в одно значение в соответствии с переданной функцией</td>
+							</tr>
+							<tr>
+								<td>sort</td>
+								<td>Сортирует массив по условию в переданной функции</td>
+							</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<h2>Оператор in</h2>
+				<p>
+					С помощью оператора <span class="blue">in</span> можно проверить, есть ли заданный ключ в указанном объекте.
+				</p>
+				<pre>
+					<code class="js">
+let soup = { freshness: 2, taste: 3, name: "borscht", "cook": "Anatoly" };
+if ('tast' in soup) {
+
+	console.log("wrong");
+
+} else if ('taste' in soup) {
+
+	console.log("yes!");
+
+}
+
+if (0 in soup === false) {
+
+	console.log("There is no 0");
+
+}
+					</code>
+				</pre>
 			</section>
 			<section>
 				<img src="img/cry.jpg">
