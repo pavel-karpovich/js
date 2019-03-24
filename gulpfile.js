@@ -19,8 +19,6 @@ const browserSync = require('browser-sync'),
 
 //variables
 
-const yaspellerDictionary = 'yadict.json';
-
 const srcPath = {
     'src': './src',
     'html': './src/**/*.html',
@@ -31,7 +29,7 @@ const srcPath = {
     'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
     'analysis': './code-analysis/',
-    'task': './src/task/**/*.pdf',
+    'task': './src/task/**/*.+(pdf|тых)',
     'cmpl': './src/completed/**/*.*',
     'print': './src/css/print/*.css',
 };
