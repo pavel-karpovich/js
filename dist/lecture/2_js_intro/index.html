@@ -1274,6 +1274,39 @@ animals.splice(0, 2, "horse", "pig", "elephant");	// ["horse", "pig", "elephant"
 							</tr>
 					</table>
 				</section>
+				<section>
+					<h2>Примеры функциональных методов</h2>
+					<pre>
+						<code class="js">
+let people = [
+    { name: "Phillip", gender: "m", age: 36 },
+    { name: "Lori", gender: "f", age: 40 },
+    { name: "Judith", gender: "f", age: 19 },
+    { name: "Alex", gender: "m", age: 26 },
+    { name: "Xander", gender: "m", age: 51 },
+    { name: "Rachel", gender: "f", age: 29 },
+    { name: "Kelly", gender: "f", age: 25 },
+];
+
+let younger30 = people.filter((person) => person.age < 30);
+
+let xander = people.find((person) => person.name === "Xander");
+
+people.forEach((person) => {
+    if (person.gender === "f" && person.age < 25) {
+        console.log(person);
+    }
+});
+
+let stringArray = people.map((person) => `${person.name}, ${person.age} years old, ${person.gender === "m" ? "male" : "female"}`);
+
+let averageAge = people.reduce((summary, person) => summary += person.age, 0) / people.length;
+let roundedAvgAge = averageAge.toFixed(2);
+
+let sortedByAge = people.sort((person1, person2) => person1.age > person2.age);
+						</code>
+					</pre>
+				</section>
 			</section>
 			<section>
 				<h2>Оператор in</h2>
