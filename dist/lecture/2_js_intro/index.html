@@ -12,6 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0 ">
 	<link rel="stylesheet" href="../../css/bundle.min.css">
 	
+	<link rel="stylesheet" href="../../css/custom.css" />
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
@@ -27,6 +28,7 @@
 </head>
 
 <body>
+	<script src="../../js/theme.js"></script>
 	<div class="reveal">
 		<div class="slides">
 			<section>
@@ -1335,6 +1337,146 @@ if (0 in soup === false) {
 				</pre>
 			</section>
 			<section>
+				<section>
+					<h2>Циклы</h2>
+					<p>
+						Изначально в JS было 4 вида циклов, но так было не интересно, и добавили ещё 2, так что
+						сейчас их 6 (пока что).
+					</p>
+					<ul>
+						<li>while</li>
+						<li>do while</li>
+						<li>for (классический)</li>
+						<li>for in</li>
+						<li>for of</li>
+						<li>forEach</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Классический while</h2>
+					<pre>
+						<code class="js">
+let arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+let sum = 0;
+while (sum < 20) {
+
+    sum += arr.length;
+
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Классический do while</h2>
+					<pre>
+						<code class="js">
+let arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
+let rnd, ind;
+do {
+
+    rnd = Math.floor(Math.random() * 20);
+    ind = arr.indexOf(rnd);
+
+} while (ind === -1);
+arr.splice(ind, 1);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>Классический for</h2>
+					<pre>
+						<code class="js">
+let arr = ["File", 'Line', `Ending`, `Work`, 'Directory', "Warning"];
+
+for (let i = 0; i < arr.length; ++i) {
+
+    if (typeof arr[i] === "string" && arr[i].length < 5) {
+
+        arr.splice(i, 1);
+        --i;
+    }
+}
+// arr = [`Ending`, 'Directory', "Warning"]
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>for in</h2>
+					<p>
+						Цикл <span class="blue">for in</span> используется для перебора свойств (ключей) объекта.
+					</p>
+					<pre>
+						<code class="js">
+let data = {
+	id: "234BC34P2321ET12",
+	name: "Volodimir Tarasov",
+	birth: "31.12.1991",
+	number: "ES377991"
+};
+
+let resStr = "&lt;person ";
+for (let prop in data) {
+
+	resStr += `${prop}='${data[prop]}' `;
+
+}
+resStr += "/&gt;";
+console.log(resStr);
+// &lt;person id='234BC34P2321ET12' name='Volodimir Tarasov' birth='31.12.1991' number='ES377991' /&gt;
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>for of</h2>
+					<p>
+						Цикл <span class="blue">for of</span> используется для перебора элементов массива.
+					</p>
+					<pre>
+						<code class="js">
+let dict = [
+	{ english: "trophy", russian: "трофей" },
+	{ english: "eggplant", russian: "баклажан" },
+	{ english: "clay", russian: "глина"},
+	{ english: "oak", russian: "дуб"},
+	{ english: "hippopotamus", russian: "бегемот" }
+];
+
+for (let word of dict) {
+
+	if (word.english.length === word.russian.length) {
+
+		console.log(`${word.english} : ${word.russian} -- Both words are the same length!`);
+
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>forEach</h2>
+					<p>
+						Метод <span class="blue">forEach</span> используется для написания циклов в функциональном стиле.
+					</p>
+					<pre>
+						<code class="js">
+let prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
+let ret = '';
+prime.forEach((value, index, array) => {
+
+	if (index != 0) {
+
+		ret += (array[index - 1] / value).toFixed(2) + " ";
+
+	}
+
+});
+
+console.log(ret);
+						</code>
+					</pre>
+				</section>
+			</section>
+			<section>
 				<img src="img/cry.jpg">
 			</section>
 			<section>
@@ -1356,6 +1498,24 @@ if (0 in soup === false) {
             <i class="fa fa-times fa-2x controls"></i>
         </a>
     </aside>
+	<aside id="presentable-theme-picker">
+		<div id="hidden-bar" class="invisible">
+			<div>
+				<div data-theme="beige" class="theme-circle theme-beige"></div>
+				<div data-theme="black" class="theme-circle theme-black"></div>
+				<div data-theme="blood" class="theme-circle theme-blood"></div>
+				<div data-theme="league" class="theme-circle theme-league"></div>
+				<div data-theme="moon" class="theme-circle theme-moon"></div>
+				<div data-theme="night" class="theme-circle theme-night"></div>
+				<div data-theme="serif" class="theme-circle theme-serif"></div>
+				<div data-theme="simple" class="theme-circle theme-simple"></div>
+				<div data-theme="sky" class="theme-circle theme-sky"></div>
+				<div data-theme="solarized" class="theme-circle theme-solarized"></div>
+				<div data-theme="white" class="theme-circle theme-white"></div>
+			</div>
+		</div>
+		<div id="selected-theme" class="theme-circle"></div>
+	</aside>
 	<script src="../../js/bundle.min.js"></script>
 </body>
 

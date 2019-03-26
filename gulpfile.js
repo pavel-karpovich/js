@@ -31,7 +31,7 @@ const srcPath = {
     'analysis': './code-analysis/',
     'task': './src/task/**/*.+(pdf|тых)',
     'cmpl': './src/completed/**/*.*',
-    'print': './src/css/print/*.css',
+    'print': './src/css/print/*.css'
 };
 
 const distPath = {
@@ -134,16 +134,26 @@ const copyCompletedFiles = function() {
 
 const copyPrintJsFiles = function() {
     return gulp.src(srcPath.print)
-        .pipe(gulp.dest(distPath.print))
+        .pipe(gulp.dest(distPath.print));
+}
+
+const copyThemeCssFiles = function() {
+    return gulp.src('./src/css/theme/*.css')
+        .pipe(gulp.dest('./dist/css/theme/'));
 }
 
 const copyHlJsFiles = function() {
     return gulp.src('./src/js/highlight/*.js')
-        .pipe(gulp.dest('./dist/js/'))
+        .pipe(gulp.dest('./dist/js/'));
+}
+
+const copyCustomCss = function() {
+    return gulp.src('./src/css/custom.css')
+        .pipe(gulp.dest('./dist/css/'));
 }
 
 const lint = gulp.parallel(lintJs, lintCss);
-const translate = gulp.parallel(parseHtml, parseCss, copyJs, parseImages, copyFonts, copyTaskFiles, copyCompletedFiles, copyPrintJsFiles, copyHlJsFiles);
+const translate = gulp.parallel(parseHtml, parseCss, copyJs, parseImages, copyFonts, copyCustomCss, copyTaskFiles, copyCompletedFiles, copyPrintJsFiles, copyThemeCssFiles, copyHlJsFiles);
 
 const build = gulp.series(cleanDist, lint, translate);
 
@@ -158,6 +168,7 @@ const watchServ = function() {
     watch(srcPath.cmpl, copyCompletedFiles);
     watch(srcPath.print, copyPrintJsFiles);
     watch('./src/js/highlight/*.js', copyHlJsFiles);
+    watch('./src/css/custom.css', copyCustomCss);
 
 }
 
