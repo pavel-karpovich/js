@@ -60,4 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
         
     });
 
+    hiddenPanel.addEventListener("click", (e) => e.stopPropagation());
+
 });
