@@ -1,11 +1,20 @@
+
+let link = null;
+let head = document.getElementsByName("head")[0];
 function setTheme(themeName) {
 
-    let link = document.createElement("link");
+    if (link) {
+
+        head.removeChild(link);
+
+    }
+
+    link = document.createElement("link");
     link.rel = "stylesheet";
     link.id = "theme";
     link.type = "text/css";
     link.href = `../../css/theme/${themeName}.css`;
-    document.getElementsByTagName("head")[0].appendChild(link);
+    head.appendChild(link);
 }
 
 const defaultTheme = "beige";
