@@ -1889,7 +1889,7 @@ eachElement(document, function(el) {
 
     if (el.hasAttributes && el.hasAttributes() && el.hasAttribute("href")) {
 
-        console.log(el);
+        console.log(el.getAttribute("href"));
         ++count;
     }
 
@@ -1897,6 +1897,301 @@ eachElement(document, function(el) {
 console.log(`A total of ${count} elements were found with href!`);
                         </code>
                     </pre>
+                </section>
+                <section>
+                    <h2>Удаление и добавление атрибутов</h2>
+                    <p>
+                        Удалить атрибут помогает метод <span class="blue">removeAttribute</span>, принимающий в качества
+                        аргумента название удаляемого атрибута.
+                    </p>
+                    <pre>
+                        <code class="js">
+element.removeAttribute("attribute-name");
+                        </code>
+                    </pre>
+                    <p>
+                        Добавить новый атрибут или новое значение можно с помощью метода <span class="blue">setAttribute</span>.
+                        Этот метод принимает 2 параметра: название атрибута и новое значение.
+                    </p>
+                    <pre>
+                        <code class="js">
+element.setAttribute("attribute-name", "attributeValue");
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с удалением/добавление атрибутов</h3>
+                    <p>
+                        Например, следующая функция, снова используя ту функцию для обхода DOM дерева, позволяет
+                        удалить любой атрибут со всей страницы.
+                    </p>
+                    <p>
+                        Например, можно деактивировать все ссылки, удалив атрибут <i>href</i>, или "очистить" страницу,
+                        удалив все атрибуты с css классами.
+                    </p>
+                    <pre>
+                        <code class="js">
+// Обход DOM дерева
+function eachElement(rootElement, callback) {
+
+    if (!callback) {
+
+        let elements = [];
+
+        eachElement(rootElement, function (element) {
+
+            elements.push(element);
+
+        });
+
+        return elements;
+    }
+
+    if (callback(rootElement) === false) {
+        return false;
+    }
+
+    if(rootElement.children.length != 0) {
+
+        let elements = rootElement.children;
+
+        for (let i = 0, l = elements.length; i < l; ++i) {
+
+            if (eachElement(elements[i], callback) === false) {
+                return;
+            }
+        }
+    }
+}
+
+// Основная функция
+function cleanAttribute(attr) {
+
+    eachElement(document, function (el) {
+
+        if (el.hasAttribute && el.hasAttribute(attr)) {
+
+            el.removeAttribute(attr);
+        }
+    });
+}
+
+cleanAttribute("href");
+
+cleanAttribute("src");
+cleanAttribute("srcset");
+
+// А вот код, который будет добавлять всплывающую подсказку для всех изображений img на странице:
+eachElement(document, function (el) {
+
+    if (el.hasAttribute && el.tagName.toLowerCase() == "img") {
+
+        el.setAttribute("title", "Это всплывающая подсказка. Которой здесь быть не должно, хакеры!");
+    }
+});
+
+
+
+
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Работа с булевыми атрибутами</h2>
+                    <p>
+                        Метод <span class="blue">toggleAttribute</span> переключает значение булевого атрибута. Т.е. если
+                        этот атрибут есть, убирает его, если же атрибута нет - то добавляет.
+                    </p>
+                    <p>
+                        В аргументах ему передаётся имя атрибута:
+                    </p>
+                    <pre>
+                        <code class="js">
+let isActive = element.toggleAttribute("attribute-name");
+                        </code>
+                    </pre>
+                    <p>
+                        Дополнительно вторым параметром можно передавать булевое значение, жестко задающее поведение:
+                        <span class="blue">true</span>, если нужно активировать атрибут, <span class="blue">false</span> - если
+                        нужно убрать его.
+                    </p>
+                    <p>
+                        Это получается то же самое, что <span class="blue">setAttribute</span>, только лишь для булевых атрибутов.
+                    </p>
+                    <pre>
+                        <code class="js">
+// Force activating
+element.toggleAttribute("attribute-name", true);
+
+// Force deactivating
+element.toggleAttribute("attribute-name", false);
+                        </code>
+                </section>
+                <section>
+                    <h3>Пример с toggleAttribute</h3>
+                    <p>
+                        Здесь каждые 10 секунд переключаются булевые атрибуты <i>readonly</i> для <i>textarea</i> и
+                        <i>contenteditable</i> для <i>div</i>-а, что переключает их между редактируемым и статическим состоянием.
+                    </p>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_NJQEzP"] {
+                            height: 400px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="NJQEzP" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="NJQEzP">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/NJQEzP/">
+                            NJQEzP</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Атрибут id</h2>
+                    <p>
+                        Для доступа к атрибуту <span class="blue">id</span> элемента на самом деле вообще не нужно пользоваться
+                        никакими методами, или обращаться к <i>attributes</i>.
+                    </p>
+                    <p>
+                        Для удобства, атрибут <span class="blue">id</span> в <span class="blue">Element</span> вынесен в
+                        отдельное свойство.
+                    </p>
+                    <p>
+                        С помощью него можно и читать, и изменять <span class="blue">id</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+let id = element.id;
+element.id = "newUniqueId";
+
+let superBlock = document.getElementById("su_block");
+console.log(superBlock.id);     // "su_block"
+superBlock.id = "id_123";
+console.log(superBlock.id);     // "id_123"
+
+let byOldId = document.getElementById("su_block");      // null
+let byNewId = document.getElementById("id_123");        // div
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример c id</h3>
+                    <p>
+                        В этом примере происходит копирование элемента с <span class="blue">id</span>. Соответственно,
+                        у каждой копии нужно менять <span class="blue">id</span> на новый.
+                    </p>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_aMeMmW"] {
+                            height: 450px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="aMeMmW" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="aMeMmW">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/aMeMmW/">
+                            aMeMmW</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>CSS классы</h2>
+                    <p>
+                        CSS классы присоединяются к элементам страницы через те же атрибуты. И в объекте <span class="blue">Element</span>
+                        есть очень удобный способ с ними работать.
+                    </p>
+                    <p>
+                        К атрибуту <span class="blue">class</span> можно получить доступ и с помощью предыдущих, рассмотренных ранее методик,
+                        но значительно удобнее с ними работать через специальные свойства.
+                    </p>
+                    <p>
+                        Вообще, связанный с CSS классами в объекте <span class="blue">Element</span> 2:
+                    </p>
+                    <ul>
+                        <li>className</li>
+                        <li>classList</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Свойство className</h2>
+                    <p>
+                        Свойство <span class="blue">className</span> предоставляет быстрый доступ к атрибуту <span class="blue">class</span>,
+                        так же как и рассмотренный только что <span class="blue">id</span>.
+                        С помощью него можно просматривать и задавать значение атрибута.
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.getElementById("main_cont");     // &lt;div class="container yello_sp1 thr2"&gt;
+console.log(div.className);             // "container yello_sp1 thr2"
+div.className = "container thr1";      
+console.log(div);                       // &lt;div class="container thr1"&gt;
+                        </code>
+                    </pre>
+                    <p>
+                        Однако не очень удобно работать с этим атрибутом, как со строкой. С одним элементом может быть сразу
+                        связано несколько CSS классов, и пытаться извлечь только нужный класс из строки совершенно неудобно.
+                    </p>
+                    <p>
+                        Поэтому это свойство редко бывает полезно, в особенности из-за наличия следующего свойства.
+                    </p>
+                </section>
+                <section>
+                    <h2>classList</h2>
+                    <p>
+                        Свойство <span class="blue">classList</span> одно из самых важных и полезный свойств в DOM.
+                    </p>
+                    <p>
+                        Оно позволяет удобно манипулировать классами у выбранного элемента, добавлять, удалять,
+                        проверять на наличие конкретных классов.
+                    </p>
+                    <p>
+                        Вообще, это свойсто содержит в себе специальный объект <span class="blue">DOMTokenList</span> -
+                        что-то вроде массива/перечисления CSS классов выбранного элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Методы объекта DOMTokenList</h2>
+                    <p>
+                        Объект <span class="blue">DOMTokenList</span> хранит назначенные элементу CSS классы в виде
+                        массива строк и содержит следующие методы:
+                    </p>
+                    <ul>
+                        <li><span class="blue">add()</span> - добавление CSS класса</li>
+                        <li><span class="blue">remove()</span> - удаление CSS класса</li>
+                        <li><span class="blue">item()</span> - получение класса по индексу</li>
+                        <li><span class="blue">toggle()</span> - переключение класса (вкл/выкл)</li>
+                        <li><span class="blue">contains()</span> - проверка наличия указанного класса</li>
+                        <li><span class="blue">replace()</span> - замена одного класса на другой</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Получение HTML разметки</h2>
+                    <p>
+                        Свойства <span class="blue">innerHTML</span> и <span class="blue">outerHTML</span>
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Получение элементов</h2>
+                    <p>
+                        До этого мы посмотрели только прямой способ получения элементов DOM дерева по переходам
+                        через навигационные свойства от корня, а также способ получения элемента по <span class="bluye">id</span>.
+                    </p>
+                    <p>
+                        И это была только верхушка айсберга. Способов получения и поиска элементов в DOM дереве гораздо больше.
+                    </p>
+                    <p>
+                        Найти элемент можно по:
+                    </p>
+                    <ul>
+                        <li><span class="purple">по уникальному id</span></li>
+                        <li><span class="purple">по имени тега</span></li>
+                        <li><span class="purple">по CSS классу</span></li>
+                        <li><span class="purple">по CSS селектору</span></li>
+                        <li><span class="purple">по XPath пути</span></li>
+                    </ul>
                 </section>
             </section>
             <section>
