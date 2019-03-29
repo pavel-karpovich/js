@@ -9,7 +9,7 @@
         progress: true,
         history: true,
         center: true,
-        slideNumber: false,
+        slideNumber: true,
         transition: "slide", // none/fade/slide/convex/concave/zoom
     });
     Reveal.addEventListener("ready", function (event) {

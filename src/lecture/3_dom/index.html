@@ -68,6 +68,19 @@
             </section>
             <section>
                 <section>
+                    <h3>Web API</h3>
+                    <img src="img/webApi.png">
+                    <p>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API">Полный список API на MDN</a>
+                    </p>
+                </section>
+                <section>
+                    <h3>NodeJs</h3>
+                    <img src="img/NodeApi.png" alt="">
+                </section>
+            </section>
+            <section>
+                <section>
                     <h1>DO<s>O</s>M</h1>
                     <p>
                         Взаимодействие JS с HTML возможно благодаря DOM.
@@ -89,9 +102,1501 @@
                     </p>
                     <p>
                         DOM содержит набор объектов и функций, которые можно использовать в JS для изменения
-                        структуры документа, стилей и контента на странице.
+                        структуры документа и контента на странице.
+                    </p>
+                    <p>
+                        С помощью DOM можно добавлять/изменять/создавать любые блоки на HTML странице.
                     </p>
                 </section>
+                <section>
+                    <h2>CSSOM</h2>
+                    <p>
+                        В комплексе с DOM применяется смежный API - CSSOM, который позволяет программно работать
+                        со стилями.
+                    </p>
+                    <p>
+                        CSSOM предоставляет функционал для добавления/редактирования/удаления встроенных стилей элементов
+                        страницы и динамического формирования CSS классов.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Окружение JavaScript</h2>
+                    <p>
+                        В JavaScript всё организовано в виде объектов.
+                    </p>
+                    <p>
+                        Даже все переменные на самом деле хранятся в виде свойств объекта.
+                    </p>
+                    <p>
+                        Объекты здесь также используются как пространства имён, чтобы группировать связанные элементы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Глобальный объект JavaScript</h2>
+                    <p>
+                        В JS существует понятие <span class="purple">глобальный объект</span> - это вершина
+                        древовидной структуры объектов, самый верхних объект, внутри которого хранятся все остальные.
+                    </p>
+                    <p>
+                        В браузерном JavaScript это объект <span class="blue">window</span>.
+                    </p>
+                    <p>
+                        Все другие объекты, существующие в JavaScript, находятся внутри объекта <span class="blue">window</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Встроенные объекты</h2>
+                    <p>
+                        Все объекты, функции и переменные, доступные глобально в JS, на самом деле являются свойствами
+                        объекта <span class="blue">window</span>.
+                    </p>
+                    <p>
+                        Например, <span class="turquoise">Array</span>, <span class="turquoise">Math</span>,
+                        <span class="turquoise">console</span> - все эти встроенные объекты находятся внутри объекта <span class="blue">window</span>.
+                    </p>
+                    <p>
+                        Вместо <span class="turquoise">Array</span> можно писать <span class="turquoise">window.Array</span>, вместо 
+                        <span class="turquoise">console</span> <span class="turquoise">window.console</span> - это будет одно и то же.
+                    </p>
+                </section>
+                <section>
+                    <h2>Глобальные переменные</h2>
+                    <p>
+                        Более того, даже все переменные и функции, объявленные в глобальном контексте, на самом деле
+                        будут храниться в виде свойств глобального объекта <span class="blue">window</span>.
+                    </p>
+                    <p>
+                        Например, простое объявление переменной: 
+                    </p>
+                    <pre>
+                        <code class="js">
+let a = 2;
+                        </code>
+                    </pre>
+                    <p>
+                        Эта переменная будет хранится в виде ключа <span class="turquoise">a</span> объекта 
+                        <span class="blue">window</span>, со значением 2:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log(window.a);          // 2
+
+let string = "blah-blah-blah";
+// window.string = "blah-blah-blah";    // Одно и то же
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Глобальные функции</h2>
+                    <p>
+                        С объявлением функций в глобальном контексте та же ситуация: они становятся свойствами
+                        (ну или уже методами) глобального объекта <span class="blue">window</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+function helloUser(name) {
+    console.log(`Good moorning, ${name}! How do you?`);
+}
+
+window.helloUser("Tim");
+
+// То же самое, что и
+// window.helloUser = function helloUser(name) {
+//     console.log(`Good moorning, ${name}! How do you?`);
+// }
+                        </code>
+                    </pre>
+                </section>
+
+            </section>
+            <section>
+                <section>
+                    <h2>Объект document</h2>
+                    <p>
+                        Весь набор объектов и функций, относящийся к взаимодействию с документом, т.е. API
+                        DOM и CSSOM, находится во встроенном объекте <span class="blue">document</span> (или
+                        <span class="purple">window.document</span>).
+                    </p>
+                    <p>
+                        Его можно считать пространством имён, в котором располагаются все DOM функции. Если что-то
+                        находится в <span class="blue">document</span> - значит это относится к DOM (или CSSOM).
+                    </p>
+                </section>
+                <section>
+                    <h2>Концепция DOM</h2>
+                    <img src="img/dom_tree.jpg">
+                </section>
+                <section>
+                    <h2>DOM дерево</h2>
+                    <p>
+                        Фундамент DOM-а - <span class="purple">DOM дерево</span>, - это древовидная структура, представляющая
+                        собой HTML документ.
+                    </p>
+                    <p>
+                        Каждый элемент HTML документа представляется в виде отдельного JS объекта.
+                    </p>
+                    <p>
+                        Корневой объект document содержит в себе ссылки на объекты head и body, body содержит ссылки
+                        на вложенные в него блоки, например, header, main, aside и footer. Header содержит ссылки на 
+                        вложенные div-ы, вложенные div-ы содержат ссылки на вложенные в них div-ы, и т.д. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Иерархия объектов DOM</h2>
+                    <img src="img/dom_hierarchy.png">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Общее представление</h2>
+                    <p>
+                        Объект <span class="blue">document</span> выполняет сразу 2 функции:
+                    </p>
+                    <p>
+                        Во-первых, он является контейнером для всех вспомогательных функций
+                        по взаимодействию с документом, т.е. пространством имён для всего DOM.
+                    </p>
+                    <p>
+                        Во-вторых, он представляет собой сам HTML документ в объектной форме, т.е. вершину
+                        иерархии DOM дерева.
+                    </p>
+                </section>
+                <section>
+                    <h2>head и body</h2>
+                    <p>
+                        Через объект <span class="blue">document</span> можно получить доступ к вложенным
+                        в него элементам head и body, через соответствующие ключи:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log(document.head);
+
+console.log(document.body);
+                        </code>
+                    </pre>
+                    <p>
+                        Доступ по имени тега доступен только в document, и только для head и body. 
+                        Потому что в HTML документе всегда должны быть head и body в количестве 1 штуки.
+                    </p>
+                </section>
+                <section>
+                    <h2>Дочерние элементы</h2>
+                    <p>
+                        У всех других объектов, для получения дочерних вложенных элементов необходимо
+                        использовать свойство <span class="blue">children</span>
+                    </p>
+                    <p>
+                        Это свойство вернет объект <span class="blue">HTMLCollection</span>, который как массив,
+                        хранит перечисление вложенных элементов.
+                    </p>
+                    <p>
+                        Обращаться к ним можно, например, по индексу. Порядок элементов в коллекции соответствует
+                        порядку записи этих элементов в HTML документе.
+                    </p>
+                </section>
+                <section>
+                    <h2>Свойство children</h2>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;div&gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;section&gt;&lt;/section&gt;
+        &lt;footer&gt;&lt;/footer&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let title = document.head.children[1];
+
+let body = document.body;
+let main = body.children[0];
+let div = main.children[0];
+
+let aInside3dLi = div.children[0].children[2].children[0];
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Получение конкретного элемента в DOM дереве</h2>
+                    <p>
+                        Добираться до нужного элемента через всё дерево может быть весьма
+                        неудобно, поэтому существует множество способов получения требуемого
+                        HTML элемента. 
+                    </p>
+                    <p>
+                        Например, получить элемент можно по <span class="blue">id</span>.
+                        Разумеется, у искомого элемента в HTML должен быть прописан атрибут id.
+                    </p>
+                    <p>
+                        Выполняется это с помощью метода <span class="blue">document.getElementById</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+let element = document.getElementById("someId");
+                        </code>
+                    </pre>
+                    <p>
+                        Если элемента с указанным <span class="blue">id</span> не существует,
+                        метод возвращает значение <span class="blue">null</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Получение элемента по id</h2>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;div id="socials" &gt;
+            &lt;ul&gt;
+                &lt;li&gt;
+                    &lt;a id="tw_link" href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a id="fb_link" href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li&gt;
+                    &lt;a id="in_link" href=""&gt;&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;section&gt;&lt;/section&gt;
+        &lt;footer id="foot"&gt;&lt;/footer&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let socialDiv = document.getElementById("socials");
+
+let footer1 = document.getElementById("foot");
+let footer2 = document.body.children[0].children[2];
+console.log(footer1 === footer2);       // true
+
+let fbLink1 = document.getElementById("fb_link");
+let fbLink2 = socialDiv.children[0].children[1].children[0];
+console.log(fbLink1 === fbLink2);
+                                </code>
+                            </pre>
+                        </div>
+                    </div>  
+                </section>
+
+            </section>
+            <section>
+                <section>
+                    <h2>Node из DOM иерархии</h2>
+                    <img src="img/node.png">
+                </section>
+                <section>
+                    <h2>Объект Node</h2>
+                    <p>
+                        <span class="blue">Node</span> - объект, базовый для всех используемых в DOM объектов 
+                        для представления любой штуки, встречающейся в HTML.
+                    </p>
+                    <p>
+                        Свойства и методы, находящиеся в этом классе, присущи всем объектам, которые можно встретить
+                        в DOM дереве.
+                    </p>
+                </section>
+                <section>
+                    <h2>Свойства навигации</h2>
+                    <p>
+                        К основным свойствам объекта <span class="blue">Node</span> можно отнести свойства навигации
+                        по DOM дереву:
+                    </p>
+                    <img src="img/dom_traverse.png">
+                </section>
+                <section>
+                    <h2>Свойства навигации по узлам</h2>
+                    <p>
+                        У каждого DOM объекта есть следующие свойства навигации:
+                    </p>
+                    <ul>
+                        <li>parentNode - родительский узел</li>
+                        <li>nextSibling - следующий сосед</li>
+                        <li>previousSibling - предыдущий сосед</li>
+                        <li>childNodes - дочерние узлы</li>
+                        <li>firstChild - первый дочерний узел</li>
+                        <li>lastChild - последний дочерний узел</li>
+                    </ul>
+                    <p>
+                        Все эти свойства предназначены только для чтения, это значит, что с
+                        помощью них удалить или заменить элемент нельзя.
+                    </p>
+                </section>
+                <section>
+                    <h2>Навигация по элементам</h2>
+                    <p>
+                        На самом деле навигация по узлам редко бывает полезна. А используется
+                        навигация только по элементам, с помощью аналогичных методов, но с
+                        немного другими названиями:
+                    </p>
+                    <ul>
+                        <li>parentElement - родительский элемент</li>
+                        <li>nextElementSibling - следующий соседский элемент</li>
+                        <li>previousElementSibling - предыдущий соседский элемент</li>
+                        <li>children - дочерние элементы</li>
+                        <li>firstElementChild - первый дочерний элемент</li>
+                        <li>lastElementChild - последний дочерний элемент</li>
+                    </ul>
+                    <p>
+                        Эти свойства есть не у всех узлов, а только у узлов, являющихся
+                        HTML элементами.
+                    </p>
+                </section>
+                <section>
+                    <h2>Узел vs Элемент</h2>
+                    <p>
+                        В чём отличие Узла от Элемента?
+                    </p>
+                    <p>
+                        Узел - это более общее понятие, объект, по иерархии наследования
+                        располагающийся выше элемента.
+                    </p>
+                    <p>
+                        Узел - это всё, что можно встретить в HTML документе: теги,
+                        простой текст, комментарии.
+                    </p>
+                    <p>
+                        Элемент - это структурная единица DOM дерева, тег в HTML. Например,
+                        div, body, a, p, h3 - Это всё элементы.
+                    </p>
+                    <p>
+                        И обычно работать приходится именно с элементами. Поэтому не
+                        стоит использовать навигационные методы по Node без строгой необходимости.
+                    </p>
+                </section>
+                <section>
+                    <h3>parentNode / parentElement</h3>
+                    <p>
+                        Свойство <span class="blue">parentElement</span> (и parentNode) содержит 
+                        ссылку на родительский объект, внутри которого расположен текущий.
+                    </p>
+                    <p>
+                        Это свойство может быть равно <span class="blue">null</span> у корневого объекта
+                        <span class="blue">document</span>, или же в том случае, если объект не
+                        привязан к основному DOM дереву документа.
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;a id="link1" href=""&gt;&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let documentParent = document.parentElement;       // null
+
+let main = document.body.children[0];
+
+console.log(main.parentElement);       // body
+
+let firstLink = document.getElementById("link1");
+
+console.log(firstLink.parentElement);      // li
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Пример с parentElement</h2>
+                    <p>
+                        Вот, например, функция, которая будет выводить всех родителей
+                        переданного элемента до самого корня:
+                    </p>
+                    <pre>
+                        <code class="js">
+function showParents(el) {
+
+    if (el instanceof Node === false) {
+        return;
+    }
+    let stack = [];
+    do {
+
+        stack.push(el);
+        el = el.parentElement;
+
+    } while(el.parentElement != null);
+
+    let indent = "";
+    while (stack.length != 0) {
+
+        let el = stack.pop();
+        console.log(indent + el + " - " + el.tagName);
+        indent += "\t";
+
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Соседи</h2>
+                    <p>
+                        Свойства <span class="blue">previousElementSibling</span> (previousSibling) 
+                        и <span class="blue">nextElementSibling</span> (nextSibling)
+                        позволяют обращаться к соседним элементам, т.е. элементам, расположенным
+                        на одном уровне, иначе говоря - имеющих общего родителя.
+                    </p>
+                    <p>
+                        Свойство <span class="blue">previousElementSibling</span> содержит ссылку на
+                        соседний элемент, который в HTML располагается <u>выше</u>, чем текущий.
+                    </p>
+                    <p>
+                        Если текущий элемент первый или единственный, значение этого свойства
+                        равно <span class="blue">null</span>.
+                    </p>
+                    <p>
+                        <span class="blue">nextElementSibling</span> содержит ссылку на соседний элемент
+                        уже с другой стороны, в HTML располагающийся <u>ниже</u> текущего.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример с ElementSibling</h3>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;ul&gt;
+            &lt;li id="item1" &gt;
+                &lt;a id="link1" href=""&gt;&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let body = document.body;
+let prevSibling = body.previousElementSibling;     // head
+let nextSibling = body.nextElementSibling;     // null
+
+let item1 = document.getElementById("item1");
+let item2 = item1.nextElementSibling;
+
+function isNodeOnlyChild(el) {
+    return el.previousElementSibling === el.nextElementSibling;
+}
+
+console.log(isNodeOnlyChild(document));     // true
+console.log(isNodeOnlyChild(document.head));        // false
+console.log(isNodeOnlyChild(document.head.children[0]));        // false
+console.log(isNodeOnlyChild(document.body.children[0]));        // true
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Дочерние узлы vs Дочерние элементы</h2>
+                    <p>
+                        Свойство <span class="blue">childNodes</span> хранит объект 
+                        <span class="blue">NodeList</span> - специальный объект, в котором
+                        перечислены все дочерние <u>узлы</u>.
+                    </p>
+                    <p>
+                        В чём его отличие от свойства <span class="blue">children</span>?
+                    </p>
+                    <p>
+                        <span class="blue">children</span> выдаёт список дочерних
+                        <u>элементов</u> (т.е. только объекты <span class="blue">Element</span>),
+                        а <span class="blue">childNodes</span> - список всех дочерних
+                        <u>узлов</u> (все производные объекты от <span class="blue">Node</span>).
+                    </p>
+                    <p>
+                        То есть, <span class="blue">children</span> - это список элементов,
+                        представляющих валидные HTML теги.
+                    </p>
+                    <p>
+                        А <span class="blue">childNodes</span> - список из всего, что есть внутри
+                        текущего элемента, включая комментарии, обычный текст и т.д.
+                    </p>
+                </section>
+                <section>
+                    <h3>Демонстрация разницы 1</h3>
+                    <p>
+                        Посмотрим разницу между Узлами и Элементами на следующем примере:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Комментарий --&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let body = document.body;
+
+console.log(body.children);     // 1 штука: [ div ]
+
+console.log(body.childNodes);   // 5 штук:  [ text, comment, text, div, text]
+
+// Как так?
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Демонстрация разницы 2</h3>
+                    <p>
+                        А теперь:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;&lt;body&gt;&lt;!-- Комментарий --&gt;&lt;div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let body = document.body;
+
+console.log(body.children);     // 1 штука: [ div ]
+
+console.log(body.childNodes);   // 2 штуки:  [ comment, div ]
+
+// О как
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                    <p>
+                        Вот поэтому навигацию по Node лучше не использовать!
+                    </p>
+                </section>
+                <section>
+                    <h3>Демонстрация разницы 3</h3>
+                    <p>
+                        Можно открыть любой сайт и посмотреть, например, в <span class="blue">document.head</span>
+                        или <span class="blue">document.body</span>, на их дочерние узлы и дочерние элементы.
+                    </p>
+                    <img src="img/children.jpg">
+                </section>
+                <section>
+                    <h3>Пример childNodes</h3>
+                    <p>
+                        Вот функция, которая показывает сколько есть и каких узлов, 
+                        не являющихся элементами, в переданном узле.
+                    </p>
+                    <pre>
+                        <code class="js">
+function showNonElements(el) {
+
+    if (el instanceof Node === false) {
+        return;
+    }
+    let arr = [];
+    let elements = el.children;
+    let nodes = el.childNodes;
+    for (let i = 0; i < nodes.length; ++i) {
+
+        let found = false;
+        for (let j = 0; j < elements.length; ++j) {
+
+            if (nodes[i] === elements[j]) {
+
+                found = true;
+                break;
+
+            }
+        }
+        
+        if (!found) {
+
+            arr.push(nodes[i]);
+
+        }
+
+    }
+
+    console.log(`${arr.length} non-elements was founded:`);
+    for (let el of arr) {
+        console.log(el);
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Крайние потомки</h2>
+                    <p>
+                        Свойства <span class="blue">firstElementChild</span> (firstChild) и 
+                        <span class="blue">nextElementChild</span> (nextChild)
+                        указывают на, соответственно, первый дочерний элемент и последний дочерний элемент.
+                    </p>
+                    <p>
+                        Если дочерний элементы лишь один, то оба свойста будут указывать на один и тот же объект.
+                    </p>
+                    <p>
+                        Если потомков нет - будет значение <span class="blue">null</span>;
+                    </p>
+                </section>
+                <section>
+                    <h2>Финальный пример навигации</h2>
+                    <p>
+                        Осторожно: рекурсия!
+                    </p>
+                    <p>
+                        Следующий алгоритм ищет и выводит самую длинную ветку DOM дерева:
+                    </p>
+                    <pre>
+                        <code class="js">
+function showParents(el) {
+
+    if (el instanceof Node === false) {
+        return;
+    }
+    let stack = [];
+    do {
+
+        stack.push(el);
+        el = el.parentElement;
+
+    } while(el.parentElement != null);
+
+    let indent = "";
+    while (stack.length != 0) {
+
+        let el = stack.pop();
+        console.log(indent + el + " - " + el.tagName);
+        indent += "\t";
+
+    }
+}
+
+function showLongestBranch() {
+
+    let dpNode = null;
+    let deepestLevel = 0;
+    
+    (function find(currentNode, currentLevel) {
+    
+        if (currentNode.children && currentNode.children.length != 0) {
+    
+            for (let i = 0; i < currentNode.children.length; ++i) {
+    
+                find(currentNode.children[i], currentLevel + 1);
+            }
+    
+        } else if (currentLevel > deepestLevel) {
+    
+            dpNode = currentNode;
+            deepestLevel = currentLevel;
+        }
+    
+    })(document, 0);
+    
+    console.log(`Longest branch in ${deepestLevel} nodes in depth!`);
+    showParents(dpNode);
+}
+showLongestBranch();
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Другие свойства Node</h2>
+                    <p>
+                        Помимо свойств навигации, любой объект Node содержит следующие полезные свойства:
+                    </p>
+                    <p>
+                        Свойства только для чтения:
+                    </p>
+                    <ul>
+                        <li><span class="blue">isConnected</span> - проверка, присоединён ли узел к основному DOM дереву</li>
+                        <li><span class="blue">nodeName</span> - имя узла (например, название тега для узлов-элементов)</li>
+                        <li><span class="blue">nodeType</span> - тип узла (элемент, комментарий, текст)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Другие свойства Node</h2>
+                    <p>
+                        Следующие 2 свойства являются редактируемыми, т.е. в них можно также и 
+                        записывать данные, изменяя тем самым содержимое документа.
+                    </p>
+                    <ul>
+                        <li><span class="blue">nodeValue</span></li>
+                        <li><span class="blue">textContent</span></li>
+                    </ul>
+                    <p>
+                        Свойство <span class="blue">nodeValue</span> используется для узлов-комментариев
+                        и текстовых узлов, чтобы хранить их значение. Т.е. с помощью него можно получить и
+                        задать значение для простого текста без тегов и комментариев в HTML. Для других
+                        типов узлов его значение равно <span class="blue">null</span> и ни на что не влияет.
+                    </p>
+                    <p>
+                        Свойство <span class="blue">textContent</span> хранит своё текстовое содержимое 
+                        и текстовое содержимое всех своих потомков. Менять с помощью него текс можно только
+                        когда он записан непосредственно в текущем элементе.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Создание узлов</h2>
+                    <p>
+                        С помощью методов объекта <span class="blue">document</span> можно
+                        создавать любые виды узлов:
+                    </p>
+                    <ul>
+                        <li><span class="blue"><b>document.createElement</b></span></li>
+                        <li><span class="blue">document.createComment</span></li>
+                        <li><span class="blue">document.createTextNode</span></li>
+                        <li><span class="blue">document.createAttribure</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Создание HTML элементов</h2>
+                    <p>
+                        Конечно, основной метод здесь <span class="blue">createElement</span> -
+                        для создания HTML элементов, или же тегов.
+                    </p>
+                    <p>
+                        Метод имеет один обязательный параметр - название тега создаваемого элемента.
+                    </p>
+                    <pre>
+                        <code class="js">
+let newElement = document.createElement("tag-name");
+                        </code>
+                    </pre>
+                    <p>
+                        Метод создаёт пустой и чистый элемент, не присоединённый к DOM дереву.
+                        Т.е. все свойства указывающие на родителей, детей или соседей у него
+                        будут равны <span class="blue">null</span>.
+                    </p>
+                    <p>
+                        Соединять его с основным DOM деревом нужно вручную (т.е. с помощью
+                        других функций).
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример создания элементов</h2>
+                    <pre>
+                        <code class="js">
+let newParagraph = document.createElement("p");
+
+let newDiv = document.createElement("div");
+
+let newUl = document.createElement("ul");
+
+let newVideo = document.createElement("video");
+
+console.log(
+    newParagraph.parentElement === newDiv.parentElement ===
+    newUl.parentElement === newVideo.parentElement === null
+);
+
+console.log(
+    newParagraph.children.length === newDiv.children.length ===
+    newUl.children.length === newVideo.children.length === 0
+);
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Методы объекта Node</h2>
+                    <p>
+                        А теперь посмотрим, какие методы есть у любого объекта <span class="blue">Node</span>:
+                    </p>
+                    <ul>
+                        <li><span class="blue"><b>appendChild</b></span> - добавляет дочерний узел</li>
+                        <li><span class="blue">insertBefore - добавляет дочерний узел перед указанным дочерним узлом</span></li>
+                        <li><span class="blue">cloneNode</span> - создаёт копию узла</li>
+                        <li><span class="blue"><b>removeChild</b></span> - удаляет дочерний узел</li>
+                        <li><span class="blue">replaceChild</span> - заменяет дочерний узел другим</li>
+                        <li><span class="blue">contains</span> - проверка, содержится ли переданный узел в текущем</li>
+                    </ul>
+                    <p>
+                        С полным перечнем свойств и методов <span class="blue">Node</span> можно ознакомиться
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node">на MDN</a>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Добаление элементов</h2>
+                    <p>
+                        Один из самых важных методов!
+                    </p>
+                    <p>
+                        С помощью метода <span class="blue">appendChild</span> можно присоединить
+                        один узел к другому.
+                    </p>
+                    <p>
+                        Метод принимает один обязательный параметр - узел, который будет добавлен
+                        в конец списка дочерних элементов текущего узла.
+                    </p>
+                    <pre>
+                        <code class="js">
+element.appendChild(aChild);
+                        </code>
+                    </pre>
+                    <p>
+                        Элемент, передаваемый в качестве параметра, присоединяется к элементу,
+                        для которого этот метод вызывается.
+                    </p>
+                    <p>
+                        При добавлении элемента к родителю, все навигационные свойства автоматически
+                        обновляют свои значения.
+                    </p>
+                </section>
+                <section>
+                    <h2>Пример добавления элемента</h2>
+                    <pre>
+                        <code class="js">
+let div = document.createElement("div");
+console.log(div.children);          // HTMLCollection []
+
+let header = document.createElement("h2");
+console.log(header.parentNode);     // null
+
+div.appendChild(header);
+console.log(div.children);          // HTMLCollection [ h2 ]
+console.log(header.parentNode);     // div
+console.log(div.firstChild);        // div
+
+let paragraph = document.createElement("p");
+
+div.appendChild(paragraph);
+console.log(div.children);              // HTMLCollection [ h2, p ]
+console.log(paragraph.parentNode);      // div
+console.log(header.nextSibling);                // p
+console.log(paragraph.previousSibling);         // h2
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>appendChild в действии</h2>
+                    <p>
+                        Пример функции, которая добавляет новый элемент <span class="blue">li</span>
+                        в список:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;ul id="list"&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+function addListItemWithText(text) {
+
+    let list = document.getElementById("list");
+
+    if (list) {
+
+        let newItem = document.createElement("li");
+        newItem.textContent = text;
+
+        list.appendChild(newItem);  
+
+    }
+}
+
+addListItemWithText("Пункт 1");
+addListItemWithText("Пункт 2");
+addListItemWithText("Пункт 3");
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Динамическое построение HTML документа</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[title="BbXRWx"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="300" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="BbXRWx" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="BbXRWx">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/BbXRWx/">
+                            BbXRWx</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Добавление методом insertBefore</h2>
+                    <p>
+                        Метод <span class="blue">insertBefore</span> используется для того, чтобы
+                        добавить дочерний элемент перед другим указанным дочерним элементом. 
+                    </p>
+                    <p>
+                        Метод принимает 2 обязательных параметра: 1 - добавляемый элемент, 2 - 
+                        присутствующий элемент, перед которым нужно вставить первый.
+                    </p>
+                    <pre>
+                        <code class="js">
+let insertedNode = parentNode.insertBefore(newNode, referenceNode);
+                        </code>
+                    </pre>
+                    <ul>
+                        <li><i>parentNode</i> - элемент, в который будет добавлен новый</li>
+                        <li><i>newNode</i> и <i>insertedNode</i> - добавляемый/добавленный элемент</li>
+                        <li>
+                            <i>referenceNode</i> - элемент, который уже находится в <i>parentNode</i>,
+                            перед которым будет вставлен <i>newNode</i>
+                        </li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Пример insertBefore</h2>
+                    <p>
+                        Вот методы <span class="blue">insertBefore</span> есть, а метода
+                        insertAfter - нет. Несправедливость!
+                    </p>
+                    <p>
+                        Давайте сами напишем метод insertAfter, используя метод
+                        <span class="blue">insertBefore</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+function insertAfter(parentNode, newNode, referenceNode) {
+
+    if (referenceNode != null) {
+
+        parentNode.insertBefore(newNode, referenceNode.NextSibling);
+
+    } else {
+
+        parentNode.appendChild(newNode);
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Добавление существующего элемента</h2>
+                    <p>
+                        Интересный момент, при добавлении элемента, который уже присутствует
+                        где-то в DOM дереве, он будет удалён из своей старой позиции и перемещён
+                        в новую.
+                    </p>
+                    <p>
+                        Т.е. один элемент не может находиться сразу в 2 местах на странице.
+                    </p>
+                    <p class="codepen" data-height="300" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="qveReQ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="qveReQ">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/qveReQ/">
+                            qveReQ</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Клонирование</h2>
+                    <p>
+                        А что делать, если всё-таки нужно добавить элемент, идентичный уже
+                        существующему? Тогда поможет метод <span class="blue">cloneNode</span>.
+                    </p>
+                    <p>
+                        Метод <span class="blue">cloneNode</span> создаёт полную <u>глубокую</u>
+                        копию узла. Глубокую - означает, что вместе с самим элементом копируются
+                        и все вложенные в него дочерние элементы.
+                    </p>
+                    <p>
+                        Таким образом, можно быстро создавать копии целых ветвей в DOM дереве.
+                    </p>
+                    <pre>
+                        <code class="js">
+let deepCopy = node.cloneNode(true); 
+                        </code>
+                    </pre>
+                    <p>
+                        Хотя это поведение можно отключить, передав в параметрах значение
+                        <span class="blue">false</span>. Тогда будет создана только копия 
+                        конкретного элемента, без дочерних элементов.
+                    </p>
+                </section>
+                <section>
+                    <h2>Пример cloneNode</h2>
+                    <p>
+                        В этом примере создаются 2 копии карточки, одна с помощью глубокого копирования,
+                        другая с помощью мелкого копирования:
+                    </p>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_JzgJmZ"] {
+                            height: 450px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="JzgJmZ" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Figure - Caption | Flexbox">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/JzgJmZ/">
+                            Figure - Caption | Flexbox</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h3>Подводные камни клонирования</h3>
+                    <p>
+                        Создавать копии узлов нужно внимательно, потому что некоторые вещи
+                        копировать не следует, например, id. При копировании объектов
+                        будут скопированы все их атрибуты, в том числе и уникальный id.
+                    </p>
+                    <p>
+                        В таким случаях id скопированного узла следует дополнительно изменять.
+                    </p>
+                    <p>
+                        Также могут встречаться и другие проблемы при копировании элементов
+                        с привязанными обработчиками событий, или копировании canvas.
+                    </p>
+                </section>
+                <section>
+                    <h2>Удаление дочерних элементов</h2>
+                    <p>
+                        Метод <span class="blue">removeChild</span> используется для удаления
+                        элемента из родительского узла, или же отсоединения дочернего узла от родителя.
+                    </p>
+                    <p>
+                        Метод принимает 1 обязательный параметр - элемент, который необходимо
+                        удалить из списка вложенных элементов.
+                    </p>
+                    <pre>
+                        <code class="js">
+let oldChild = node.removeChild(child);
+                        </code>
+                    </pre>
+                    <p>
+                        Элемент <i>child</i> отсоединяется от элемента <i>node</i>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример удаления</h3>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;ul id="list"&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;Первая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;Вторая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;Третья ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a href=""&gt;Четвёртая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let list = document.getElementById("list");
+
+for (let i = 0; i < list.children.length; ++i) {
+
+    let listItem = list.children[i];
+    let linkInsideItem = listItem.firstElementChild;
+
+    listItem.removeChild(linkInsideItem);
+
+}
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Пример удаления</h3>
+                    <p>
+                        Следующая функция будет очищать (удалять всех детей) указанный
+                        элемент:
+                    </p>
+                    <pre>
+                        <code class="js">
+function removeAllChildren(element) {
+
+    while(element.firstChild) {
+
+        element.removeChild(element.firstChild);
+
+    }
+}
+
+removeAllChildren(document.body);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Замена элемента</h2>
+                    <p>
+                        Метод <span class="blue">replaceChild</span> выполняет замену
+                        одного элемента на другой элемент.
+                    </p>
+                    <pre>
+                        <code class="js">
+let replacedNode = parentNode.replaceChild(newChild, oldChild);
+                        </code>
+                    </pre>
+                    <ul>
+                        <li><i>parentNode</i> - элемент, чьих детей подменяем</li>
+                        <li><i>newChild</i> - новый элемент, который встанет на место <i>oldChild</i></li>
+                        <li><i>oldChild</i> и <i>replacedNode</i> - элемент, который будет заменён</li>
+                    </ul>
+                    <p>
+                        Замена = удаление + добавление
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример replaceChild</h3>
+                    <p>
+                        Квадрат-пожиратель:
+                    </p>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_ZPgaGW"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="ZPgaGW" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="ZPgaGW">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/ZPgaGW/">
+                            ZPgaGW</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h3>Желтые против Синих</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_OqKOze"] {
+                            height: 600px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="OqKOze" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="OqKOze">
+                            <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/OqKOze/">
+                            OqKOze</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                            on <a href="https://codepen.io">CodePen</a>.</span>
+                          </p>
+                          <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Метод contains</h2>
+                    <p>
+                        С помощью метода <span class="blue">contains</span> можно проверить,
+                        содержится ли указанный элемент у другом элементе, вне зависимости от
+                        глубины вложенности.
+                    </p>
+                    <pre>
+                        <code class="js">
+node.contains(otherNode)
+                        </code>
+                    </pre>
+                    <p>
+                        Метод возвращает <span class="blue">true</span>, если элемент
+                        <i>otherNode</i> является самим элементом <i>node</i>, его
+                        дочерним элементом, или дочерним его дочерних элментов и т.д.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример contains</h3>
+                    <p>
+                        Простой метод для проверки, присоединён ли элемент к основному DOM
+                        дереву:
+                    </p>
+                    <pre>
+                        <code class="js">
+function isInPage(node) {
+
+    return document.body.contains(node);
+
+}
+
+isInPage(document.head);                        // false
+isInPage(document.body.lastElementChild);       // true
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Объект Element</h2>
+                    <p>
+                        Это был только объект <span class="blue">Node</span>.
+                    </p>
+                    <p>
+                        Теперь мы рассмотрим следующий в иерархии объект - <span class="blue">Element</span>,
+                        основной объект, используемый при работе с DOM.
+                    </p>
+                    <img src="img/element.png">
+                </section>
+                <section>
+                    <h2>Наследники Element</h2>
+                    <p>
+                        И это ещё не конец, у Element-а целая куча наследников
+                    </p>
+                    <img src="img/dom_hierarchy_2.png">
+                </section>
+                <section>
+                    <h3>Гораздо больше...</h3>
+                    <img src="img/html_elements.jpg">
+                </section>
+                <section>
+                    <h2>Основной функционал</h2>
+                    <p>
+                        Но все последующие объекты уже не добавляют почти никакого дополнительного
+                        функционала, только всякие нестандартные элементы, типа canvas.
+                    </p>
+                    <p>
+                        Основные функции и свойства сосредоточены в объектах <span class="blue">Node</span>,
+                        который мы рассмотрели, и <span class="blue">Element</span>, который мы разберём
+                        сейчас.
+                    </p>
+                    <small>
+                        *Ещё некоторые дополнительные функции и свойства, такие как рассмотренные нами
+                        навигационные свойства для элементов, находятся в отдельных объектах, не 
+                        входящим в основную иерархию, - так называемых, миксинах (mixin).
+                    </small>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Element и атрибуты</h2>
+                    <p>
+                        Объект <span class="blue">Element</span> добавляет целый ряд свойств и 
+                        методов для работы с атрибутами.
+                    </p>
+                    <p>
+                        Свойство
+                    </p>
+                    <ul>
+                        <li><span class="blue">attributes</span> - список всех атрибутов</li>
+                    </ul>
+                    <p>
+                        И методы:
+                    </p>
+                    <ul>
+                        <li><span class="blue">getAttribute()</span> - получение значения конкретного атрибута</li>
+                        <li><span class="blue">getAttributeNames()</span> - выдаёт массив атрибутов</li>
+                        <li><span class="blue">hasAttribute()</span> - проверка наличия атрибута</li>
+                        <li><span class="blue">hasAttributes()</span> - проверка наличия множества атрибутов</li>
+                        <li><span class="blue">removeAttribute()</span> - удаление атрибута</li>
+                        <li><span class="blue">setAttribute()</span> - установка значения атрибута</li>
+                        <li><span class="blue">toggleAttribute()</span> - переключение булевого атрибута</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Свойство attributes</h2>
+                    <p>
+                        <span class="blue">attributes</span> - универсальное свойство для работы с атрибутами. С помощью
+                        него можно получить доступ ко всем атрибутам элемента, добавлять новые атрибуты, изменять или
+                        удалять существующие.
+                    </p>
+                    <p>
+                        Свойство <span class="blue">attributes</span> содержит специальный объект <span class="blue">NamedNodeMap</span>,
+                        который является чем-то вроде перечисления из пар ключ-значение.
+                    </p>
+                </section>
+                <section>
+                    <h2>Объект NamedNodeMap</h2>
+                    <p>
+                        Объект <span class="blue">NamedNodeMap</span> хранит в себе перечисление из объектов 
+                        <span class="blue">Attr</span> (это которые наряду c
+                        <span class="blue">Element</span> наследуются от <span class="blue">Node</span>).
+                    </p>
+                    <p>
+                        Элементы этого перечисления можно перебирать по индексам, либо же обращаться к атрибутам по их именам.
+                    </p>
+                </section>
+                <section>
+                    <h2>Доступ к атрибутам через attributes</h2>
+                    <p>
+                        В этом примере показан доступ к атрибутам по индексам:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body class="body-container"&gt;
+    &lt;main class="container"&gt;
+        &lt;ul id="list" class="blue-list"&gt;
+            &lt;li&gt;
+                &lt;a id="link_1" name="clecture" href="https://learn.paradox.red/clecture"&gt;Первая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_2" href="https://learn.paradox.red/sharp"&gt;Вторая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_3" href="https://learn.paradox.red/js"&gt;Третья ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_4" href="https://learn.paradox.red/testing"&gt;Четвёртая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+function showAttr(el) {
+
+    if (el.attributes.length === 0) {
+
+        console.log("No attributes to show");
+        return;
+
+    }
+    for (let i = 0; i < el.attributes.length; ++i) {
+
+        console.log(el.attributes[i].name.padEnd(5) + " --> " + el.attributes[i].value);
+
+    }
+}
+
+let link1 =  document.getElementById("link_1");
+showAttr(link1);
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section>
+                CSSOM
+            </section>
+            <section>
+                Events
             </section>
 		</div>
 	</div>
