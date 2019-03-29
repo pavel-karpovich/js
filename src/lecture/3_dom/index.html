@@ -834,7 +834,7 @@ function showNonElements(el) {
                     </p>
                 </section>
                 <section>
-                    <h2>Финальный пример навигации</h2>
+                    <h2>Почти финальный пример навигации</h2>
                     <p>
                         Осторожно: рекурсия!
                     </p>
@@ -892,6 +892,53 @@ function showLongestBranch() {
     showParents(dpNode);
 }
 showLongestBranch();
+                        </code>
+                    </pre>
+                </section>                
+                <section>
+                    <h2>Обход всего DOM дерева</h2>
+                    <p>
+                        Осторожно: высокая концентрация рекурсии! Опасно для жизни!
+                    </p>
+                    <p>
+                        Следующая функция перебирает все элементы DOM дерева и выполняет для кажого элемента переданную
+                        callback-функцию:
+                    </p>
+                    <pre>
+                        <code class="js">
+function eachNode(rootNode, callback) {
+
+    if (!callback) {
+
+        let nodes = [];
+
+        eachNode(rootNode, function (node) {
+
+            nodes.push(node);
+
+        });
+
+        return nodes;
+    }
+
+    if (callback(rootNode) === false) {
+        return false;
+    }
+
+    if(rootNode.hasChildNodes()) {
+
+        let nodes = rootNode.childNodes;
+
+        for (let i = 0, l = nodes.length; i < l; ++i) {
+
+            if (eachNode(nodes[i], callback) === false) {
+                return;
+            }
+        }
+    }
+}
+
+// Пригодится в будущем
                         </code>
                     </pre>
                 </section>
@@ -1500,7 +1547,7 @@ isInPage(document.body.lastElementChild);       // true
                         <li><span class="blue">getAttribute()</span> - получение значения конкретного атрибута</li>
                         <li><span class="blue">getAttributeNames()</span> - выдаёт массив атрибутов</li>
                         <li><span class="blue">hasAttribute()</span> - проверка наличия атрибута</li>
-                        <li><span class="blue">hasAttributes()</span> - проверка наличия множества атрибутов</li>
+                        <li><span class="blue">hasAttributes()</span> - проверка наличия атрибутов в принципе</li>
                         <li><span class="blue">removeAttribute()</span> - удаление атрибута</li>
                         <li><span class="blue">setAttribute()</span> - установка значения атрибута</li>
                         <li><span class="blue">toggleAttribute()</span> - переключение булевого атрибута</li>
@@ -1528,6 +1575,52 @@ isInPage(document.body.lastElementChild);       // true
                     <p>
                         Элементы этого перечисления можно перебирать по индексам, либо же обращаться к атрибутам по их именам.
                     </p>
+                </section>
+                <section>
+                    <h2>Объект Attr</h2>
+                    <p>
+                        При работе с атрибутами через свойство <span class="blue">attributes</span> нужно быть очень
+                        внимательным, т.к. легко забыть, что атрибуты хранятся не в виде простых строковых значений,
+                        а виде объектов <span class="blue">Attr</span>.
+                    </p>
+                    <p>
+                        Следующая запись на первый взгляд может показаться нормальной, но это неправильная запись:
+                    </p>
+                    <pre>
+                        <code class="js">
+node.attributes.id = "uniqueId";            // неправильно
+node.attributes.name = "objName";           // неправильно
+node.attributes.href = "http://localhost:5500/index.html";     // неправильно
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Изменение значения атрибута через объект Attr</h3>
+                    <p>
+                        В объекте <span class="blue">Attr</span> значение аттрибута хранится в свойстве <span class="blue">value</span>.
+                        И если нужно изменять его, то нужно это делать именно через это свойство.
+                    </p>
+                    <pre>
+                        <code class="js">
+node.attributes.id.value = "uniqueId";            // Ок
+node.attributes.name.value = "objName";           // Ок
+node.attributes.href.value = "http://localhost:5500/index.html";     // Ок
+                        </code>
+                    </pre>
+                    <p>
+                        Имя атрибута можно получить через свойство <span class="blue">name</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log(node.attributes.role.name);       // "id"
+console.log(node.attributes.type.name);       // "type"
+console.log(node.attributes.tabindex.name);       // "tabindex"
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Схема объектов атрибутов</h2>
+                    <img src="img/attributes.png">
                 </section>
                 <section>
                     <h2>Доступ к атрибутам через attributes</h2>
@@ -1590,6 +1683,220 @@ showAttr(link1);
                             </pre>
                         </div>
                     </div>
+                </section>
+                <section>
+                    <h3>Доступ к атрибутам по ключу</h3>
+                    <p>
+                        А здесь осуществляется получение атрибутов по ключу, а также изменение их значений:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body class="body-container"&gt;
+    &lt;main class="container"&gt;
+        &lt;ul id="list" class="blue-list"&gt;
+            &lt;li&gt;
+                &lt;a id="link_1" name="clecture" href="https://learn.paradox.red/clecture"&gt;Первая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_2" name="sharp" href="https://learn.paradox.red/sharp"&gt;Вторая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_3" name="js" href="https://learn.paradox.red/js"&gt;Третья ссылка&lt;/a&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;a id="link_4" name="testing" href="https://learn.paradox.red/testing"&gt;Четвёртая ссылка&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+
+let list =  document.getElementById("list");
+
+let item = list.firstElementChild;
+do {
+
+    let linkAttrs = item.children[0].attributes;
+
+    linkAttrs.href.value = "http://example.com/";
+    console.log(`${linkAttrs.name.value} now leads to ${linkAttrs.href.value}`);
+
+    item = item.nextElementSibling;
+
+} while (item != null);
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Методы объекта NamedNodeMap</h2>
+                    <ul>
+                        <li><span class="blue">getNamedItem()</span> - аналог получения атрибута по ключу</li>
+                        <li><span class="blue">item()</span> - аналог получения атрибута по индексу</li>
+                        <li><span class="blue"><b>removeNamedItem()</b></span> - удаление атрибута</li>
+                        <li><span class="blue">setNamedItem()</span> - добавление Attr объекта атрибута</li>
+                    </ul>
+                    <p>
+                        Первые 2 метода - это то же самое, что получение атрибута по ключу/значению, только через методы.
+                    </p>
+                    <p>
+                        Метод <span class="blue">setNamedItem</span> слишком сложный для добавления атрибута, есть пути
+                        гораздо проще. Этот метод принимает параметр - объект типа <span class="blue">Attr</span>,
+                        который предварительно нужно создать с помощью <span class="blue">document.createAttribute</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Удаление атрибута через attributes</h2>
+                    <p>
+                        Единственный метод, которым здесь можно пользоваться, это <span class="blue">removeNamedItem</span>. 
+                    </p>
+                    <p>
+                        Он удаляет у элемента атрибут, по переданному названию.
+                    </p>
+                    <pre>
+                        <code class="js">
+let deletedAttr = node.attributes.removeNamedItem("name-of-attribute");
+                        </code>
+                    </pre>
+                    <p>
+                        Но и для удаления есть варианты попроще.
+                    </p>
+                </section>
+                <section>
+                    <h2>Методы Element для атибутов</h2>
+                    <p>
+                        Напомним, что у объекта <span class="blue">Element</span>, помимо свойства
+                        <span class="blue">attributes</span>, хоть всё можно сделать и через него, для удобства 
+                        существует набор методов для выполнения различных операций над атрибутами:
+                    </p>
+                    <ul>
+                        <li><span class="blue">getAttributeNames()</span> - выдаёт массив атрибутов</li>
+                        <li><span class="blue">getAttribute()</span> - получение значения конкретного атрибута</li>
+                        <li><span class="blue">hasAttribute()</span> - проверка наличия атрибута</li>
+                        <li><span class="blue">hasAttributes()</span> - проверка наличия атрибутов в принципе</li>
+                        <li><span class="blue">removeAttribute()</span> - удаление атрибута</li>
+                        <li><span class="blue">setAttribute()</span> - установка значения атрибута</li>
+                        <li><span class="blue">toggleAttribute()</span> - переключение булевого атрибута</li>
+                    </ul>
+                    <p>
+                        Эти методы прячут внутри всё сложное устройство <span class="blue">attributes</span> с их объектами
+                        <span class="blue">Attr</span>, и выдают только сами ключи и значения.
+                    </p>
+                </section>
+                <section>
+                    <h2>Получение имён и значений атрибутов</h2>
+                    <p>
+                        С помощью метода <span class="blue">getAttributeNames</span> можно получить массив из названий
+                        атрибутов у текущего элемента.
+                    </p>
+                    <pre>
+                        <code class="js">
+let attrArray = element.getAttributeNames();
+
+let attrs = link1.getAttributeNames();      // [ "id", "name", "href" ]
+                        </code>
+                    </pre>
+                    <p>
+                        А метод <span class="blue">getAttribute</span> позволяет по извествному названию атрибута получить
+                        его значение.
+                    </p>
+                    <pre>
+                        <code class="js">
+let attrValue = element.getAttribute("attrName");
+
+let linkAddress = link1.getAttribute("href");          // "http://example.com"
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка наличия атрибутов</h2>
+                    <p>
+                        Чтобы проверить, если ли у элемента вообще хоть один атрибут, или нет ни одного, можно с помощью
+                        метода <span class="blue">hasAttributes</span>.
+                    </p>
+                    <p>
+                        Этот метод не принимает параметров и возвращает <span class="blue">false</span>, если у элемента
+                        нет ни одного атрибута.
+                    </p>
+                    <p>
+                        Проверить, есть ли у текущего элемента какой-либо конкретный атрибут, можно с помощью метода
+                        <span class="blue">hasAttribute</span>.
+                    </p>
+                    <p>
+                        В качестве параметра этот метод принимает строку - имя атрибута, и возвращает <span class="blue">true</span>,
+                        если такой атрибут присутствует у этого элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Пример работы с атрибутами</h2>
+                    <p>
+                        Воспользуемся нашей старой рекурсивной функцией для обхода всего дерева, для того чтобы найти
+                        все элементы с атрибутами <i>href</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Обход DOM дерева
+function eachElement(rootElement, callback) {
+
+    if (!callback) {
+
+        let elements = [];
+
+        eachElement(rootElement, function (element) {
+
+            elements.push(element);
+
+        });
+
+        return elements;
+    }
+
+    if (callback(rootElement) === false) {
+        return false;
+    }
+
+    if(rootElement.children.length != 0) {
+
+        let elements = rootElement.children;
+
+        for (let i = 0, l = elements.length; i < l; ++i) {
+
+            if (eachElement(elements[i], callback) === false) {
+                return;
+            }
+        }
+    }
+}
+
+// Основная функция
+let count = 0;
+eachElement(document, function(el) {
+
+    if (el.hasAttributes && el.hasAttributes() && el.hasAttribute("href")) {
+
+        console.log(el);
+        ++count;
+    }
+
+});
+console.log(`A total of ${count} elements were found with href!`);
+                        </code>
+                    </pre>
                 </section>
             </section>
             <section>
