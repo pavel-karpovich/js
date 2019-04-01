@@ -3232,12 +3232,815 @@ let email_input = document.getElementById("mail");
                 <section>
                     <h2>Магия XPath</h2>
                     <p>
-                        Когда дела плохи, и возможностей CSS селекторов не хватает
+                        Когда дела плохи, и возможностей CSS селекторов не хватает, в бой идут <span class="purple">XPath</span>
+                        выражения.
                     </p>
+                    <blockquote>
+                        <span class="purple">XPath (XML Path Language)</span> - специальный язык запросов к XML, предоставляющий
+                        гибкий способ для адресации и поиска различных частей XML документа. Также с помощью XPath выражений
+                        можно проверять узлы на соответствие определённому паттерну расположения.
+                    </blockquote>
+                    <p>
+                        XPath использует адресную нотацию (как URL) для навигации через древовидную структуру XML документа.
+                    </p>
+                    <p>
+                        Поскольку HTML является подвидом XML, то XPath отлично применяется и для HTML DOM деревьев.
+                    </p>
+                </section>
+                <section>
+                    <h2>Преимущества перед селекторами</h2>
+                    <p>
+                        CSS селекторы не создавались для программного поиска элементов, они создавались для применения
+                        стилей к элементам страницы во время её парсинга. Поскольку парсинг документа происходит сверху
+                        вниз, в CSS селекторы не было заложено возможности проверки последующих элементов. 
+                    </p>
+                    <p>
+                        Также с помощью CSS селекторов невозможно обращаться к элементам вверх по дереву, 
+                        CSS селекторы всегда смотрят в направлении спуска по DOM дереву.
+                    </p>
+                    <p>
+                        Нельзя писать комплексные селекторы, состоящие из нескольких выражений сразу. Нельзя использовать
+                        относительую адресацию. Нельзя искать по текстовому содержимому.
+                    </p>
+                    <p>
+                        CSS селекторы на самом деле довольно ограничены.
+                    </p>
+                </section>
+                <section>
+                    <h2>Примеры XPath</h2>
+                    <p>
+                        Например, вот это выражение, поднимется на 2 родителя вверх по дереву, относительно текущего элемент,
+                        и оттуда уже будет искать элемент с атрибутом <i>type</i>, равным <i>submit</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate('./../../div//*[@type="submit"]', div); 
+                        </code>
+                    </pre>
+                    <p>
+                        А вот это выражение, будет искать все <i>div</i>-ы, после которых находится <i>div</i>
+                        с классом <i>button</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]]', document); 
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Примеры XPath</h2>
+                    <p>
+                        Здесь производится поиск по текстовому контенту внутри элемента:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate("//span[text()='2 раза']", document); 
+                        </code>
+                    </pre>
+                    <p>
+                        А вот составное выражение, которое будет искать все <i>li</i> внутри <i>header</i>, и все <i>span</i>-ы
+                        внутри <i>main</i> с классом <i>container</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate('//header//li | //main[@class="container"]//span', document); 
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Синтаксис XPath</h2>
+                    <p>
+                        В XPath используется похожая на URL схема адресации. Адрес строится из составных элементов,
+                        каждый уровень которых разделяется символом /. К основным выражениям XPath относятся:
+                    </p>
+                    <table>
+                        <tr>
+                            <td><span class="turquoise">tagName</span></td>
+                            <td>Выбирает все теги <i>tagName</i></td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">/</span></td>
+                            <td>Если стоит в начале - поиск от корневого узла</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">//</span></td>
+                            <td>Поиск среди всех потомков текущего элемента</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">.</span></td>
+                            <td>Текущий узел</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">..</span></td>
+                            <td>Родитель текущего узла</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">@</span></td>
+                            <td>Выбор аттрибута</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">*</span></td>
+                            <td>Выбор любого элемента</td>
+                        </tr>
+                        <tr>
+                            <td><span class="turquoise">@*</span></td>
+                            <td>Выбор любого атрибута</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h3>Примеры</h3>
+                    <table>
+                        <tr>
+                            <td>img</td>
+                            <td>Выбирает все изображения img в документе (глобально)</td>
+                        </tr>
+                        <tr>
+                            <td>aside/img</td>
+                            <td>Все img, которые находятся прямо внутри aside</td>
+                        </tr>
+                        <tr>
+                            <td>//img</td>
+                            <td>Выбирает все изображения img в документе (относительно)</td>
+                        </tr>
+                        <tr>
+                            <td>aside//img</td>
+                            <td>Выбирает все img, которые находятся внутри aside, на любом уровне вложенности</td>
+                        </tr>
+                        <tr>
+                            <td>//@href</td>
+                            <td>Выбирает все атрибуты href (именно сами атрибуты)</td>
+                        </tr>
+                        <tr>
+                            <td>aside/*</td>
+                            <td>Выбирает всех потомков элемента aside</td>
+                        </tr>
+                        <tr>
+                            <td>//div[@*]</td>
+                            <td>Выбирает все элементы div, у которых есть хотя бы один атрибут</td>
+                        </tr>
+                    </table>
+                    <p>
+                        <i>Глобально</i> - выполняет поиск всегда во всём документе.
+                    </p>
+                    <p>
+                        <i>Относительно</i> - выполняет поиск относительно текущего элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Предикаты</h2>
+                    <p>
+                        Предикаты - это условия, или ограничения/уточнения, которые накладываются на искомый элемент. С
+                        помощью предикатов происходит дополнительная фильтрация элементов.
+                    </p>
+                    <blockquote>
+                        Предикаты записываются в квадратных скобках после пути к элементу.
+                    </blockquote>
+                    <p>
+                        Вот здесь был предикат: <span class="turquoise">//div[@*]</span>
+                    </p>
+                    <p>
+                        Разбирая этот пример - элемент, который мы ищем, записывается до квадратных скобок - мы ищем <i>div</i>,
+                        и поиск вернёт нам div(ы). 
+                    </p>
+                    <p>
+                        В квадратных скобках описывается <i>уточнение</i>, какой именно <i>div</i>, мы хотим получить, - 
+                        то <i>div</i>, у которого есть атрибуты.
+                    </p>
+                </section>
+                <section>
+                    <h3>Примеры предикатов</h3>
+                    <table>
+                        <tr>
+                            <td>//ul/li[1]</td>
+                            <td>Выбирает первый <i>li</i> из списка (нумерация с 1, они сумасшедшие)</td>
+                        </tr>
+                        <tr>
+                            <td>//ul/li[last()]</td>
+                            <td>Последний элемент в списке</td>
+                        </tr>
+                        <tr>
+                            <td>//ul/li[last() - 1]</td>
+                            <td>Предпоследний элементы в списке</td>
+                        </tr>
+                        <tr>
+                            <td>//ul/li[position() < 4]</td>
+                            <td>Выбирает элементы списка, чьи номера меньше 4. Т.е. 3 первых элемента списка</td>
+                        </tr>
+                        <tr>
+                            <td>//div[@contenteditable]</td>
+                            <td>Выбирает <i>div</i>, у которого есть атрибут <i>contenteditable</i></td>
+                        </tr>
+                        <tr>
+                            <td>//div[@class='top-block']</td>
+                            <td>Выбирает <i>div</i>, у которого есть только класс <i>top-block</i></td>
+                        </tr>
+                        <tr>
+                            <td>//div[span > 12.0]/a</td>
+                            <td>Выбирает ссылку <i>a</i>, которая находится внутри <i>div</i>-а, внутри которого есть
+                            элемент <i>span</i> с числовым значением больше 12.0</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h3>Функции XPath</h3>
+                    <p>
+                        На предыдущем слайде в предикате использовались функции <span class="blue">last()</span>,
+                        <span class="blue">position()</span>, а ещё раньше - функция <span class="blue">text()</span>,
+                        для обращения к текстовому содержимому элемента.
+                    </p>
+                    <p>
+                        И таких встроенных функций в XPath целая куча. Например:
+                    </p>
+                    <ul>
+                        <li><span class="blue">boolean()</span> - вычисляет логическое выражение</li>
+                        <li><span class="blue">concat()</span> - конкатенация строк</li>
+                        <li><span class="blue">choose()</span> - выражение if-else</li>
+                        <li><span class="blue">contains()</span> - проверка вхождения подстроки</li>
+                        <li><span class="blue">not()</span> - инвертирует булевое значение</li>
+                        <li><span class="blue">number()</span> - конвертирует объект в число</li>
+                        <li><span class="blue">sum()</span> - получает сумма числовых значений всех потомков</li>
+                    </ul>
+                    <p>
+                        Подробнее о них всех можно прочитать
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/XPath/Functions">на MDN</a>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Оси</h3>
+                    <p>
+                        В XPath существует дополнительный механизм, с помощью которого можно настраивать, в каком
+                        направлении будет происходить поиск элементов. Этот механизм назвается <span class="purple">оси</span>.
+                    </p>
+                    <p>
+                        Всего в XPath существует 13 осей, каждая из которых представляет собой какой-либо вид отношения
+                        к текущему узлу.
+                    </p>
+                    <p>
+                        Мы уже видили один пример использования осей, вот здесь:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]]', document); 
+                        </code>
+                    </pre>
+                    <p>
+                        Ось задаётся через специальный префикс, после которого идут 2 знака двоеточия:
+                        <span class="purple">axes-name::</span>
+                    </p>
+                </section>
+                <section>
+                    <h3>Список осей</h3>
+                    <p>
+                        Основные оси:
+                    </p>
+                    <ul>
+                        <li><span class="blue">ancestor</span> - предки</li>
+                        <li><span class="blue">attribue</span>, сокращённо <span class="blue">@</span> - атрибуты текущего узла</li>
+                        <li><span class="blue"><b>child</b></span> - потомки, ось по умолчанию</li>
+                        <li><span class="blue">following</span> - все элементы, идущие в документе после текущего узла</li>
+                        <li><span class="blue">following-sibling</span> - все последующие соседи</li>
+                        <li><span class="blue">preceding</span> - все элементы, идущие в документе до текущего узла</li>
+                        <li><span class="blue">preceding-sibling</span> - все предыдущие соседи</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Примеры с осями</h3>
+                    <div class="flex">
+                        <div class="c2">
+                            <pre>
+                                <code class="js">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body class="body-container"&gt;
+    &lt;header&gt;
+        &lt;div class="nav_box"&gt;
+            &lt;ul class="navigation"&gt;
+                &lt;li&gt;Пункт меню 1&lt;/li&gt;
+                &lt;li&gt;Пункт меню 2&lt;/li&gt;
+                &lt;li&gt;Пункт меню 3&lt;/li&gt;
+                &lt;li&gt;Пункт меню 4&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;main class="container"&gt;
+        &lt;div&gt;
+            &lt;form action="/my-handling-form-page" method="post"&gt;
+                &lt;div&gt;
+                    &lt;label for="name"&gt;Имя:&lt;/label&gt;
+                    &lt;input type="text" id="name" name="user_name"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="mail"&gt;Э.Почта:&lt;/label&gt;
+                    &lt;input type="email" id="mail" name="user_mail"&gt;
+                &lt;/div&gt;
+                &lt;div&gt;
+                    &lt;label for="msg"&gt;Сообщение:&lt;/label&gt;
+                    &lt;textarea id="msg" name="user_message"&gt;&lt;/textarea&gt;
+                &lt;/div&gt;
+                &lt;div class="button"&gt;
+                    &lt;button type="submit"&gt;Отправить&lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+            &lt;aside&gt;
+                Нафантазируйте здесь панель
+            &lt;/aside&gt;
+        &lt;/div&gt;
+        &lt;div class="info"&gt;
+            &lt;span&gt;Какой-то текст&lt;/span&gt;
+            &lt;span&gt;2 раза&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+// Найдёт div-ы, у которых в предках есть main, а также впереди присутствует другой div
+let xpathResult = document.evaluate('//div[ancestor::main][following-sibling::div]', document);
+
+// Найдёт div-ы, у которых в предках есть div с классом info
+xpathResult = document.evaluate('//span[ancestor::div[@class="info"]]', document);
+
+// Найдёт элементы списка li, которые окружены соседями (не первые, и не последние у родителя)
+xpathResult = document.evaluate('//li[preceding-sibling::*][following-sibling::*]', document);
+
+// Найдёт все div-ы, у которых в предках есть form, за которой следует aside.
+// Также искомые div-ы не должны содержать класс button
+xpathResult = document.evaluate('//div[ancestor::form[following-sibling::aside]][not(@class="button")]', document); 
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h3>Составные выражения</h3>
+                    <p>
+                        С помощью знака прямой черты <span class="purple">|</span> можно объединять несколько XPath выражений
+                        в одно, для совмещённого поиска элементов по нескольким селекторам.
+                    </p>
+                    <table>
+                        <tr>
+                            <td>//header//img | //main//img</td>
+                            <td>Выбирает все <i>img</i> внутри <i>header</i> И все <i>img</i> внутри <i>main</i></td>
+                        </tr>
+                        <tr>
+                            <td>/*//a | /*//link</td>
+                            <td>Выбирает все ссылки <i>a</i> и <i>link</i></td>
+                        </tr>
+                        <tr>
+                            <td>/html/head/title | //*[@title]</td>
+                            <td>Выбирает элемент <i>title</i> из <i>head</i>-а и все элементы с атрибутом <i>title</i></td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>Использование в JS</h2>
+                    <p>
+                        Ну, вы уже поняли, что поиск по XPath выражению выполняется с помощью метода
+                        document.<span class="blue">evaluate()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate("XPath-expression", contextNode);
+                        </code>
+                    </pre>
+                    <p>
+                        У этого метода 2 обязательных аргумента:
+                    </p>
+                    <ul>
+                        <li>1 аргумент - строка с самим XPath выражением</li>
+                        <li>2 аргумент - элемент DOM дерева, относительно которого это выражение будет просчитываться</li>
+                    </ul>
+                    <p>
+                        Т.е. используя второй параметр, можно выполнять поиск не из корня DOM дерева, а из любого места.
+                    </p>
+                </section>
+                <section>
+                    <h2>XPath result</h2>
+                    <p>
+                        Метод document.<span class="blue">evaluate()</span> возвращает специальный объект 
+                        <span class="blue">XPathResult</span>.
+                    </p>
+                    <p>
+                        <span class="blue">XPathResult</span> - это итератор, а не объект-коллекция, как мы привыкли.
+                        Элементы из <span class="blue">XPathResult</span> нельзя получить по индексам, или через цикл for.
+                    </p>
+                    <p>
+                        Элементы этого объекта извлекаются по очереди, с помощью вызова метода <span class="blue">iterateNext()</span>.
+                    </p>
+                    <p>
+                        Каждый вызов метода <span class="blue">iterateNext()</span> возвращает следующий элемент из результата,
+                        пока они не закончатся. Дальше будет возвращаться значение <span class="blue">null</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Перебор элементов XPathResult</h2>
+                    <p>
+                        Удобнее всего перебирать элементы из XPathResult с помощью цикла while:
+                    </p>
+                    <pre>
+                        <code class="js">
+let xpathResult = document.evaluate("/html/body/div[4]/div[2]/div/div/div/div[3]/div/span[2]/span", document);
+
+let element = null;
+while (element = xpathResult.iterateNext()) {
+    console.log(element);
+}
+                        </code>
+                    </pre>
                 </section>
             </section>
             <section>
-                CSSOM
+                <section>
+                    <h2>Объект HTMLElement</h2>
+                    <p>
+                        Объект <span class="blue">HTMLElement</span> - это следующее звено в цепочке наследования HTML элементов,
+                        после <span class="blue">Node</span> и <span class="blue">Element</span>.
+                    </p>
+                    <img src="img/htmlelement.jpg">
+                </section>
+                <section>
+                    <h2>Редактируемость</h2>
+                    <p>
+                        Любой <span class="blue">HTMLElement</span> может быть переведён в режим редактирования.
+                    </p>
+                    <p>
+                        Режим редактирования позволяет пользователю вручную изменять текстовое содержимое элемента,
+                        как в текстовом редакторе.
+                    </p>
+                    <p>
+                        Задать режим редактирования можно с помощью атрибута <span class="blue">contentEditable</span>,
+                        или же через одноимённое свойство.
+                    </p>
+                    <p>
+                        Свойство <span class="blue">contentEditable</span> может принимать 2 значения: "true" и "false".
+                    </p>
+                    <p>
+                        Когда значение "true" - текст внутри элемента можно вручную редактировать.
+                    </p>
+                </section>
+                <section>
+                    <h2>Редактируемость</h2>
+                    <p>
+                        Эта особенность часто используется в HTML для создания из div-ов многострочных редактируемых
+                        текстовых полей.
+                    </p>
+                    <p>
+                        Проверить, редактируемый ли элемени, или нет, можно с помощью свойства 
+                        <span class="blue">isContentEditable</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.querySelector("div.container");
+
+if (div.isContentEditable) {
+    
+    div.contentEditable = "true";
+
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Документ. Режим дизайнера</h2>
+                    <p>
+                        В <span class="blue">document</span> есть ещё такое интересное свойство - <span class="blue">designMode</span>.
+                    </p>
+                    <p>
+                        С помощью этого свойства можно переключить ВСЕ элементы на странице в режим редактирования.
+                    </p>
+                    <p>
+                        Это свойство принимает 2 значения: "on" - для активации, и "off" для деактивации.
+                    </p>
+                    <p>
+                        В дополнение ко всему, в режиме редактирования можно не только менять текст, но и выполнять более
+                        продвинутые операции по форматированию текста: выравнивания, отступы, цвета и т.д.
+                    </p>
+                </section>
+                <section>
+                    <h3>Демонстрация редактируемости</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_ROwmmp"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="ROwmmp" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Use execCommands to edit HTML content in your browser">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/ROwmmp/">
+                        Use execCommands to edit HTML content in your browser</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Пользовательские атрибуты</h2>
+                    <p>
+                        В объекте <span class="blue">HTMLElement</span> добавляется поддержка пользовательских атрибутов.
+                    </p>
+                    <p>
+                        Пользовательские атрибуты - это атрибуты, которые придумывает сам программист, для своих нужд. Как правило,
+                        для хранения какой-нибудь нужной информации внутри элементов.
+                    </p>
+                    <p>
+                        Пользовательские атрибуты в HTML разметке <u>обязаны начинаться на префикс <span class="blue">data-</span></u>:
+                    </p>
+                    <pre>
+                        <code class="html">
+&lt;a data-myattr="42"&gt;&lt;/a&gt;
+
+&lt;div class="item-title-area" data-test-id="item-title-area"&gt;&lt;/div&gt;
+
+&lt;button data-item="pen" data-hashid="ROwmmp" class="button button-editor-outline loves heart-button loved-0" title="Love"&gt;&lt;/button&gt;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Доступ в коде</h2>
+                    <p>
+                        Пользовательские атрибуты, прописанные в HTML, доступны в JS через специальное свойство
+                        <span class="blue">dataset</span>, как обычные ключи в объекте. Причём, в коде, префикс
+                        <span class="blue">data-</span> у этих атрибутов отсутствует.
+                    </p>
+                    <p>
+                        Т.е. если в HTML у вас прописан пользовательский атрибут, скажем, <span class="blue">data-myid</span>,
+                        то в JS оно будет доступно как <span class="blue">dataset.myid</span> у этого DOM элемента.
+                    </p>
+                    <p>
+                        Соответственно, если изменять значение в свойстве <span class="blue">dataset.myid</span>, то в HTML
+                        разметке будет изменяться значение атрибута <span class="blue">data-myid</span>.
+                    </p>
+                    <p>
+                        С помощью <span class="blue">dataset</span> можно и добавлять новые пользовательские атрибуты. Добавление
+                        нового ключа <span class="blue">new-key</span> повлечёт за собой появление атрибута
+                        <span class="blue">data-new-key</span> в HTML разметке.
+                    </p>
+                </section>
+                <section>
+                    <h3>Ещё свойства для размеров</h3>
+                    <p>
+                        В <span class="blue">HTMLElement</span> добавляется еще парочка странных свойств для получения
+                        фактических размеров элементов:
+                    </p>
+                    <ul>
+                        <li><span class="blue">offsetParent</span> - ближайший позиционированный родитель</li>
+                        <li><span class="blue">offsetTop</span> - расстояние сверху до offsetParent</li>
+                        <li><span class="blue">offsetLeft</span> - расстояние слева до offestParent</li>
+                        <li><span class="blue">offsetWidth</span> - ширина контента с рамкой</li>
+                        <li><span class="blue">offsetHeight</span> - высота контента с рамкой</li>
+                    </ul>
+                    <img src="img/offset_width.png">
+                </section>
+                <section>
+                    <h2>Методы HTMLElement</h3>
+                    <p>
+                        <span class="blue">HTMLElement</span> добавляет всего 4 новых метода:
+                    </p>
+                    <ul>
+                        <li><span class="blue">click()</span> - симуляция нажатия мыши</li>
+                        <li><span class="blue">focus()</span> - взятие в фокус</li>
+                        <li><span class="blue">blur()</span> - потеря фокуса</li>
+                        <li><span class="blue">forceSpellCheck()</span> - принудительно включает проверку правописания</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример с фокусом</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_rbNXYz"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="rbNXYz" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Remove focus from a text input">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/rbNXYz/">
+                        Remove focus from a text input</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>CSSOM</h1>
+                    <p></p>
+                    <small>Да, есть такое название</small>
+                </section>
+                <section>
+                    <h2>CSSOM</h2>
+                    <p>
+                        До этого момента мы рассматривали DOM API, - набор функций, который позволяет программно
+                        взаимодействовать с HTML документом.
+                    </p>
+                    <p>
+                        Мы не касались стилей, даже когда работали с классами. CSS классы уже были
+                        созданы заранее, а мы лишь подключали/отключали их от HTML элементов. Т.е.
+                        просто работали с аттрибутом class, а атрибуты это часть DOM.
+                    </p>
+                    <p>
+                        CSSOM же позволяет изменять именно <u>стили</u>.
+                    </p>
+                </section>
+                <section>
+                    <h2>CSSOM</h2>
+                    <blockquote>
+                        <span class="purple">CSS Object Model</span> (CSSOM) - это API, набор функций
+                        и объектов, которые позволяют взаимодействовать с CSS через JavaScript. 
+                    </blockquote>
+                    <p>
+                        Это то же, что и DOM, только для CSS, а не для HTML.
+                    </p>
+                    <p>
+                        С помощью CSSOM можно получать и динамически изменять стили, программно
+                        создавать наборы стилей и CSS классы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Встроенные стили</h2>
+                    <p>
+                        Самый главный и удобный способ взаимодействия с CSS свойствами - через
+                        свойство <span class="blue">style</span>, которое есть у всех HTML элементов
+                        (объект <i>HTMLElement</i>).
+                    </p>
+                    <p>
+                        Например:
+                    </p>
+                    <pre>
+                        <code class="js">
+document.body.style.background = "lightblue";
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Свойство style</h2>
+                    <p>
+                        Через это JS свойство можно получать значение и изменять <u>любое</u> CSS свойство, у любого
+                        элемента на странице.
+                    </p>
+                    <p>
+                        Вот по такому формату:
+                    </p>
+                    <pre>
+                        <code class="js">
+element.style.propertyName
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Объект style</h2>
+                    <p>
+                        Свойство <span class="blue">style</span> содержит в себе объект <span class="blue">CSSStyleDeclaration</span>
+                        (или <span class="blue">CSS2Properties</span>, в зависимости от браузера).
+                    </p>
+                    <p>
+                        Это просто объект, в котором есть ключи для большинства свойств, существующих в CSS.
+                    </p>
+                    <p>
+                        Если заглянуть в него, то можно будет увидеть этот огромный перечень свойств.
+                    </p>
+                </section>
+                <section>
+                    <h2>Правила наименования</h2>
+                    <p>
+                        Имена многих свойств записаны в объекте <span class="blue">style</span> так же, как и в CSS.
+                    </p>
+                    <p>
+                        Но в некоторых именах в CSS встречаются знаки тире "-", а в JS этот символ нельзя использовать для 
+                        названий переменных, поэтому при переносе свойств в JS знаки тире пропадают, и вместо них следующая
+                        буква прописывается заглавной.
+                    </p>
+                    <p>
+                        Трансляция имён происходит по такому принципу:
+                    </p>
+                    <table>
+                        <tr>
+                            <th><span class="blue">CSS</span></th>
+                            <th><span class="purple">JS</span></th>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">background-color</span></td>
+                            <td><span class="purple">backgroundColor</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">border-radius</span></td>
+                            <td><span class="purple">borderRadius</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">box-sizing</span></td>
+                            <td><span class="purple">boxSizing</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">grid-row-gap</span></td>
+                            <td><span class="purple">grdidRowGap</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">min-width</span></td>
+                            <td><span class="purple">minWidth</span></td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h3>Пример с inline стилями</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_PgwqgK"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="html,result" data-user="ParadoxMaster" data-slug-hash="PgwqgK" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Using the style property to change the background color">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/PgwqgK/">
+                        Using the style property to change the background color</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Inline стили</h3>
+                    <p>
+                        Свойство <span class="blue">style</span> - очень мощный инструмент, благодаря ему можно создавать
+                        настоящуюю динамику и сложную анимацию на странице.
+                    </p>
+                    <p>
+                        Но у этого свойства есть одна проблема: оно работает чисто со <span class="purple">встроенными (inline)</span>
+                        стилями.
+                    </p>
+                    <blockquote>
+                        Inline стилями называются стили, которые прописаны прямо внутри HTML элемента.
+                    </blockquote>
+                    <p>
+                        В документе это выглядит вот так:
+                    </p>
+                    <pre>
+                        <code class="html">
+&lt;span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"&gt;&lt;/span&gt;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проблема</h2>
+                    <p>
+                        Если задать значение inline свойству, и затем прочитать его, всё будет нормально:
+                    </p>
+                    <pre>
+                        <code class="js">
+// HTML:  &lt;body&gt;
+document.body.style.backgroundColor = "rgb(100, 100, 100)";
+
+// Теперь HTML: &lt;body style="background-color: rgb(100, 100, 100)"&gt;
+console.log(document.body.style.backgroundColor);
+// Выведет "rgb(100, 100, 100)"
+                        </code>
+                    </pre>
+                    <p>
+                        А что если свойство заднего фона будет задано стилями, например, через класс?
+                    </p>
+                    <pre>
+                        <code class="js">
+// CSS:  .ct { backgroundColor: darkblue; }
+// HTML:  &lt;body class="ct"&gt;
+
+console.log(document.body.style.backgroundColor);  
+// Выведет ""
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Ограничения</h2>
+                    <p>
+                        Свойство <span class="blue">style</span> очень удобное и незаменимое.
+                    </p>
+                    <p>
+                        Но оно обладает очень серьёзными ограничениями.
+                    </p>
+                    <p>
+                        Это свойство работает только с inline стилями, и никак не контактирует со всеми
+                        остальными формами задания CSS свойств.
+                    </p>
+                    <p>
+                        Этим свойством удобно пользоваться, когда нужно <u>изменить стиль</u>.
+                    </p>
+                    <p>
+                        А вот с целью получения текущих значений CSS свойств, оно поможет слабо. Для
+                        этого нужен другой подход.
+                    </p>
+                </section>
+                <section>
+                    <h2>Вычисленные свойства</h2>
+                    <p>
+                        CSSOM предоставляет глобальную функцию <span class="blue">getComputedStyle()</span>, находящююся
+                        прямо в <i>window</i>(не знаю, что она там забыла).
+                    </p>
+                    <p>
+                        И эта функция позволяет получить полную таблицу вычисленных на текущий момент времени свойств
+                        для любого элемента HTML страницы.
+                    </p>
+                </section>
             </section>
             <section>
                 Events
