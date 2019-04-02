@@ -29,7 +29,7 @@ const srcPath = {
     'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
     'analysis': './code-analysis/',
-    'task': './src/task/**/*.+(pdf|тых)',
+    'task': './src/task/**/*.+(pdf|тых|html|css)',
     'cmpl': './src/completed/**/*.*',
     'print': './src/css/print/*.css'
 };
