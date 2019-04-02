@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Arimo&subset=cyrillic');
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: 'Arimo';
+}
+body {
+    display: flex;
+    flex-flow: column nowrap;
+}
+body > header {
+    height: 60px;
+    background-color: #7161EF;
+}
+.content {
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.main-area {
+    flex: 1;
+    background-color: #FFE7DB;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+.main-area > div {
+    background-image: linear-gradient(#eee, #fff);
+    width: 16vh;
+    height: 16vh;
+    margin: 10px;
+    border: 2px solid rgba(0,0,0,.3);
+}
