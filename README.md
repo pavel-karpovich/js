@@ -46,4 +46,16 @@ CSSOM API. Встроенные стили. Вычисленные свойст�
 
 * Задание 4.
 
-[*DOM. Часть I*](https://tgjmjgj.github.io/js/task/task_5/task_5.pdf "DOM. Часть I")
+[*DOM I. Tinder*](https://tgjmjgj.github.io/js/task/task_5/task_5.pdf "DOM I. Tinder")
+
+* Задание 5.
+
+[*DOM II. Поле Чудес*](https://tgjmjgj.github.io/js/task/task_6/task_6.pdf "DOM II. Поле Чудес")
+
+* Задание 6.
+
+[*DOM III. Тут будет что-нибудь ещё*](https://tgjmjgj.github.io/js/task/task_7/task_7.pdf "DOM III. Тут будет что-нибудь ещё")
+
+* Задание 7.
+
+[*DOM. Запланировано*](https://tgjmjgj.github.io/js/task/task_8/task_8.pdf "DOM. Запланировано")
