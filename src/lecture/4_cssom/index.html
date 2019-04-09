@@ -215,65 +215,16 @@ div1.style["text-align"] = "center";
                     </p>
                     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
-            </section>
-            <section>
                 <section>
-                    <h2>Анимация движения</h2>
-                    <p>
-                        Есть 2 способа создания для элемента анимации движения по странице. 
-                    </p>
-                    <ul>
-                        <li>На чистом CSS</li>
-                        <li>И при помощи JS</li>
-                    </ul>
-                    <p>
-                        CSS используется для более простой анимации, когда траекторию перемещения можно описать несколькими
-                        точками и она не меняется по ходу работы программы. Простая интерактивная анимация создаётся через CSS
-                        свойство <span class="blue">transition</span>, более сложная и автоматическая - через свойство
-                        <span class="blue">animation</span> и ключевые кадры.
-                    </p>
-                    <p>
-                        Через JS анимацию нужно делать только тогда, когда траектория движения элементов на странице
-                        сложна, непредсказуема, или очень сильно варьируется в зависимости от действий пользователя. 
-                    </p>
-                </section>
-                <section>
-                    <h2>Позиционирование</h2>
-                    <p>
-                        Любая анимация реализуется через изменение CSS свойств элемента. Но в CSS нет такого понятия,
-                        как координаты элемента. Но зато есть свойства для задания относительного положения на странице -
-                        <span class="blue">top</span>, <span class="blue">right</span>, <span class="blue">bottom</span>
-                        и <span class="blue">left</span>. Именно они используются в роли координат элемента.
-                    </p>
-                    <p>
-                        Но эти CSS свойства доступны только для жестко позиционированных элементов. Поэтому для элементов, 
-                        движение которых нужно анимировать, обычно используется абсолютная или фиксированная позиция.
-                    </p>
-                </section>
-                <section>
-                    <h2>Анимация через CSS</h2>
+                    <h3>Ещё один</h3>
                     <style>
-                        .cp_embed_wrapper > iframe[id="cp_embed_PgbQLR"] {
+                        .cp_embed_wrapper > iframe[id="cp_embed_NmbQar"] {
                             height: 500px;
                         }
                     </style>
-                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="PgbQLR" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Animation by Transition">
-                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/PgbQLR/">
-                        CSS Animation by Transition</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
-                        on <a href="https://codepen.io">CodePen</a>.</span>
-                    </p>
-                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
-                </section>
-                <section>
-                    <h2>Анимация через JS</h2>
-                    <style>
-                        .cp_embed_wrapper > iframe[id="cp_embed_bJBvaP"] {
-                            height: 500px;
-                        }
-                    </style>
-                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="bJBvaP" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="JS Animation">
-                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/bJBvaP/">
-                        JS Animation</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="NmbQar" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Random colors flow">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/NmbQar/">
+                        Random colors flow</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
                         on <a href="https://codepen.io">CodePen</a>.</span>
                     </p>
                     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
@@ -585,7 +536,7 @@ cmp.backgroundColor = "rgb(111, 147, 80)";
                         прописано следующим образом: <i>background-color: blue</i>.
                     </p>
                     <p>
-                        Но в <span class="blue">getComputedStyle()</span> оно будет выглядить уже не так, как
+                        Но в <span class="blue">getComputedStyle()</span> оно будет выглядеть уже не так, как
                         было прописано в CSS:
                     </p>
                     <pre>
@@ -722,6 +673,69 @@ console.log(placeholderStyle.content);
                             </pre>
                         </div>
                     </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Анимация движения</h2>
+                    <p>
+                        Есть 2 способа создания для элемента анимации движения по странице. 
+                    </p>
+                    <ul>
+                        <li>На чистом CSS</li>
+                        <li>И при помощи JS</li>
+                    </ul>
+                    <p>
+                        CSS используется для более простой анимации, когда траекторию перемещения можно описать несколькими
+                        точками и она не меняется по ходу работы программы. Простая интерактивная анимация создаётся через CSS
+                        свойство <span class="blue">transition</span>, более сложная и автоматическая - через свойство
+                        <span class="blue">animation</span> и ключевые кадры.
+                    </p>
+                    <p>
+                        Через JS анимацию нужно делать только тогда, когда траектория движения элементов на странице
+                        сложна, непредсказуема, или очень сильно варьируется в зависимости от действий пользователя. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Позиционирование</h2>
+                    <p>
+                        Любая анимация реализуется через изменение CSS свойств элемента. Но в CSS нет такого понятия,
+                        как координаты элемента. Но зато есть свойства для задания относительного положения на странице -
+                        <span class="blue">top</span>, <span class="blue">right</span>, <span class="blue">bottom</span>
+                        и <span class="blue">left</span>. Именно они используются в роли координат элемента.
+                    </p>
+                    <p>
+                        Но эти CSS свойства доступны только для жестко позиционированных элементов. Поэтому для элементов, 
+                        движение которых нужно анимировать, обычно используется абсолютная или фиксированная позиция.
+                    </p>
+                </section>
+                <section>
+                    <h2>Анимация через CSS</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_PgbQLR"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="PgbQLR" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Animation by Transition">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/PgbQLR/">
+                        CSS Animation by Transition</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Анимация через JS</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_bJBvaP"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="bJBvaP" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="JS Animation">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/bJBvaP/">
+                        JS Animation</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
             </section>
             <section>
@@ -892,11 +906,13 @@ cssEditor();
                         </code>
                     </pre>
                 </section>
+            </section>
+            <section>
                 <section>
                     <h2>Свойство cssRules</h2>
                     <p>
                         Но самое интересное в объекте <span class="blue">CSSStyleSheet</span> - это свойство
-                        <span class="blue">cssRules</span>
+                        <span class="blue">cssRules</span>.
                     </p>
                     <p>
                         Свойство <span class="blue">cssRules</span> хранит в себе перечисление всех CSS правил,
@@ -905,7 +921,138 @@ cssEditor();
                     </p>
                 </section>
                 <section>
-                    <h3>Пример работы с cssRules</h3>
+                    <h2>CssRules</h2>
+                    <p>
+                        Свойство <span class="blue">cssRules</span> хранит коллекцию объектов <span class="blue">CSSStyleRule</span>,
+                        которые представляют собой конкретные блоки CSS правил.
+                    </p>
+                    <img src="img/cssrules.jpg">
+                </section>
+                <section>
+                    <h2>Объект CSSStyleRule</h2>
+                    <p>
+                        Объект <span class="blue">CSSStyleRule</span> предназначен для описания отдельного CSS правила,
+                        из которых состоят таблицы стилей.
+                    </p>
+                    <img src="img/cssrule.jpg">
+                </section>
+                <section>
+                    <h2>Свойства объекта CSSStyleRule</h2>
+                    <p>
+                        Основные свойства объекта <span class="blue">CSSStyleRule</span>:
+                    </p>
+                    <ul>
+                        <li><span class="blue">type</span> - тип CSS правила</li>
+                        <li><span class="blue">cssText</span> - текст CSS правила</li>
+                        <li><span class="blue">selectorText</span> - текст селектора</li>
+                        <li><span class="blue">style</span> - объект со свойствами CSS</li>
+                        <li><span class="blue">styleMap</span> - другой объект со свойствами CSS</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Типы CSS правил</h2>
+                    <p>
+                        В свойстве <span class="blue">type</span> записано число, которое показывает к какому типу
+                        CSS блоков относится текущее правило. Всего есть 16 типов CSS правил, среди основных:
+                    </p>
+                    <table>
+                        <tr>
+                            <th>Код</th>
+                            <th>Константа</th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>CSSRule.STYLE_RULE</td>
+                            <td>Стандартный набор CSS свойств с селектором</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>CSSRule.IMPORT_RULE</td>
+                            <td>Элемент @import</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>CSSRule.MEDIA_RULE</td>
+                            <td>Медиа-выражение</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>CSSRule.FONT_FACE_RULE</td>
+                            <td>Блок шрифта</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>CSSRule.PAGE_RULE</td>
+                            <td>Правило @page для печати</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>CSSRule.KEYFRAMES_RULE</td>
+                            <td>Кадры анимации</td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h3>Пример с type</h3>
+                    <p>
+                        Следующая функция будет искать все медиа-выражения во всех подключенных к документу таблицах стилей:
+                    </p>
+                    <pre>
+                        <code class="js">
+function showAllMediaQuery() {
+
+    let count = 0;
+    let i = 0;
+    try {
+        for (i = 0; i < document.styleSheets.length; ++i) {
+
+            let stylesheet = document.styleSheets[i];
+            for (let j = 0; j < stylesheet.cssRules.length; ++j) {
+
+                let rule = stylesheet.cssRules[j];
+                if (rule.type === CSSRule.MEDIA_RULE) {
+                    console.log(rule);
+                    count++;
+                }
+            }
+        }
+        console.log(`На этой странице ${count} медиа-выражений`);
+
+    } catch(exc) {
+        console.log("Что-то пошло не так...");
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Текстовые свойства</h2>
+                    <p>
+                        Свойство <span class="blue">cssText</span> содержит в себе текстовую запись всего блок CSS правила,
+                        как оно прописано в CSS файле/теге style. Например:
+                    </p>
+                    <pre>
+                        <code class="js">
+let randomRule = document.styleSheets[3].cssRules[8];
+console.log(randomRule.cssText);
+// ".pupil > div { width: 25px; margin: 3px 6px; color: black; }"
+                        </code>
+                    </pre>
+                    <p>
+                        Свойство <span class="blue">selectorText</span> содержит только текст селектора для указанного
+                        CSS правила. Например:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log(randomRule.selectorText);
+/* ".pupil > div"
+*/ 
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с cssSelector</h3>
                     <p>
                         Например, вот здесь выводятся все CSS селекторы, которые встречаются в документе:
                     </p>
@@ -921,9 +1068,190 @@ cssEditor();
                     </p>
                     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
+                <section>
+                    <h2>Изменение селектора</h2>
+                    <p>
+                        Свойство <span class="blue">selectorText</span> является редактируемым, а это значит,что с его
+                        помощью можно менять селектор CSS правила.
+                    </p>
+                    <pre>
+                        <code class="js">
+if (i.selectorText === 'a:hover') {
+
+    i.selectorText = 'a:hover, a:active';
+
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Свойство style у CSS правила</h2>
+                    <p>
+                        И вот мы снова пришли к объекту <span class="blue">CSSStyleDeclaration</span>, который использовался
+                        во встроенных и вычисленных стилях. 
+                    </p>
+                    <p>
+                        В объекте <span class="blue">CSSStyleRule</span> свойство <span class="blue">style</span> хранит
+                        свойства, назначенные выбранному CSS правилу.
+                    </p>
+                    <p>
+                        С помощью этого свойства удобнее всего редактировать CSS правила. Удаление/добавление/изменение
+                        свойств в этом объекте будет отображаться в изменения CSS правила.
+                    </p>
+                </section>
+                <section>
+                    <h2>Изменение css правил</h2>
+                    <p>
+                        Используя свойство <span class="blue">style</span> можно изменять свойства CSS правила так же, как
+                        и при работе с обычными <i>inline</i> стилями. 
+                    </p>
+                    <p>
+                        Т.е. вот эта запись добавит в CSS правило с селектором на класс <i>list-item</i> стиль для
+                        отображения чёрной рамки:
+                    </p>
+                    <pre>
+                        <code class="js">
+let target = "#wikiArticle > p:nth-child(19) > em";
+let rule = null;
+for (let i in document.styleSheets) {
+    
+    let end = false;
+    for (let j in document.styleSheets[i]) {
+
+        if (document.styleSheets[i].selectorText == target) {
+            rule = document.styleSheets[i];
+            end = true;
+            break;
+        }
+    }
+    if (end) break;
+}
+if (rule) {
+    // Меняем свойства в CSS правиле
+    rule.style.border = "1px solid black";
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Поиск применяющихся CSS правил</h3>
+                    <p>
+                        В Js нет встроенной функции, которая выдавала бы набор CSS правил, применяющихся к элементу. Но
+                        такую функцию можно написать самостоятельно:
+                    </p>
+                    <pre>
+                        <code class="js">
+function getRulesFor(el) {
+    let sheets = document.styleSheets;
+    let ret = [];
+    for (let i = 0; i < sheets.length; ++i) {
+
+        let rules = sheets[i].cssRules;
+        for (let j = 0; j < rules.length; ++j) {
+
+            // Проверяем, подходит ли заданный элемент под указанный селектор
+            if (el.matches(rules[j].selectorText)) {
+                // Если подходит, то добавляем CSS правило в массив
+                ret.push(rules[j]);
+            }
+        }
+    }
+    return ret;
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Использование этой функции</h3>
+                    <div class="flex">
+                        <div class="c1">
+                           <img src="img/rules_for_element.jpg">
+                        </div>
+                        <div class="c1">
+                            <img src="img/rules_for_element_2.jpg">
+                        </div>
+                    </div>
+                </section>
             </section>
             <section>
-                Events
+                <section>
+                    <h2>Создание новых CSS правил</h2>
+                    <p>
+                        Создавать новые CSS правила можно с помощью метода <span class="blue">insertRule()</span> 
+                        объекта <span class="blue">CSSStyleSheet</span>.
+                    </p>
+                    <p>
+                        А удалять существующие CSS правила с помощью метода <span class="blue">deleteRule()</span>.
+                    </p>
+                    <p>
+                        При добавлении элемента нужно указывать индекс, по которому новое правило будет вставлено в 
+                        таблицу стилей. И удаление происходит именно по индексу.
+                    </p>
+                    <pre>
+                        <code class="js">
+let cssFile = document.styleSheets[0];
+cssFile.insertRule("#blanc { color: white }", 0);
+
+cssFile.deleteRule(0);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Примеры добавления правил</h3>
+                    <pre>
+                        <code class="js">
+let myStylesheet = document.styleSheets[0];
+console.log(myStylesheet.cssRules.length); // 8
+
+let newRule = "article { line-height: 1.5; font-size: 1.5em; }";
+// Добавление в конец
+document.styleSheets[0].insertRule(newRule, myStylesheet.cssRules.length);
+console.log(document.styleSheets[0].cssRules.length); // 9
+
+myStylesheet.deleteRule(3);
+console.log(myStylesheet.cssRules.length); // 7
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Как итог</h2>
+                    <p>
+                        <i>CSSOM</i> API состоит из 3 основных частей. Это:
+                    </p>
+                    <ul>
+                        <li><span class="blue">element.style</span> - свойство для работы с <i>inline</i> свойствами</li>
+                        <li><span class="blue">getComputedStyle()</span> - метод для получения фактических значений свойств</li>
+                        <li><span class="blue">styleSheets и cssRules</span> - объекты для работы со сформированными CSS правилами</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Встроенные свойства</h2>
+                    <p>
+                        <span class="purple">Встроенные свойства</span> нужно использовать когда требуется программно
+                        динамически менять CSS свойства элементов на странице.
+                    </p>
+                </section>
+                <section>
+                    <h2>Вычисленные значения</h2>
+                    <p>
+                        <span class="purple">Вычисленные значения</span> свойств нужны тогда, когда необходимо в логике
+                        скрипта отталкиваться от присутствующих стилей документа, например, чтобы узнать положение
+                        элемента на странице, получить его размеры, цвет и т.д.
+                    </p>
+                </section>
+                <section>
+                    <h2>Таблицы стилей и CSS правила</h2>
+                    <p>
+                        Это более продвинутый механизм, который используется в основном в сложных веб приложениях,
+                        когда за счёт действий пользователя должны создаваться новые стили.
+                    </p>
+                    <p>
+                        Например, это может применяться в браузерных векторных графических редакторах, 
+                        или веб-приложениях для создания сайтов.
+                    </p>
+                </section>
             </section>
 		</div>
 	</div>
