@@ -1032,13 +1032,17 @@ let newUl = document.createElement("ul");
 let newVideo = document.createElement("video");
 
 console.log(
-    newParagraph.parentElement === newDiv.parentElement ===
-    newUl.parentElement === newVideo.parentElement === null
+    newParagraph.parentElement === newDiv.parentElement &&
+    newDiv.parentElement === newUl.parentElement &&
+    newUl.parentElement === newVideo.parentElement  &&
+    newVideo.parentElement === null
 );
 
 console.log(
-    newParagraph.children.length === newDiv.children.length ===
-    newUl.children.length === newVideo.children.length === 0
+    newParagraph.children.length === newDiv.children.length &&
+    newDiv.children.length === newUl.children.length &&
+    newUl.children.length === newVideo.children.length &&
+    newVideo.children.length === 0
 );
                         </code>
                     </pre>

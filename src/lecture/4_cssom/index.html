@@ -88,6 +88,8 @@
                         создавать наборы стилей и CSS классы.
                     </p>
                 </section>
+            </section>
+            <section>
                 <section>
                     <h2>Встроенные стили</h2>
                     <p>
@@ -101,6 +103,9 @@
                     <pre>
                         <code class="js">
 document.body.style.background = "lightblue";
+
+let div = document.getElementsByTagName("div");
+console.log(div.style.height);
                         </code>
                     </pre>
                 </section>
@@ -173,6 +178,30 @@ element.style.propertyName
                     </table>
                 </section>
                 <section>
+                    <h2>Альтернативная запись</h2>
+                    <p>
+                        Также к отдельным свойствам внутри объекта <span class="blue">style</span> можно обращаться и
+                        через нотацию квадратных скобок.
+                    </p>
+                    <pre>
+                        <code class="js">
+let div1 = document.getElementById("test_div");
+div1.style["width"] = "256px";
+                        </code>
+                    </pre>
+                    <p>
+                        Причём в это случае можно использовать не транслированные имена без знаков тире, а оригинальные
+                        названия свойств из CSS:
+                    </p>
+                    <pre>
+                        <code class="js">
+div1.style["background-color"] = "#123456";
+div1.style["margin-top"] = "2vw";
+div1.style["text-align"] = "center";
+                        </code>
+                    </pre>
+                </section>
+                <section>
                     <h3>Пример с inline стилями</h3>
                     <style>
                         .cp_embed_wrapper > iframe[id="cp_embed_PgwqgK"] {
@@ -186,10 +215,232 @@ element.style.propertyName
                     </p>
                     <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Анимация движения</h2>
+                    <p>
+                        Есть 2 способа создания для элемента анимации движения по странице. 
+                    </p>
+                    <ul>
+                        <li>На чистом CSS</li>
+                        <li>И при помощи JS</li>
+                    </ul>
+                    <p>
+                        CSS используется для более простой анимации, когда траекторию перемещения можно описать несколькими
+                        точками и она не меняется по ходу работы программы. Простая интерактивная анимация создаётся через CSS
+                        свойство <span class="blue">transition</span>, более сложная и автоматическая - через свойство
+                        <span class="blue">animation</span> и ключевые кадры.
+                    </p>
+                    <p>
+                        Через JS анимацию нужно делать только тогда, когда траектория движения элементов на странице
+                        сложна, непредсказуема, или очень сильно варьируется в зависимости от действий пользователя. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Позиционирование</h2>
+                    <p>
+                        Любая анимация реализуется через изменение CSS свойств элемента. Но в CSS нет такого понятия,
+                        как координаты элемента. Но зато есть свойства для задания относительного положения на странице -
+                        <span class="blue">top</span>, <span class="blue">right</span>, <span class="blue">bottom</span>
+                        и <span class="blue">left</span>. Именно они используются в роли координат элемента.
+                    </p>
+                    <p>
+                        Но эти CSS свойства доступны только для жестко позиционированных элементов. Поэтому для элементов, 
+                        движение которых нужно анимировать, обычно используется абсолютная или фиксированная позиция.
+                    </p>
+                </section>
+                <section>
+                    <h2>Анимация через CSS</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_PgbQLR"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="PgbQLR" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="CSS Animation by Transition">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/PgbQLR/">
+                        CSS Animation by Transition</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+                <section>
+                    <h2>Анимация через JS</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_bJBvaP"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="bJBvaP" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="JS Animation">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/bJBvaP/">
+                        JS Animation</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Объект CSSStyleDeclaration</h2>
+                    <p>
+                        Свойство <span class="blue">style</span> хранит объект <span class="blue">CSSStyleDeclaration</span>.
+                    </p>
+                    <p>
+                        Этот объект будет встречаться не только в этом свойстве, но и в нескольких других местах далее -
+                        везде, где нужно хранить полный перечень CSS свойств элемента.
+                    </p>
+                    <p>
+                        В нём есть парочка дополнительных методов:
+                    </p>
+                    <ul>
+                        <li><span class="blue">setProperty()</span> - установка значения CSS свойства</li>
+                        <li><span class="blue">getPropertyPriority()</span> - получение приоритета свойства</li>
+                        <li><span class="blue">removeProperty()</span> - удаление значения CSS свойства</li>
+                    </ul>
+                    <p>
+                        И свойство <span class="blue">cssText</span> - строка, которая хранится в атрибуте <i>style</i>
+                        элемента.
+                    </p>
+                </section>
+                <section>
+                    <h2>Метод setProperty</h2>
+                    <p>
+                        Метод <span class="blue">setProperty()</span> является функциональной альтернативой для
+                        задания значения CSS свойству.
+                    </p>
+                    <p>
+                        Он принимает 2 обязательных строковых аргумента: название свойства и значение.
+                    </p>
+                    <pre>
+                        <code class="js">
+style.setProperty("property-name", "value");
+                        </code>
+                    </pre>
+                    <p>
+                        Например, вот так:
+                    </p>
+                    <pre>
+                        <code class="js">
+let span = document.getElementById("my_id");
+span.style.setProperty("height", "300px");
+span.style.setProperty("line-height", "300px");
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Работа с приоритетом</h2>
+                    <p>
+                        С помощью третьего дополнительного параметра метода <span class="blue">setProperty</span>
+                        можно установить приоритетность свойства:
+                    </p>
+                    <p>
+                        Допускается 2 варианта значения: "important" и "".
+                    </p>
+                    <pre>
+                        <code class="js">
+// Устанавливает повышенный приоритет свойства
+span.style.setProperty("width", "10%", "important");
+// Устанавливает обычный приоритет
+span.style.setProperty("margin","5px 8px", "");
+                        </code>
+                    </pre>
+                    <p>
+                        Это единственный способ работы с приоритетом CSS свойств из JS. Через короткую форму записи
+                        назначение свойства с приоритетом работать <u>не будет</u>:
+                    </p>
+                    <pre>
+                        <code class="js">
+span.style.caretColor = "white !important";     // Ноль результата
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Метод getPropertyPriority</h2>
+                    <p>
+                        Метод <span class="blue">getPropertyPriority()</span> даёт возможность проверить приоритет
+                        конкретного CSS свойства.
+                    </p>
+                    <pre>
+                        <code class="js">
+let priority = style.getPropertyPriority("property-name");
+                        </code>
+                    </pre>
+                    <p>
+                        Единственным параметром принимает имя проверяемого свойства, возвращает пустую строку или
+                        строку "important".
+                    </p>
+                    <pre>
+                        <code class="js">
+let img = document.images[0];
+let prior = img.style.getPropertyPriority("scrollBehavior");
+if (prior === "important") {
+    console.log("scrollBehavior is set to important!");
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Метод removeProperty</h2>
+                    <p>
+                        Метод <span class="blue">removeProperty()</span> позволяет сбросить (обнулить) значение
+                        указанного CSS свойства.
+                    </p>
+                    <pre>
+                        <code class="js">
+let oldValue = style.removeProperty("property-name");
+                        </code>
+                    </pre>
+                    <p>
+                        Параметром передаётся название обнуляемого свойства, возвращаемым значением приходит
+                        значение, которое было в свойстве перед обнулением.
+                    </p>
+                    <pre>
+                        <code class="js">
+let p = document.querySelector("p");
+p.style.setProperty("border-radius", "2px", "important");
+console.log(p.style.borderRadius);      // "2px"
+console.log(p.style.getPropertyPriority("border-radius"));  // "important"
+
+let old = p.style.removeProperty("border-radius");  // old = "2px"
+console.log(p.style.borderRadius);      // ""
+console.log(p.style.getPropertyPriority("border-radius"));  // ""
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Свойство cssText</h2>
+                    <p>
+                        В свойстве <span class="blue">cssText</span> хранится строка, представляющая собой
+                        встроенный стиль элемента. Иначе говоря, это то же, что и значение атрибута <i>style</i>.
+                    </p>
+                    <p>
+                        Если в HTML:
+                    </p>
+                    <pre>
+                        <code class="html">
+&lt;span class="sent" style="heigth: 20px; margin: 5px 2px; color: black"&gt;Sentence - Предложение&lt;/span&gt;
+                        </code>
+                    </pre>
+                    <p>
+                        То в свойстве <span class="blue">cssText</span> у стиля этого элемента будет:
+                    </p>
+                    <pre>
+                        <code class="js">
+let sentSpan = document.querySelector("span.sent");
+let inlineStyles = sentSpan.style.cssText;
+console.log(inlineStyles);          // "heigth: 20px; margin: 5px 2px; color: black"
+if (inlineStyles != "") {
+    console.log("Element has inline styles");
+}
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
                 <section>
                     <h2>Inline стили</h3>
                     <p>
-                        Свойство <span class="blue">style</span> - очень мощный инструмент, благодаря ему можно создавать
+                        Свойство <span class="blue">style</span> - очень мощный инструмент, с помощью него можно создавать
                         настоящую динамику и сложную анимацию на странице.
                     </p>
                     <p>
@@ -242,20 +493,22 @@ console.log(document.body.style.backgroundColor);
                         Свойство <span class="blue">style</span> очень удобное и незаменимое.
                     </p>
                     <p>
-                        Но оно обладает очень серьёзными ограничениями.
+                        Но оно обладает весьма серьёзными ограничениями.
                     </p>
                     <p>
-                        Это свойство работает только с inline стилями, и никак не контактирует со всеми
+                        Это свойство работает только с <i>inline</i> стилями, и никак не контактирует со всеми
                         остальными формами задания CSS свойств.
                     </p>
                     <p>
-                        Этим свойством удобно пользоваться, когда нужно <u>изменить стиль</u>.
+                        Этим свойством style удобно пользоваться, когда нужно <u>изменить стиль</u>.
                     </p>
                     <p>
                         А вот с целью получения текущих значений CSS свойств, оно поможет слабо. Для
                         этого нужен другой подход.
                     </p>
                 </section>
+            </section>
+            <section>
                 <section>
                     <h2>Вычисленные свойства</h2>
                     <p>
@@ -263,9 +516,410 @@ console.log(document.body.style.backgroundColor);
                         прямо в <i>window</i>(не знаю, что она там забыла).
                     </p>
                     <p>
-                        И эта функция позволяет получить полную таблицу вычисленных на текущий момент времени свойств
+                        И эта функция позволяет получить 
+                        <a href="http://bit.ly/2IayEFi">полную таблицу вычисленных</a> на текущий момент времени свойств
                         для любого элемента HTML страницы.
                     </p>
+                    <p>
+                        Через эту функцию нельзя изменять значения свойств элемента, можно только получать.
+                    </p>
+                </section>
+                <section>
+                    <h2>getComputedStyle</h2>
+                    <p>
+                        Эта функция, <span class="blue">getComputedStyle()</span>, принимает в качестве параметра объект
+                        элемента, чьи CSS свойства нужно получить, и возвращает такой же объект, какой содержится в свойстве
+                        <span class="blue">style</span>, т.е. объект с ключами для всех CSS свойств, только readonly и 
+                        с вычисленными значениями. 
+                    </p>
+                    <pre>
+                        <code class="js">
+let computed = getComputedStyle(element);
+
+let div = document.getElementsByTagName("div");
+let compForDiv = getComputedStyle(div);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Вычисленные значения</h3>
+                    <p>
+                        Их также можно видеть в Инструментах Разработчика на специальной панели:
+                    </p>
+                    <img src="img/computed.jpg">
+                </section>
+                <section>
+                    <h2>Вычисленные значения</h2>
+                    <p>
+                        <span class="purple">Вычисленные значения</span> свойств отражают состояние стиля отображения элемента
+                        на момент их получения. Если значение CSS свойства задаётся формулой или относительным выражением,
+                        то здесь будет выдано уже рассчитанное значение, а не сама формула.
+                    </p>
+                </section>
+                <section>
+                    <h2>Примеры функционирования</h2>
+                    <p>
+                        Если у нас есть <i>div</i>, у которого с помощью CSS класса задан цвет фона
+                        <i>background-color: rgb(10, 16, 242)</i>.
+                    </p>
+                    <p>
+                        Тогда в вычисленных значениях для элемента можно будет получить это значение:
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.getElementById("main");
+let cmp = getComputedStyle(div);
+
+console.log(cmp.backgroundColor);      // "rgb(10, 16, 242)"
+
+// Ошибка - нельзя изменять вычисленные свойства
+cmp.backgroundColor = "rgb(111, 147, 80)";
+
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Особенности вычисленных значений</h2>
+                    <p>
+                        А теперь представим, что свойство <i>background-color</i> для нашего <i>div</i>-а
+                        прописано следующим образом: <i>background-color: blue</i>.
+                    </p>
+                    <p>
+                        Но в <span class="blue">getComputedStyle()</span> оно будет выглядить уже не так, как
+                        было прописано в CSS:
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.getElementById("main");
+let cmp = getComputedStyle(div);
+
+console.log(cmp.backgroundColor);      // "rgb(0, 0, 255)"
+// blue -> rgb(0, 0, 255)
+
+                        </code>
+                    </pre>
+                    <p>
+                        И так будет для всех остальных форм записи цвета - вернётся значение в формате rgb/rgba.
+                    </p>
+                </section>
+                <section>
+                    <h2>Вычисленные размеры</h2>
+                    <p>
+                        Это может стать проблемой при получении размеров:
+                    </p>
+                    <p>
+                        Допустим, в CSS для элемента задана ширина как <i>width: 60%</i>. 
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.getElementById("main");
+let cmp = getComputedStyle(div);
+
+console.log(cmp.width);      // 782px
+// 60% -> 782px
+                        </code>
+                    </pre>
+                    <p>
+                        Любые размеры будут показаны в пикселях. Вне зависимости от их формы записи в оригинальном CSS.
+                        Высота, ширина, внутренние/внешние отступы, смещение, граница - все свойства, в которых
+                        фигурируют размеры, будут рассчитаны в пикселях.
+                    </p>
+                </section>
+                <section>
+                    <h2>Значения по умолчанию</h2>
+                    <p>
+                        А теперь попробуем заглянуть в свойство <i>backgroundColor</i> без задания цвета в CSS,
+                        т.е. когда в CSS просто не прописан задний фон для элемента.
+                    </p>
+                    <pre>
+                        <code class="js">
+let div = document.getElementById("main");
+let cmp = getComputedStyle(div);
+
+console.log(cmp.backgroundColor);      // rgba(0, 0, 0, 0)
+// ничего -> rgba(0, 0, 0, 0)
+                        </code>
+                    </pre>
+                    <p>
+                        Откуда взялось это значение? Это значение по умолчанию.
+                    </p>
+                    <p>
+                        В объекте, который возвращает функция <span class="blue">getComputedStyle()</span>, все свойства
+                        проинициализированы и имеют какое-то значение. Если свойство не было прописано в CSS, то для него
+                        используется значение по умолчанию. 
+                    </p>
+                </section>
+                <section>
+                    <h2>Суть вычисленных свойств</h2>
+                    <p>
+                        Вычисленные свойства не отражают все CSS свойства и наборы стилей, привязанные к элементу. 
+                        Они показывают, чему равны значения CSS свойств элемента <u>на текущий момент</u>. 
+                    </p>
+                    <p>
+                        Например, если к элементу применяется несколько наборов стилей с перекрывающимися свойствами,
+                        с помощью <span class="blue">getComputedStyle()</span> нельзя узнать о тех свойствах,
+                        которые были подавлены более приоритетными селекторами.
+                    </p>
+                </section>
+                <section>
+                    <h2>Стили псевдоэлементов</h2>
+                    <p>
+                        С помощью функции <span class="blue">getComputedStyle()</span> также можно получать вычисленные
+                        значения свойств псевдоэлементов.
+                    </p>
+                    <p>
+                        Для этого в функцию нужно передать второй параметр - строку с типом псевдоэлемента.
+                    </p>
+                    <pre>
+                        <code class="js">
+let computed = getComputedStyle(element, pseudoType);
+
+let cmp1 = getComputedStyle(div, "::before");
+let cmp2 = getComputedStyle(div, "::placeholder");
+let cmp3 = getComputedStyle(div, "::selection");
+let cmp4 = getComputedStyle(div, "::first-letter");
+                        </code>
+                    </pre>
+                    <p>
+                        И это, к слову, единственный в JS способ получения значений для псевдоэлементов.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример с псевдоэлементами</h3>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="css">
+.box::before {
+    content: "Example";
+    display: block;
+    background-color: rgb(13, 239, 120);
+    width: 50px;
+}
+.box::placeholder {
+    content: "Please, enter your name";
+    display: block;
+    color: #A2A2A2;
+    margin-left: 30px;
+}
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="c1">
+                            <pre>
+                                <code class="js">
+let box = document.querySelector(".box");
+
+let beforeStyle = window.getComputedStyle(box, "::before");
+console.log(beforeStyle.width);        
+// 50px  
+
+let placeholderStyle = window.getComputedStyle(box, "::placeholder");
+console.log(placeholderStyle.content);
+// "Please, enter your name"
+
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Таблицы стилей CSS</h1>
+                    <p>
+                        <span class="purple">CSSOM</span> даёт возможности программно работать не только с CSS свойствами
+                        конкретных HTML элементов, но и предоставляет функционал для чтения и записи в любые таблицы/наборы
+                        стилей.
+                    </p>
+                    <p>
+                        Под <span class="purple">таблицами стилей</span> (<span class="blue">Stylesheets</span>) 
+                        подразумеваются CSS файлы с набором прописанных стилей с селекторами, а также встроенные в HTML
+                        теги <i>style</i>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Список таблиц стилей</h2>
+                    <p>
+                        Самый простой способ программного доступа к таблицам стилей - через свойство
+                        <span class="blue">document.styleSheets</span>.
+                    </p>
+                    <blockquote>
+                        Свойство <span class="blue">document.styleSheets</span> содержит массив (не стандартный 
+                        <i>Array</i>) из всех подключенных к текущему документу наборов стилей.
+                    </blockquote>
+                    <p>
+                        Каждый отдельный CSS файл, подключенный тегом <i>link</i>, считается набором стилей.
+                    </p>
+                    <p>
+                        Каждый тег <i>style</i> внутри HTML документа также считается самостоятельным набором стилей.
+                    </p>
+                </section>
+                <section>
+                    <h2>document.styleSheets</h2>
+                    <p>
+                        Этот объект имеет стандартное свойство <span class="blue">length</span>, а к отдельным его
+                        элементам можно обращаться по индексу.
+                    </p>
+                    <pre>
+                        <code class="js">
+document.styleSheets
+                        </code>
+                    </pre>
+                    <p>
+                        Например:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log("Количество таблиц стилей подключенных к документу:");
+console.log(document.styleSheets.length);
+
+console.log("Список таблиц стилей:");
+for (let i = 0; i < document.styleSheets.length; ++i) {
+
+    console.log(`${i}-ая таблица стилей:`);
+    console.log(document.styleSheets[i]);
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Список таблиц стилей</h3>
+                    <pre>
+                        <code class="js">
+console.log(document.styleSheets);
+                        </code>
+                    </pre>
+                    <p>
+                        На выводе это может выглядеть как-нибудь так:
+                    </p>
+                    <img src="img/stylesheets.jpg">
+                </section>
+                <section>
+                    <h2>Объект CSSStyleSheet</h2>
+                    <p>
+                        Элементы этого массива являются объектами <span class="blue">CSSStyleSheet</span>,
+                        каждый из которых выглядит следующим образом:
+                    </p>
+                    <pre>
+                        <code class="js">
+console.log(document.styleSheets[2]);
+                        </code>
+                    </pre>
+                    <img src="img/one_stylesheet.jpg">
+                </section>
+                <section>
+                    <h2>Свойства CSSStyleSheet</h2>
+                    <p>
+                        Основные свойства, которые содержит объект <span class="blue">CSSStyleSheet</span>:
+                    </p>
+                    <ul>
+                        <li><span class="blue">disabled</span> - отключена ли таблица стилей</li>
+                        <li><span class="blue">href</span> - адрес CSS файла, если он есть</li>
+                        <li><span class="blue">media</span> - список медиа, для которых будет применяться набор стилей
+                            (атрибут <i>media</i> в <i>link</i>)</li>
+                        <li><span class="blue">ownerNode</span> - HTML элемент, через который таблица стилей подключена</li>
+                        <li><span class="blue">title</span> - подпись для таблицы стилей (атрибут <i>title</i> в <i>link</i>)</li>
+                        <li><b><span class="blue">cssRules</span>/<span class="blue">rules</span></b> - 
+                            перечисление всех CSS правил</li>
+                    </ul>
+                    <p>
+                        Все свойства, кроме <span class="blue">disabled</span> и <span class="blue">cssRules</span>,
+                        являются <i>readonly</i>, только для чтения.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример со свойством disabled</h3>
+                    <p>
+                        Ниже представлена функция, с помощью которой можно включать/выключать любые таблицы стилей на странице:
+                    </p>
+                    <pre>
+                        <code class="js">
+function cssEditor() {
+
+    let panel = document.createElement("div");
+    panel.innerHTML = `<div id="pan1" style="background: rgb(200,200,200); width: 25%; height: auto; border: 1px solid black;
+                        display: flex; flex-flow: column nowrap; position: fixed; bottom: 20px; right: 20px;"></div>`;
+    document.body.appendChild(panel);
+    panel = panel.firstElementChild;
+
+    function appendItem(stylesheet) {
+
+        let newItem = document.createElement("div");
+        newItem.style.background = "white";
+        newItem.style.margin = "3px 6px";
+        newItem.style.width = "calc(100% - 12px)";
+        newItem.style.height = "20px";
+        newItem.style.cursor = "pointer";
+        newItem.style.display = "flex";
+        newItem.style.flexFlow = "row nowrap";
+        let indicator = document.createElement("span");
+        indicator.style.width = "20px";
+        indicator.style.height = "20px";
+        indicator.style.marginRight = "30px";
+        indicator.style.borderRadius = "50%";
+        indicator.style.border = "1px solid black";
+        newItem.appendChild(indicator);
+        let text = document.createElement("span");
+        text.style.height = "20px";
+        text.style.lineHeight = "20px";
+        text.innerHTML = stylesheet.href != null ? stylesheet.href : "inline";
+        newItem.appendChild(text);
+        panel.appendChild(newItem);
+
+        let updateColorStatus = function() {
+            
+            if (stylesheet.disabled) {
+                indicator.style.background = "red";
+            } else {
+                indicator.style.background = "green";
+            }
+        }
+        updateColorStatus();
+        newItem.addEventListener("click", function() {
+
+            stylesheet.disabled = !stylesheet.disabled;
+            updateColorStatus();
+
+        });
+    }
+    for (let i = 0; i < document.styleSheets.length; ++i) {
+        appendItem(document.styleSheets[i]);
+    }
+
+}
+cssEditor();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Свойство cssRules</h2>
+                    <p>
+                        Но самое интересное в объекте <span class="blue">CSSStyleSheet</span> - это свойство
+                        <span class="blue">cssRules</span>
+                    </p>
+                    <p>
+                        Свойство <span class="blue">cssRules</span> хранит в себе перечисление всех CSS правил,
+                        описанных в соответствующей таблице стилей, включая обычные блоки с селекторами, @-блоки,
+                        медиа-выражения, блоки кадров анимации и т.д. - всё, что бывает в CSS файлах.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример работы с cssRules</h3>
+                    <p>
+                        Например, вот здесь выводятся все CSS селекторы, которые встречаются в документе:
+                    </p>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_zXoRpO"] {
+                            height: 400px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="zXoRpO" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Work with CSSStyleSheet – Logging selectors">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/zXoRpO/">
+                        Work with CSSStyleSheet – Logging selectors</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
             </section>
             <section>
