@@ -60,7 +60,7 @@ DOM события. Категории событий. Обработка соб
 
 * Задание 6.
 
-[*DOM III. Тут будет что-нибудь ещё*](https://tgjmjgj.github.io/js/task/task_7/task_7.pdf "DOM III. Тут будет что-нибудь ещё")
+[*DOM III. Регистрация*](https://docs.google.com/document/d/1XMyoIl2tOFcUpP3wqh4N3yf6z-SO8FhTvZMLds1h6NE/edit?usp=sharing "DOM III. Регистрация")
 
 * Задание 7.
 

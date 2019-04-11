@@ -852,8 +852,8 @@ console.log(document.styleSheets[2]);
 function cssEditor() {
 
     let panel = document.createElement("div");
-    panel.innerHTML = `<div id="pan1" style="background: rgb(200,200,200); width: 25%; height: auto; border: 1px solid black;
-                        display: flex; flex-flow: column nowrap; position: fixed; bottom: 20px; right: 20px;"></div>`;
+    panel.innerHTML = `&lt;div id="pan1" style="background: rgb(200,200,200); width: 25%; height: auto; border: 1px solid black;
+                        display: flex; flex-flow: column nowrap; position: fixed; bottom: 20px; right: 20px;"&gt;&lt;/div&gt;`;
     document.body.appendChild(panel);
     panel = panel.firstElementChild;
 

@@ -4,9 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+    <title>Регистрация в Сервис</title>
 </head>
 <body>
+    <header></header>
+    <!-- <section id="loader">
+        <div class="loader-box">
+            <div>
+                <span class="full"></span>
+                <span class="empty"></span>
+            </div>
+            <p>Браузерные гномы собирают страницу...</p>
+        </div>
+    </section>
+    <script src="loader.js"></script> -->
+    <main id="page">
+        <div>
+            <section id="frame_1" class="invisible">
+                <p>Добро пожаловать в <span>Сервис</span>!</p>
+                <small>Для продолжения нужно зарегистрироваться</small>
+                <button type="button" name="reg" class="active-button">Регистрация</button>
+            </section>
+            <section id="frame_2">
+                <p>Шаг 1. Персональные данные</p>
+                <div class="private-data">
+                    <div>
+                        <div>
+                            <label for="firstname">Имя:</label>
+                            <input type="text" name="firstname">
+                        </div>
+                        <div>
+                            <label for="lastname">Фамилия:</label>
+                            <input type="text" name="lastname">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="email">Электронная почта:</label>
+                            <input type="text" name="email">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="country">Страна:</label>
+                            <input type="text" name="country">
+                        </div>
+                        <div>
+                            <label for="address">Адрес:</label>
+                            <input type="text" name="address">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="password">Пароль:</label>
+                            <input type="text" name="password">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="repassword">Повторите пароль:</label>
+                            <input type="text" name="repassword">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="active-button">Отмена</button>
+                    <button type="button" class="locked-button">Далее</button>
+                </div>
+            </section>
+        </div>
+    </main>
     <script src="code.js"></script>
 </body>
 </html>
