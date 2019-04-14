@@ -10,7 +10,7 @@
 </head>
 <body>
     <header></header>
-    <!-- <section id="loader">
+    <section id="loader">
         <div class="loader-box">
             <div>
                 <span class="full"></span>
@@ -19,16 +19,22 @@
             <p>Браузерные гномы собирают страницу...</p>
         </div>
     </section>
-    <script src="loader.js"></script> -->
-    <main id="page">
+    <script src="loader.js"></script>
+    <main id="page" class="invisible">
         <div>
-            <section id="frame_1" class="invisible">
+            <div class="indicator invisible">
+                <div class="step">1</div>
+                <div class="step">2</div>
+                <div class="step">3</div>
+                <div class="wire"></div>
+            </div>
+            <section id="frame_1">
                 <p>Добро пожаловать в <span>Сервис</span>!</p>
                 <small>Для продолжения нужно зарегистрироваться</small>
                 <button type="button" name="reg" class="active-button">Регистрация</button>
             </section>
-            <section id="frame_2">
-                <p>Шаг 1. Персональные данные</p>
+            <section id="frame_2" class="invisible">
+                <p class="frame-header">Шаг 1. Персональные данные</p>
                 <div class="private-data">
                     <div>
                         <div>
@@ -69,10 +75,77 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button type="button" class="active-button">Отмена</button>
-                    <button type="button" class="locked-button">Далее</button>
+                <div class="buttons">
+                    <button name="fr1_cancel_btn" type="button" class="active-button">Отмена</button>
+                    <button name="fr1_next_btn" type="button" class="locked-button">Далее</button>
                 </div>
+            </section>
+            <section id="frame_3" class="invisible">
+                <p class="frame-header">Шаг 2. Телефонный номер</p>
+                <div class="phone-data">
+                    <p>В целях безопасности Сервису нужно подтверждение вашего телефонного номера.
+                    На ваш номер будет отправлен 4-значный код подтверждения.</p>
+                    <div class="phone-entry">
+                        <input type="text" name="phone" placeholder="+___(__)___-__-__">
+                        <button name="fr2_send_btn" type="button" class="active-button">Отправить</button>
+                    </div>
+                    <div class="ver-code">
+                        <label for="verufy">Код подтверждения:</label>
+                        <div>
+                            <input type="text" name="verify" placeholder="XXXX" maxlength="4">
+                            <button name="fr2_verify_btn" type="button" class="active-button">Проверить</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button name="fr2_back_btn" type="button" class="active-button">Назад</button>
+                    <button name="fr2_next_btn" type="button" class="locked-button">Далее</button>
+                </div>
+            </section>
+            <section id="frame_4" class="invisible">
+                <p class="frame-header">Шаг 3. Метод оплаты</p>
+                <div class="credit-card">
+                    <p>Для совершения покупок в Сервисе необходимо подключить банковскую карту.</p>
+                    <div>
+                        <label for="credit-1">Номер карты:</label>
+                        <div>
+                            <input type="text" name="credit-1" maxlength="4" placeholder="1111">
+                            <input type="text" name="credit-2" maxlength="4" placeholder="2222">
+                            <input type="text" name="credit-3" maxlength="4" placeholder="3333">
+                            <input type="text" name="credit-4" maxlength="4" placeholder="4444">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="credit-date">Срок действия:</label>
+                            <input type="text" name="credit-date" maxlength="5" placeholder="00/00">
+                        </div>
+                        <div>
+                            <label for="credit-cvv">CVV:</label>
+                            <input type="text" name="credit-cvv" maxlength="3" placeholder="xxx">
+                        </div>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="terms">
+                        <label for="terms">Я согласен с любыми условиями, ничего не хочу читать, дайте мне уже пользоваться сервисом</label>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button name="fr3_back_btn" type="button" class="active-button">Назад</button>
+                    <button name="fr3_end_btn" type="button" class="locked-button">Завершить</button>
+                </div>
+            </section>
+            <section id="frame_5" class="invisible">
+                <img src="img/flying_star.svg">
+                <p>
+                    Поздравляем!
+                </p>
+                <p>
+                    Регистрация успешно завершена!
+                </p>
+                <p>
+                    Благодарим за использование нашего сервиса!
+                </p>
             </section>
         </div>
     </main>

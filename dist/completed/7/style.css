@@ -22,6 +22,7 @@ body > header {
     align-items: center;
 }
 #page > div {
+    position: relative;
     box-sizing: border-box;
     background: white;
     border: 1px solid black;
@@ -87,8 +88,9 @@ section#frame_2 {
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: flex-start;
+    position: relative;
 }
-#frame_2 > p {
+.frame-header {
     font-size: 1.1rem;
     margin-left: 20px;
 }
@@ -114,24 +116,233 @@ section#frame_2 {
 #frame_2 .private-data > div > div + div {
     margin-left: 50px;
 }
-#frame_2 input[type="text"] {
+main input[type="text"] {
     outline-color: #7161EF;
     font-size: 1.1rem;
     border: none;
     border-bottom: 2px solid #7161EF;
 }
-#frame_2 > div:last-child {
+.buttons {
+    position: absolute;
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
     justify-content: flex-end;
+    bottom: 20px;
 }
-#frame_2 button {
+.buttons > button {
     width: 120px;
     height: 36px;
     font-size: 1.2rem;
     margin-left: 10px;
 }
-#frame_2 button:last-child { 
+.buttons > button:last-child { 
     margin-right: 30px;
+}
+section#frame_3 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+}
+#frame_3 .phone-data {
+    margin: 0 40px;
+}
+#frame_3 .phone-data > p {
+    font-size: .9rem;
+}
+#frame_3 .phone-entry {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+#frame_3 .phone-entry > input {
+    padding-left: 20px;
+    width: 250px;
+    font-size: 1.4rem;
+}
+#frame_3 input::placeholder {
+    color: #bebebe;
+}
+#frame_3 .phone-data button {
+    margin-left: 40px;
+    height: 30px;
+    width: 80px;
+    border-radius: 4px;
+}
+#frame_3 .ver-code {
+    margin-top: 50px;
+}
+#frame_3 .ver-code label {
+    font-size: .9rem;
+}
+#frame_3 .ver-code input {
+    margin-left: 30px;
+    margin-top: 10px;
+    border: 1px solid #7161EF;
+    border-radius: 5px;
+    padding: 4px;
+    text-align: center;
+    width: 70px;
+    font-size: 1.2rem;
+}
+#frame_3 .ver-code button {
+    margin-left: 20px;
+}
+section#frame_4 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+}
+#frame_4 .credit-card {
+    margin: 0 40px;
+}
+#frame_4 .credit-card > p {
+    font-size: .9rem;
+}
+#frame_4 .credit-card > div:nth-of-type(1) {
+    display: flex;
+    flex-flow: column nowrap;
+    margin-left: 40px;
+    margin-top: 40px;
+}
+#frame_4 .credit-card > div:nth-of-type(2) {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+#frame_4 .credit-card > div:nth-of-type(2) > div {
+    display: flex;
+    flex-flow: column nowrap;
+}
+#frame_4 .credit-card > div:nth-of-type(2) > div:nth-of-type(2) {
+    margin-left: 100px;
+}
+#frame_4 label {
+    font-size: .9rem;
+}
+#fram_4 .credit-card > div:nth-of-type(1) > div {
+    display: flex;
+    flex-flow: row nowrap;
+}
+#frame_4 .credit-card > div:last-child {
+    margin-top: 40px;
+    font-size: .5rem;
+}
+#frame_4 .credit-card > div:last-child > input {
+    padding-top: 5px;
+}
+#frame_4 .credit-card > div:last-child > label {
+    font-size: .8rem;
+    padding-left: 10px;
+}
+#frame_4 .credit-card > div:nth-of-type(1) input {
+    width: 46px;
+    height: 26px;
+    padding-left: 6px;
+    font-size: 1.2rem;
+    margin-top: 8px;
+    border: 2px solid #7161EF;
+    background: #fbfaff;
+    border-radius: 6px;
+    outline: none;
+    caret-color: #7161EF;
+}
+/* #frame_4 .credit-card > div:nth-of-type(1) input {
+    width: 276px;
+    font-size: 1.2rem;
+    margin-top: 8px;
+    caret-color: #7161EF;
+    padding-left: 30px;
+} */
+#frame_4 .credit-card > div:nth-of-type(1) input:not(:first-child) {
+    margin-left: 3px;
+}
+#frame_4 .credit-card > div:nth-of-type(2) input {
+    width: 100px;
+    margin-top: 8px;
+    text-align: center;
+}
+#frame_4 input::placeholder {
+    color: #bebebe;
+}
+section#frame_5 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+#frame_5 > img {
+    position: absolute;
+    width: 300px;
+    left: calc(50% - 150px);
+    z-index: 1;
+}
+#frame_5 > p:nth-of-type(1) {
+    font-size: 3rem;
+    color: #7161EF;
+    text-shadow: 3px -3px 0 #e9c500;
+    font-weight: 600;
+    z-index: 2;
+    margin-top: 190px;
+    text-align: center;
+}
+#frame_5 > p:nth-of-type(2) {
+    font-size: 1.8rem;
+    margin: 0;
+    z-index: 2;
+}
+#frame_5 > p:nth-of-type(3) {
+    z-index: 2;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+.indicator {
+    position: absolute;
+    bottom: 48px;
+    left: 50px;
+    display: flex;
+    flex-flow: row nowrap;
+}
+.indicator > .step {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    border: 1px solid #7161EF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+    font-size: .8rem;
+    color: black;
+}
+.indicator > div.completed {
+    background: #7161EF;
+    color: #fff;
+}
+.indicator > .step:not(:first-child) {
+    margin-left: 20px;
+}
+.indicator > .wire {
+    box-sizing: border-box;
+    position: absolute;
+    width: calc(100% - 4px);
+    height: 8px;
+    top: calc(50% - 4px);
+    background: #fff;
+    border: 1px solid #7161EF;
+    z-index: 1;
+    margin: 0 2px;
 }
