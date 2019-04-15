@@ -62,6 +62,10 @@ DOM события. Категории событий. Обработка соб
 
 [*DOM III. Регистрация*](https://docs.google.com/document/d/1XMyoIl2tOFcUpP3wqh4N3yf6z-SO8FhTvZMLds1h6NE/edit?usp=sharing "DOM III. Регистрация")
 
+* Бонусное задание.
+
+[*Сапёр в DOM-е*](https://docs.google.com/document/d/1hGj9L9Qhuetg3Na76XUHqTiZ_ig4nu2neia_1nrS01o/edit?usp=sharing "Сапёр в DOM-е")
+
 * Задание 7.
 
 [*DOM. Запланировано*](https://tgjmjgj.github.io/js/task/task_8/task_8.pdf "DOM. Запланировано")

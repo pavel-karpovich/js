@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hamburger.css">
+    <title>Сапёр Онлайн</title>
+</head>
+<body>
+    <header class="header">
+        <img src="img/logo_horizont.svg">
+        <button class="hamburger hamburger--spring is-active" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+    </header>
+    <section class="menu menu-shown">
+        <div>
+            <div class="menu-close">
+                <i class="fas fa-times-circle fa-lg"></i>
+            </div>
+            <div class="menu-content">
+                <img src="img/logo.svg" draggable="false">
+                <div class="area-size">
+                    <label>Размеры поля:</label>
+                    <div>
+                        <input type="text" name="area-width" maxlength="3" value="24">
+                        <span>x</span>
+                        <input type="text" name="area-height" maxlength="3" value="24">
+                    </div>
+                </div>
+                <div class="bombs">
+                    <label>Количество бомб:</label>
+                    <input type="text" name="bomb-number" maxlength="4" value="99">
+                </div>
+                <button name="start-game">СТАРТ</button>
+            </div>
+        </div>
+    </section>
+    <section class="game">
+        <div class="board"></div>
+        <span>Игровое поле</span>
+    </section>
+    <script src="code.js"></script>
+</body>
+</html>
