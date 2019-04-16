@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&subset=cyrillic');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
 html,
 body {
     margin: 0;
@@ -7,10 +8,6 @@ body {
     width: 100%;
     position: relative;
     font-family: 'Roboto', sans-serif;
-}
-body {
-    display: flex;
-    flex-flow: column nowrap;
 }
 .header {
     background-color: #c2e9e9;
@@ -21,17 +18,22 @@ body {
     flex-flow: row nowrap;
     justify-content: space-between;
 }
-.header > img {
+
+.header>img {
     padding: 2px;
 }
-.header > button {
+
+.header>button {
     outline: none;
     margin-top: -2px;
 }
+
 .menu {
     position: absolute;
     height: 100%;
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,16 +41,19 @@ body {
     background-color: darkgreen;
     top: 0;
     transition: top .8s ease-out,
-                background-color .3s linear .6s;
+        background-color .3s linear .6s;
     z-index: 2;
+    -moz-user-select: none;
     user-select: none;
 }
+
 .menu-hidden {
     top: -100%;
     background-color: transparent;
     transition: top .8s ease-in,
-                background-color .2s linear;
+        background-color .2s linear;
 }
+
 .menu>div {
     position: relative;
     height: 450px;
@@ -70,13 +75,17 @@ body {
     right: 8px;
     cursor: pointer;
 }
+
 .menu-close:hover {
     color: #b12929;
 }
+
 .menu-content {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-flow: column nowrap;
     padding: 50px;
@@ -90,6 +99,8 @@ body {
 }
 
 .menu-content>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-flow: column nowrap;
 }
@@ -97,14 +108,18 @@ body {
 .area-size {
     margin-top: 30px;
 }
+
 .menu-content label {
     font-size: 1.4rem;
 }
-.area-size > label::before {
+
+.area-size>label::before {
     content: "🗒️";
 }
 
 .area-size>div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-flow: row nowrap;
     margin: 10px 0;
@@ -126,14 +141,15 @@ body {
     transform: scaleY(1.2);
 }
 
-.bombs > label::before {
+.bombs>label::before {
     content: "💣";
 }
+
 .bombs>input {
     margin-top: 10px;
 }
 
-.menu-content > button {
+.menu-content>button {
     font-family: "Press Start 2P", cursive;
     font-size: 1.4rem;
     height: 60px;
@@ -147,7 +163,8 @@ body {
     border-radius: 10px;
     animation: heartbeat 3s ease-in-out infinite both;
 }
-.menu-content > button:hover {
+
+.menu-content>button:hover {
     background: #daa077;
 }
 
@@ -180,36 +197,82 @@ body {
 }
 
 .game {
-    flex: 1;
-    background: yellow;
+    height: calc(100% - 50px);
+    background: #FDE74C;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.game > span {
+
+.game>span {
     font-size: 8rem;
     color: #77a4c5;
     margin: 0 40px;
     text-align: center;
 }
-.board {
+
+.board-container {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    position: relative;
     display: flex;
-    flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
 }
-.board > div {
+
+.board {
+    display: inline-flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+
+.board>div {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
 }
+
+.board>div::after {
+    content: "";
+    flex: 0 0 100px;
+}
+
 .board .cell {
     box-sizing: border-box;
     height: 20px;
     width: 20px;
+    flex: 0 0 20px;
     border: 1px solid #444;
     margin: 1px;
     text-align: center;
     line-height: 20px;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #93EF81;
+    transition: background-color 1s linear;
+}
+.board .cell:hover {
+    background-color: rgb(73, 175, 52);
+    transition: none;
+}
+.board .safely {
+    background-color: rgb(238, 191, 138);
+    transition: none;
+}
+.board .safely:hover,
+.board .bomb:hover {
+    background-color: unset;
+}
+.board .bomb {
+    background-color: red;
+    transition: none;
+}
+
+.invisible {
+    display: none !important;
 }

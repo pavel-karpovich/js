@@ -28,9 +28,9 @@
                 <div class="area-size">
                     <label>Размеры поля:</label>
                     <div>
-                        <input type="text" name="area-width" maxlength="3" value="24">
+                        <input type="text" name="area-width" maxlength="3" value="100">
                         <span>x</span>
-                        <input type="text" name="area-height" maxlength="3" value="24">
+                        <input type="text" name="area-height" maxlength="3" value="100">
                     </div>
                 </div>
                 <div class="bombs">
@@ -42,8 +42,10 @@
         </div>
     </section>
     <section class="game">
-        <div class="board"></div>
         <span>Игровое поле</span>
+        <div class="board-container invisible">
+            <div class="board"></div>
+        </div>
     </section>
     <script src="code.js"></script>
 </body>
