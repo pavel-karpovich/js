@@ -1,0 +1,89 @@
+svg text {
+    -moz-user-select: none;
+    user-select: none;
+}
+#back_down > g:nth-child(11) > g:nth-child(2) {
+    cursor: pointer
+}
+#back_down > g:nth-child(11) > g.z > g {
+    stroke: rgba(255, 255, 255, .9);
+    fill: rgba(255, 255, 255, .9);
+    animation: highlight 7s linear 2s infinite normal;
+}
+
+@keyframes highlight {
+    0% {
+        transform: translateX(0);
+    }
+    13% {
+        transform: translateX(300px);
+    }
+    100% {
+        transform: translateX(300px);
+    }
+}
+
+#back_down > g:nth-child(11) {
+    transform-origin: 50% 77%;
+    transition: transform .1s ease-out;
+}
+#back_down > g:nth-child(11):hover {
+    transform: rotateZ(2deg);
+}
+#back_down > g:nth-child(11) > g:nth-child(2) > path.y {
+    transition: fill .2s ease-out;
+}
+#back_down > g:nth-child(11):hover > g:nth-child(2) > path.y {
+    fill: #fffeb5;
+}
+
+#back_up > g > g:nth-of-type(1) {
+    animation: fly-cloud-1 234s linear infinite normal;
+    animation-delay: -170s;
+}
+
+@keyframes fly-cloud-1 {
+    0% { transform: translate(96%, 30px); }
+    100% { transform: translate(-30%, 30px); }
+}
+
+#back_up > g > g:nth-of-type(2) {
+    animation: fly-cloud-2 100s linear infinite normal;
+    animation-delay: -26s;
+}
+
+@keyframes fly-cloud-2 {
+    0% { transform: translate(54%, -50px); }
+    100% { transform: translate(-74%, -50px); }
+}
+
+#back_up > g > g:nth-of-type(3) {
+    animation: fly-cloud-3 140s linear infinite normal;
+    animation-delay: -15s;
+}
+
+@keyframes fly-cloud-3 {
+    0% { transform: translate(19%, 120px); }
+    100% { transform: translate(-99%, 120px); }
+}
+#back_up > g > rect {
+    animation: day-night 360s linear infinite alternate;
+}
+
+@keyframes day-night {
+    0% { fill: #a9cbff; }
+    100% { fill: #243246; }
+}
+
+foreignObject > input {
+    height: 100%;
+    width: 70px;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+    font-family: "Izhitsa Cyrillic", sans-serif;
+    background: none;
+    outline: none;
+    text-align: center;
+    color: #333;
+}

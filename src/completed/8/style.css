@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P&subset=cyrillic');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+    font-family: 'Izhitsa Cyrillic';
+    src: url('fonts/izhitsa-cyrillic.ttf');
+}
 
 html,
 body {
@@ -8,6 +12,7 @@ body {
     width: 100%;
     position: relative;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 .header {
     background-color: #c2e9e9;
@@ -19,38 +24,69 @@ body {
     justify-content: space-between;
 }
 
-.header>img {
-    padding: 2px;
+.header > img {
+    margin: 2px 0 2px 60px;
+    cursor: pointer;
 }
 
 .header>button {
     outline: none;
     margin-top: -2px;
 }
-
-.menu {
+.new-game > svg {
     position: absolute;
     height: 100%;
     width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    min-width: 1920px;
+    min-height: 1080px;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+@media (max-width: 1920px) {
+    .new-game > svg {
+        left: calc((100vw - 1920px) / 2);
+    }
+ }
+/* @media (max-height: 720px) {
+    .new-game {
+        bottom: calc((100vh - 1080px) / 2);
+    }
+} */
+.go-up {
+    transition: bottom 3s ease;
+    bottom: 100% !important;
+}
+.go-down {
+    transition: bottom 3s ease;
+    bottom: -100% !important;
+}
+.svg-bombs {
+    position: absolute;
+}
+
+.menu { 
+    position: absolute;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: rgba(232, 232, 232, .6); */
+    z-index: 2;
     background-color: darkgreen;
     top: 0;
-    transition: top .8s ease-out,
-        background-color .3s linear .6s;
-    z-index: 2;
     -moz-user-select: none;
     user-select: none;
 }
+.menu-shown {
+    transition: top .6s ease-out,
+        background-color .3s linear .45s;
 
+}
 .menu-hidden {
     top: -100%;
     background-color: transparent;
-    transition: top .8s ease-in,
+    transition: top .6s ease-in,
         background-color .2s linear;
 }
 
@@ -59,7 +95,7 @@ body {
     height: 450px;
     width: 400px;
     background: #fff;
-    border-radius: 20px;
+    border-radius: 20px 20px 4px 4px;
     box-shadow: 0 0 32px 1px black;
     background-image: url("img/background.svg");
     background-repeat: no-repeat;
@@ -84,8 +120,6 @@ body {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-flow: column nowrap;
     padding: 50px;
@@ -99,8 +133,6 @@ body {
 }
 
 .menu-content>div {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-flow: column nowrap;
 }
@@ -118,8 +150,6 @@ body {
 }
 
 .area-size>div {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     flex-flow: row nowrap;
     margin: 10px 0;
@@ -145,7 +175,7 @@ body {
     content: "💣";
 }
 
-.bombs>input {
+.menu-content .bombs>input {
     margin-top: 10px;
 }
 
@@ -198,10 +228,13 @@ body {
 
 .game {
     height: calc(100% - 50px);
-    background: #FDE74C;
+    background: #fff4a3;
     display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
+    -moz-user-select: none;
+    position: relative;
 }
 
 .game>span {
@@ -217,46 +250,47 @@ body {
     width: 100%;
     overflow: auto;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+    line-height: 100%;
+    white-space: nowrap;
 }
-
-.board {
+.board-container::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+.game .board {
     display: inline-flex;
+    vertical-align: middle;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     margin: 100px;
 }
-
-.board>div {
+.game .board > div {
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
 }
 
-.board>div::after {
-    content: "";
-    flex: 0 0 100px;
-}
-
 .board .cell {
     box-sizing: border-box;
-    height: 20px;
-    width: 20px;
-    flex: 0 0 20px;
+    height: 26px;
+    width: 26px;
+    flex: 0 0 26px;
+    line-height: 26px;
     border: 1px solid #444;
-    margin: 1px;
     text-align: center;
-    line-height: 20px;
     -moz-user-select: none;
     user-select: none;
+}
+.board .unknown {
     background-color: #93EF81;
     transition: background-color 1s linear;
 }
-.board .cell:hover {
+.board .unknown:hover:not([class*="flag"]) {
     background-color: rgb(73, 175, 52);
     transition: none;
 }
@@ -264,15 +298,94 @@ body {
     background-color: rgb(238, 191, 138);
     transition: none;
 }
-.board .safely:hover,
-.board .bomb:hover {
-    background-color: unset;
-}
 .board .bomb {
     background-color: red;
+    transition: none;
+}
+.board .flag {
+    background-color: rgb(190, 190, 190);
     transition: none;
 }
 
 .invisible {
     display: none !important;
+}
+.game-bar {
+    height: 60px;
+    width: 300px;
+    border-radius: 30px;
+    border: 1px solid #222;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 150px);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #eee;
+    font-size: 1.4rem;
+}
+.game-bar-drag {
+    box-sizing: border-box;
+    padding: 14px;
+    width: 52px;
+    cursor: move;
+}
+.game-bar-drag > img {
+    width: 21px;
+}
+.game-over-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 400px;
+    height: 140px;
+    background: #c2e9e9;
+    z-index: 10;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 black;
+}
+.game-over-popup > span {
+    font-family: "Roboto", serif;
+    font-size: 2.4rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #222;
+}
+.game-over-popup > img {
+    width: 60px;
+    transform-origin: center;
+    cursor: pointer;
+}
+.game-over-popup > img:hover {
+    transform: scale(1.04);
+}
+.game-win-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 420px;
+    height: 120px;
+    background: #8cc63f;
+    z-index: 10;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 black;
+    box-sizing: border-box;
+    padding: 18px 0;
+}
+.game-win-popup > span {
+    font-family: "Roboto", serif;
+    font-size: 2rem;
+    color: #222;
 }
