@@ -731,24 +731,133 @@ thirdSpan.addEventListener("click", function() {
                     </p>
                 </section>
                 <section>
-                    <h2>Метод stopPropagation</h2>
+                    <h2>Метод stopPropagation 1</h2>
+                    <img src="img/stop_propagation_1.png">
+                </section>
+                <section>
+                    <h2>Метод stopPropagation 2</h2>
+                    <img src="img/stop_propagation_2.png">
+                </section>
+                <section>
+                    <h2>Мгновенная остановка продвижения</h2>
+                    <p>
+                        Метод <span class="blue">stopPropagation()</span> останавливает продвижение события ко всем
+                        послудющим элементам DOM дерева, но для текущего узла все обработчики будут выполнены, если их
+                        здесь несколько.
+                    </p>
+                    <p>
+                        Чтобы полностью прекратить выполнение всех последующих обработчиков, включая обработчики текущего
+                        узла, используется метод <span class="blue">stopImmediatePropagation()</span>.
+                    </p>
+                    <p>
+                        После вызова метода <span class="blue">stopImmediatePropagation()</span> гарантированно не будет
+                        вызвано больше ни одного обработчика для данного события.
+                    </p>
+                </section>
+                <section>
+                    <h2>stopPropagation vs stopImmediatePropagation</h2>
+                    <img src="img/stop_immediate_propagation_1.png">
+                </section>
+                <section>
+                    <h2>Метод stopImmediatePropagation</h2>
+                    <img src="img/stop_immediate_propagation_2.png">
                 </section>
             </section>
             <section>
                 <section>
-                    <h2>Целевые элементы события</h2>
+                    <h2>Действие по умолчанию</h2>
+                    <p>
+                        Для многих событий на разных элементах интерфейса прописано стандартное поведение, например, при
+                        нажатии (событие <i>click</i>) на ссылку, должен осуществляться переход по ней; при нажатии
+                        на текстовое поле в это текстовое поле должен переходить фокус и появляться каретка ввода; при
+                        нажатии клавиши на клавиатуре (событие <i>keypress</i>), когда там находится фокус, должен
+                        происходить ввод нажатого символа в текстовое содержимое элемента.
+                    </p>
+                    <p>
+                        Всё это является действиями по умолчанию для конкретных элементов и событий. 
+                    </p>
+                    <p>
+                        И это стандартное поведение можно заблокировать, вызвав внутри обработчика метод
+                        <span class="blue">e.preventDefault()</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Метод preventDefault</h2>
+                    <blockquote>
+                        <span class="blue">preventDefault()</span> - метод из объекта аргументов события (е), с помощью
+                        которого можно отключить действие по умолчанию для текущего события.
+                    </blockquote>
+                    <p>
+                        Например, если мы не хотим, чтобы при клике на ссылку происходил переход на другую страницу,
+                        то нужно в обработчике вызвать этот метод:
+                    </p>
+                    <pre>
+                        <code class="js">
+const a = document.getElementById("link");
+
+a.addEventListener("click", function(e) {
+
+    console.log("click");
+    e.preventDefault();
+
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Делегирование событий</h2>
                     <p>
                         Если повесить обработчик на контейнерный элемент, внутри которого содержится много дочерних элементов, 
                         то с помощью свойства <span class="blue">target</span> можно будет определить, для какого именно
                         из внутренних элементов этого контейнера произошло событие. 
                     </p>
+                    <p>
+                        Всегда лучше иметь один обработчик, чем десять.
+                    </p>
+                    <p>
+                        Такой приём назвается <span class="purple">Делегирование событий</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Делегирование событий</h2>
+                    <p>
+                        Если нескольким элементам нужен одинаковый обработчик, то нужно использовать делегирование. Т.е
+                        привязать обработчик к их общему родителю, и обращаться к нажатому элементу с помощью
+                        свойства <span class="blue">target</span>.
+                    </p>
                     <img src="img/events_delegation.png">
                 </section>
                 <section>
-                    <h2>Свойство target</h2>
+                    <h2>Дополнительные проверки</h2>
                     <p>
-                        Свойство <span class="blue">target</span> хранит ссылку на элемент страницы, для которого произошло событие.
+                        Но если в родительском элементе есть что-то ещё, кроме элементов, для которых нужно обрабатывать
+                        событие - какие-то другие элементы, или просто пустые отступы, то нужно добавлять проверку, что
+                        <span class="blue">target</span> - это именно то, что нужно.
                     </p>
+                    <p>
+                        Если посмотреть на предыдущую картинку, то при нажатии на сам <i>span</i> - в <span class="blue">target</span>
+                        будет записан именно <i>span</i>, на которой было произведено нажатие.
+                    </p>
+                    <p>
+                        Но если кликнуть на свободную область между <i>span</i>-ами, то <span class="blue">target</span> будет
+                        указывать на родительский <i>div</i>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_bJOyNL"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="bJOyNL" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Random circles">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/bJOyNL/">
+                        Random circles</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                      </p>
+                      <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
             </section>
             <section>
@@ -784,6 +893,121 @@ elem.addEventListener("build", function(e) { console.log("My own Event!") });
 elem.dispatchEvent(event);
                         </code>
                     </pre>
+                </section>
+                <section>
+                    <h2>Конструктор Event</h2>
+                    <p>
+                        Вообще, с помощью конструктора <span class="blue">Event</span> можно программно генерировать
+                        любые события: пользовательские и стандартные.
+                    </p>
+                    <pre>
+                        <code class="js">
+// Стандартное событие клика мышкой
+let programClick = new Event("click");
+button.dispatchEvent(programClick);
+
+// Стандартное событие нажатия клавиши
+let programKeydown = new Event("keydown");
+textArea.dispatchEvent(programKeydown);
+
+// Стандартное событие загрузки ресурса
+let programLoad = new Event("load");
+fileInput.dispatchEvent(programLoad);
+
+// Пользовательское событие
+let myEvent = new Event("pigeon-fly");
+div.dispatchEvent(myEvent);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Объект Event</h2>
+                    <p>
+                        Объект, создающийся в результате вызова конструктора <span class="blue">new Event()</span>
+                        является объектом аргументов события - это тот объект, который приходит параметром в обработчики.
+                    </p>
+                    <p>
+                        Поэтому при программной генерации события его можно программно заполнять вспомогательной информацией.
+                    </p>
+                    <p>
+                        Помимо базового конструктора <span class="blue">Event</span> есть объекты и для более специфичных событий:
+                    </p>
+                    <ul>
+                        <li><span class="blue">MouseEvent</span></li>
+                        <li><span class="blue">KeyboardEvent</span></li>
+                        <li><span class="blue">FocusEvent</span></li>
+                        <li><span class="blue">WheelEvent</span></li>
+                        <li>и другие</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre>
+                        <code class="js">
+const e = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true,
+    clientX: 100,
+    clientY: 100,
+    x: 100,
+    y: 100,
+    which: 0
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пользовательский тип события</h2>
+                    <p>
+                        В стандартные объекты <span class="blue">Event</span> можно записывать только стандартные свойства,
+                        их нельзя дополнять своими данными.
+                    </p>
+                    <p>
+                        Если в аргументах события нужно передавать какую-то дополнительную информацию, то на помощь приходят
+                        собственные типы событий: <span class="blue">CustomEvent</span>.
+                    </p>
+                    <p>
+                        Объект <span class="blue">CustomEvent</span> содержит свойство <span class="blue">detail</span>,
+                        в которое вы можете записать всё, что захотите.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример CustomEvent</h3>
+                    <pre>
+                        <code class="js">
+const event = new CustomEvent('build', {
+    'detail': {
+        'time': new Date(),
+        'strangth': 10
+    }
+});
+
+function eventHandler(e) {
+
+    console.log('The Event was triggered by: ' + e.target);
+    console.log('Event creation time is: ' + e.detail);
+
+}
+
+div.addEventListener('build', eventHandler);
+
+div.dispatchEvent(event);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_MRLgvR"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="MRLgvR" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Coin stack">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/MRLgvR/">
+                        Coin stack</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
                 </section>
             </section>
 		</div>
