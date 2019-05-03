@@ -68,4 +68,4 @@ DOM события. Категории событий. Обработка соб
 
 * Задание 7.
 
-[*DOM. Запланировано*](https://tgjmjgj.github.io/js/task/task_8/task_8.pdf "DOM. Запланировано")
+[*DOM IV. Кубизм*](https://docs.google.com/document/d/1tujZxwsRo4dKjmRCYSNHwfkfYxp_m8maavr73WwrGsg/edit "DOM IV. Кубизм")
