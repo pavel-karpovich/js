@@ -359,8 +359,1057 @@ doWork();
                 </section>
                 <section>
                     <h1>AJAX</h1>
+                    <p>
+                        <span class="purple">AJAX</span> (Asynchronous JavaScript And XML) - это технология обращения к серверу
+                        без перезагрузки страницы, используя <span class="purple">XMLHttpRequest</span>.
+                    </p>
+                    <p>
+                        AJAX позволяет вам динамически обновлять части DOM дерева HTML страницы, в результате фонового
+                        взаимодействия с веб сервером, без необходимости перезагрузки всей страницы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Объект XMLHttpRequest</h2>
+                    <p>
+                        Для создания асинхронного запроса к веб-серверу в JavaScript существует специальный
+                        объект <span class="blue">XMLHttpRequest</span> из Web API.
+                    </p>
+                    <p>
+                        На практике он обычно не используется напрямую, а через другие функции. Но нужно понимать, что
+                        любой асинхронный запрос из JS к удалённому ресурсу в конечном итоге создаёт объект
+                        <span class="blue">XMLHttpRequest</span>, и фоновая отправка запроса идёт именно через него.
+                    </p>
+                </section>
+                <section>
+                    <h2>Принцип работы</h2>
+                    <img src="img/ajax.png">
+                </section>
+                <section>
+                    <h2>Обработка запроса</h2>
+                    <p>
+                        Алгоритм отправки запроса через объект <xpan class="blue">XMLHttpRequest</xpan> следующий:
+                    </p>
+                    <ol>
+                        <li>Сначала нужно создать объект <span class="blue">XMLHttpRequest</span> через конструктор.</li>
+                        <li>Затем у этого объекта вызвать метод <span class="blue">open()</span>, чтобы настроить запрос.</li>
+                        <li>Вызвать метод <span class="blue">send()</span>, который запустит запрос.</li>
+                        <li>Повесить обработчики событий для обработки результата запроса через события <i>load</i> или <i>readystatechange</i>.</li>
+                    </ol>
+                </section>
+                <section>
+                    <h2>Примеры</h2>
+                    <pre>
+                        <code class="js">
+function loadDoc() {
+    // Создаём объект XMLHttpRequest
+    const xhttp = new XMLHttpRequest();
+    // Назначаем обработчик
+    xhttp.onreadystatechange = function() {
+        // Этот код выполнится после успешного получения ответа от сервера
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("demo").innerHTML = xhttp.responseText;
+        }
+    };
+    // Настройка запроса
+    xhttp.open("GET", "ajax_info.txt", true);
+    // Отправка
+    xhttp.send();
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Использование XMLHttpRequest</h2>
+                    <pre>
+                        <code class="js">
+// Объект XMLHttpRequest создаётся через конструктор
+const xhr = new XMLHttpRequest();
+
+// Затем метод open() используется для настройки запроса
+xhr.open('GET', 'phones.json', true);
+
+// Метод send() отправляет запрос
+xhr.send(); 
+
+// Получение результата происходит через обработчик события readystatechange
+xhr.onreadystatechange = function() {
+    if (xhr.readyState != 4) {
+        return;
+    }
+    button.innerHTML = 'Готово!';
+    if (xhr.status != 200) {
+        alert(xhr.status + ': ' + xhr.statusText);
+    } else {
+        alert(xhr.responseText);
+    }
+} 
+
+button.innerHTML = 'Загружаю...';
+button.disabled = true;
+                        </code>
+                    </pre>
                 </section>
             </section>
+            <section>
+                <section>
+                    <h2>Инициализация запроса</h2>
+                    <p>
+                        Для инициализации и настройки запроса используется метод <span class="blue">open()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+XMLHttpRequest.open(method, url, async?, user?, password?);
+                        </code>
+                    </pre>
+                    <p>
+                        Метод принимает 2 обязательных параметра: <i>method</i> и <i>url</i>.
+                    </p>
+                    <p>
+                        <i>method</i> - название метода HTTP запроса, который вы собираетесь отправить, например,
+                        "GET", "POST", "PUT", "DELETE" и т.д.
+                    </p>
+                    <p>
+                        <i>url</i> - URL адрес ресурса, по которому будет отправлен запрос.
+                    </p>
+                </section>
+                <section>
+                    <h3>Запрещённый приём</h3>
+                    <p>
+                        Третий параметр метода <span class="blue">open()</span> позволяет сделать вызов функции
+                        синхронным. Этот параметр запрещено использовать среди веб разработчиков! В скором времени
+                        эту возможность планируют убрать из новых версий браузеров.
+                    </p>
+                    <pre>
+                        <code class="js">
+const request = new XMLHttpRequest();
+
+// Асинхронный запрос (по умолчанию)
+request.open('POST', 'http://example.com');
+
+// Асинхронный запрос
+request.open('POST', 'http://example.com', true);
+
+// СИНХРОННЫЙ запрос
+request.open('POST', 'http://example.com', false);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Синхронный XHR vs Асинхронный XHR</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_VOZbgV"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="css,result" data-user="ParadoxMaster" data-slug-hash="VOZbgV" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Don't use sync XHR!">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/VOZbgV/">
+                        Don't use sync XHR!</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Отправка запроса</h2>
+                    <p>
+                        Метод <span class="blue">send()</span> используется для отправки запроса на сервер.
+                    </p>
+                    <pre>
+                        <code class="js">
+XMLHttpRequest.send(body?);
+                        </code>
+                    </pre>
+                    <p>
+                        С помощью параметра этого метода <i>body</i> можно задавать тело HTTP запроса. Это используется для
+                        отправки данных на сервер через многие HTTP методы, например, POST и PUT. Если же запрос
+                        не поддерживает тело (например, GET и HEAD методы HTTP), то этот параметр игнорируется.
+                    </p>
+                    <p>
+                        В качестве тела запроса допускается обычная строка, или объекты <i>Document</i>, <i>ArrayBuffer</i>,
+                        <i>TypedArray</i>, <i>FormData</i>, <i>URLSearchParams</i>, <i>ReadableStream</i>, 
+                    </p>
+                </section>
+                <section>
+                    <h2>Пример с GET</h2>
+                    <pre>
+                        <code class="js">
+const xhr = new XMLHttpRequest();
+// GET запрос
+// Параметры передаются через адрес, в заголовке запроса
+xhr.open('GET', '/server?name=Viktor&password=VikTheBest111', true);
+
+xhr.onload = function () {
+    // Здесь что-нибудь происходит
+};
+
+xhr.send(null);
+// Любые значения параметра будут игнорироваться,
+// Потому что это GET запрос
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример с POST</h2>
+                    <pre>
+                        <code class="js">
+const xhr = new XMLHttpRequest();
+// POST запрос, параметры передаются в теле запроса
+xhr.open('POST', '/server', true);
+
+// Устанвливаем нужный заголовок Content-Type
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+// Обработчик на событие изменения состояния запроса
+xhr.onreadystatechange = function() {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        // Запрос завершён. Обрабатываем его здесь
+    }
+}
+// Отправляем запрос с указанным телом
+xhr.send('name=viktor&password=VikTheBest111');
+// xhr.send(new Blob());
+// xhr.send(new Int8Array());
+// xhr.send(document);
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Свойства объекта XMLHttpRequest</h2>
+                    <ul>
+                        <li><span class="blue">readyState</span> (readonly) - текущее состояние запроса</li>
+                        <li><span class="blue"><b>response</b></span> (readonly) - ответ сервера (text/JSON/Blob/document)</li>
+                        <li><span class="blue"><b>responseText</b></span> (readonly) - текст ответа</li>
+                        <li><span class="blue">responseType</span> - формат ответа (text/JSON/Blob/document)</li>
+                        <li><span class="blue">responseURL</span> (readonly) - URL адрес запроса</li>
+                        <li><span class="blue"><b>status</b></span> (readonly) - HTTP статус результата отправленного запроса</li>
+                        <li><span class="blue">statusText</span> (readonly) - текст статуса</li>
+                        <li><span class="blue">timeout</span> - ограничение по времени ожидания ответа</li>
+                        <li><span class="blue">withCredentials</span> - разрешать ли куки для межсайтовых запросов</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <p>
+                        Как сделать из обработчика коллбэк?
+                    </p>
+                    <pre>
+                        <code class="js">
+function load(url, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === xhr.DONE) {
+            if (xhr.status === 200) {
+                callback(xhr.response);
+            } else if (xhr.status === 404) {
+                console.log('Page not found!');
+            }
+        }
+    }
+    xhr.open('GET', url, true);
+    xhr.send();
+}
+
+load('https://developer.mozilla.org', function(res) {
+    console.log('Результат XHR запроса: ' + res);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример 2</h2>
+                    <pre>
+                        <code class="js">
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/server', true);
+
+// Установим максимально допустимое время на выполнение запроса
+// 2000 мс - 2 с
+xhr.timeout = 2000;
+
+xhr.onload = function () {
+    // Всё хорошо - запрос выполнен
+    // Выводим на консоль текст ответа
+    console.log(xhr.responseText);
+};
+
+xhr.ontimeout = function (e) {
+    // Время запроса истекло
+    console.log('Попробуйте ещё раз!');
+};
+
+xhr.send();
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Методы объекта XMLHttpRequest</h2>
+                    <ul>
+                        <li><span class="blue">abort()</span> - прерывает запрос</li>
+                        <li><span class="blue">getAllResponseHeaders()</span> - возвращает строку из заголовков HTTP ответа</li>
+                        <li><span class="blue"><b>getResponseHeader()</b></span> - выдаёт значение конкретного заголовка ответа</li>
+                        <li><span class="blue"><b>open()</b></span> - инициализация и настройка запроса</li>
+                        <li><span class="blue">overrideMimeType()</span> - переопределение MIME типа данных из ответа</li>
+                        <li><span class="blue"><b>send()</b></span> - отправка запроса</li>
+                        <li><span class="blue"><b>setRequestHeader()</b></span> - задаёт заголовок HTTP запроса</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <pre>
+                        <code class="js">
+const reqestButton = document.querySelector('button.request');
+const abortButton = document.querySelector('button.abort');
+
+let xhr = null;
+
+reqestButton.addEventListener('click', function() {
+    xhr = new XMLHttpRequest();
+    const method = 'GET';
+    const url = 'https://learn.paradox.red/';
+    xhr.open(method, url, true);
+    xhr.send();
+});
+abortButton.addEventListener('click', function() {
+    if (xhr) {
+        xhr.abort();
+    }
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с заголовками</h3>
+                    <pre>
+                        <code class="js">
+const request = new XMLHttpRequest();
+request.open('GET', 'file.txt', true);
+request.send(null);
+
+request.addEventListener('readystatechange', function() {
+    // Если были получены заголовки
+    if(this.readyState === this.HEADERS_RECEIVED) {
+
+        // Получаем все заголовки в одной строке
+        const headers = request.getAllResponseHeaders();
+
+        // Разбиваем одну большую строку в массив подстрок
+        // Где разделителем выступают символы конца строки \r\n
+        // Тогда каждый элемент массива будет представлять собой один заголовок
+        const arr = headers.trim().split(/[\r\n]+/);
+
+        // Объект для хранения заголовков как ключи-значения
+        const headerMap = {};
+        // Перебираем все строки заголовков
+        arr.forEach(function (line) {
+            // Разбиваем строку заголовка на символе двоеточия :
+            const parts = line.split(': ');
+            // Первый элемент полученного массива будет названием заголовка
+            const header = parts[0];
+            // Второй элемент массива будет его значением
+            const value = parts[1];
+            // Добавляем их в объект headerMap
+            headerMap[header] = value;
+        });
+
+        const contentType = headerMap['content-type'];
+        console.log(headerMap);
+    }
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример 3</h2>
+                    <pre>
+                        <code class="js">
+const client = new XMLHttpRequest();
+client.open('GET', 'unicorns-are-teh-awesome.txt', true);
+
+// Заголовки HTTP запроса должны выставляться между open и send
+// Устанавливаем разные заголовки для отключения хеширования
+xhr.setRequestHeader('cache-control', 'no-cache, must-revalidate, post-check=0, pre-check=0');
+xhr.setRequestHeader('cache-control', 'max-age=0');
+xhr.setRequestHeader('expires', '0');
+xhr.setRequestHeader('expires', 'Tue, 01 Jan 1980 1:00:00 GMT');
+xhr.setRequestHeader('pragma', 'no-cache');
+
+client.send(null);
+
+client.onreadystatechange = function() {
+    // Если получены заголовки
+    if(this.readyState === this.HEADERS_RECEIVED) {
+        // Получаем конкретный заголовок - заголовок Content-Type
+        const contentType = client.getResponseHeader('Content-Type');
+        // Если значение заголовка Content-Type не JSON
+        // т.е. сервер хочет ответить не в JSON формате, а каком-то другом
+        if (contentType !== 'application/json') {
+            // Прерываем запрос
+            client.abort();
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>События объекта XMLHttpRequest</h2>
+                    <ul>
+                        <li><span class="blue">abort</span> - когда запрос прерывается</li>
+                        <li><span class="blue"><b>error</b></span> - когда во время отправки запроса происходит</li>
+                        <li><span class="blue"><b>load</b></span> - когда приходит ответ</li>
+                        <li><span class="blue">loadend</span> - когда происходит abort, error или load</li>
+                        <li><span class="blue">loadstart</span> - когда запрос начинает получать данные ответа</li>
+                        <li><span class="blue">progress</span> - происходит периодически, пока загружается ответ</li>
+                        <li><span class="blue">timeout</span> - когда истекает максимальное время запроса</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример событий XMLHttpRequest</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_aropxr"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="aropxr" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Live XHR example">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/aropxr/">
+                        Live XHR example</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Цельный пример</h2>
+                    <p>
+                        Пример общения клиента и сервера на PHP через XMLHttpRequest:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;form id="loginform" method="post"&gt;
+            &lt;div&gt;
+                Имя пользователя:
+                &lt;input type="text" name="username" id="username" /&gt;
+                Пароль:
+                &lt;input type="password" name="password" id="password" /&gt;    
+                &lt;input type="submit" name="loginBtn" id="loginBtn" value="Login" /&gt;
+            &lt;/div&gt;
+        &lt;/form&gt;
+        &lt;script type="text/javascript"&gt;
+// Получаем все необходимые элементы DOM дерева
+const usernameField = document.getElementsByName('username')[0];
+const passwordField = document.getElementsByName('password')[0]
+const form = document.getElementById('loginform');
+// Вешаем на событие формы 'submit' обработчик
+form.addEventListener('submit', function(e) {
+    // Блокируем поведение по-умолчанию для формы
+    e.preventDefault();
+    // Создаём объект XMLHttpRequest
+    const xhr = new XMLHttpRequest();
+    // Устанавливаем, что будет делать POST запрос по адресу 'login.php'
+    xhr.open('POST', 'login.php');
+    // С помощью заголовков настраиваем тип контента
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    // Создаём объект с данными, которые будем отправлять на сервер
+    const requestBody = {
+        'username': usernameField.value,
+        'password': passwordField.value
+    };
+    // Отправляем запрос, передавая в его теле параметры
+    xhr.send(JSON.stringify(requestBody));
+    // Добавляем обработчик для события завершения запроса
+    xhr.addEventListener('load', function() {
+        // Если запрос завершился успешно
+        if (xhr.status === 200) {
+            // Парсим JSON ответ в объект JS
+            const jsonData = JSON.parse(xhr.response);
+            // Если в ответе по ключу 'success' находится true
+            if (jsonData.success) {
+                // Переходим на страницу профиля пользователя
+                location.href = 'my_profile.php';
+            } else {
+                // Иначе выводим сообщение
+                alert('Вы ввели неверные данные!');
+            }
+        }
+    });
+});
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="c1">
+                            <pre>
+                                <code class="php">
+&lt;?php
+// Хранящиеся на сервере данные о логине и пароле пользователя
+$username = 'Bernie';
+$password = 'pass12345';
+
+// Если в принятом POST запросе есть параметры 'username' и 'password'
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    // Проверяем, совпадают ли они с хранящимися на сервере
+    if ($_POST['username'] === $username && $_POST['password'] === $password) {
+        // Возвращаем ответ в формате JSON со значеним true по ключу 'success'
+        echo json_encode(array('success' => true));
+    } else {
+        // Если имя пользователя или пароль не совпали, то возвращаем JSON со значением false в 'success'
+        echo json_encode(array('success' => false));
+    }
+} else {
+    // Если в запросе отсутствовали параметры 'username' и 'password'
+    // Возвращаем дополнительный ключ 'error' со значением true
+    echo json_encode(array('success' => false, 'error' => true));
+}
+?&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Цельный пример 2</h2>
+                    <p>
+                        Пример автодополнения с серверной обработкой:
+                    </p>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre>
+                                <code class="html">
+&lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            &lt;b&gt;Start typing a name in the input field below:&lt;/b&gt;
+        &lt;/p&gt;
+        &lt;form&gt; 
+            Имя: &lt;input type="text" class="name"onkeyup="showHint(this.value)"&gt;
+        &lt;/form&gt;
+        &lt;p&gt;
+            Подсказки: &lt;span id="txtHint"&gt;&lt;/span&gt;
+        &lt;/p&gt;
+        &lt;script&gt;
+// Элемент страницы, в котором будут отображаться подсказки
+const hints = document.getElementById('txtHint');
+
+// Функция-обработчик для события нажатия клавиши в текстовом поле
+function showHint(e) {
+    // Получаем записанную в текстовое поле строку
+    const str = e.target.value;
+    // Если строка пустая
+    if (str.length === 0) {
+        // Обнуляем текст в поле подсказок 
+        hints.innerHTML = '';
+        return;
+    } else {
+        // Если в результате нажатия клавиши в текстовом поле появился какой-либо текст
+        // Создаём запрос
+        const xmlhttp = new XMLHttpRequest();
+        // Назначаем обработчик на событие изменение состояния запроса
+        xmlhttp.addEventListener('readystatechange', function() {
+            // Если запрос окончен и статут HTTP ответа равен 200
+            if (this.readyState == 4 && this.status == 200) {
+                // Выводим сообщение из ответа сервера (responseText) на страницу
+                hints.innerHTML = xmlhttp.responseText;
+            }
+        });
+        // Настраиваем запрос: будем отправлять GET запрос по адресу 'gethint.php' с параметром q
+        // В котором передадим на сервер текст из текстового поля
+        xmlhttp.open('GET', 'gethint.php?q='' + str);
+        // Отправляем запрос в полёт
+        xmlhttp.send();
+    }
+}
+
+const input = document.querySelector('form > input.name');
+// Вешаем этот обработчик на событие 'keyup' текстового поля
+input.addEventListener('keyup', showHint);
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+                                </code>
+                            </pre>
+                        </div>
+                        <div class="separator"></div>
+                        <div class="c1">
+                            <pre>
+                                <code class="php">
+&lt;?php
+// Массив из имён
+$a = ['Anna', 'Brittany', 'Cinderella', 'Diana', 'Eva', 'Fiona', 'Gunda', 'Hege', 'Inga',
+'Johanna', 'Kitty', 'Linda', 'Nina', 'Ophelia', 'Petunia', 'Amanda', 'Raquel', 'Cindy',
+'Doris', 'Eve', 'Evita', 'Sunniva', 'Tove', 'Unni', 'Violet', 'Liza', 'Elizabeth', 'Ellen'];
+
+// Получаем параметр 'q' из запроса от клиента
+$q = $_REQUEST['q'];
+
+$hint = '';
+
+// Если в $q есть значение
+if ($q !== '') {
+    // Переводим всё к нижнему регистру
+    $q = strtolower($q);
+    // Получаем длину строки $q
+    $len = strlen($q);
+    // Перебираем все имена из массива имён &name
+    foreach($a as $name) {
+        // Получаем первые символы имени, размера строки $q
+        $begin = substr($name, 0, $len);
+        // Если имя начинается со строки, переданной с клиента
+        if ($q === $begin) {
+            // Добавляем к строке $hint текущее имя
+            if ($hint === '') {
+                $hint = $name;
+            } else {
+                $hint .= ', $name';
+            }
+        }
+    }
+}
+
+// Возвращаем 'нет совпадений', если не нашлось ни одного имени, начинающегося
+// с полученной строки $q, или список имён, если таковые имеются
+echo $hint === '' ? 'нет совпадений' : $hint;
+?&gt;
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Кроссдоменные запросы (CORS)</h2>
+                    <p>
+                        <a href="https://learn.javascript.ru/xhr-crossdomain">Статья на learn.javascript.ru</a>
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>События в JS</h2>
+                    <p>
+                        JavaScript называют событийно-ориентированным языком программирования, потому что он построен на
+                        асинхронных операциях, а все асинхронные операции сводятся к каким-либо встроенным событиям.
+                    </p>
+                    <blockquote>
+                        Ответное действие на любую асинхронную операцию внутри движка JS задаётся как функция,
+                        выступающая в виде обработчика для какого-нибудь события.
+                    </blockquote>
+                </section>
+                <section>
+                    <h2>Коллбэки в JS</h2>
+                    <p>
+                        Но при проектировании функций в JS обработчики часто оказываются скрытыми за другими конструкциями
+                        языка. Основной пример этого сокрытия - это коллбэки в асинхронных функциях.
+                    </p>
+                    <p>
+                        Из любого обработчика легко можно сделать коллбэк, просто поместив назначение обработчика в
+                        дополнительную функцию.
+                    </p>
+                </section>
+                <section>
+                    <h3>Например</h3>
+                    <p>
+                        Возьмём следующий блок кода. В функции <i>getData()</i> здесь есть ошибка.
+                    </p>
+                    <pre>
+                        <code class="js">
+function getData() {
+    let data;
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'example.php');
+    xhr.send();
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            data = xhr.response;
+        }
+    });
+    return data;
+}
+
+var data = getData();
+console.log("The data is: " + data);
+                        </code>
+                    </pre>
+                    <p>
+                        Как правильно структурировать и написать такой код, когда внутри функции выполняется
+                        асинхронное действие и нам нужно вернуть из неё результат этой асинхронной операции?
+                    </p>
+                </section>
+                <section>
+                    <h2>Коллбэк</h2>
+                    <p>
+                        Это можно сделать только через коллбэк во внешней функции, потому что это единственный
+                        способ получения результата асинхронного действия:
+                    </p>
+                    <pre>
+                        <code class="js">
+function getData(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'example.php');
+    xhr.send();
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            let data = xhr.response;
+            callback(data)
+        }
+    });
+}
+
+getData(funсtion cb(data) {
+    console.log("The data is: " + data);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Ещё один пример</h3>
+                    <pre>
+                        <code class="js">
+function loadAsset(url, type, callback) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.responseType = type;
+    xhr.onload = function() {
+        callback(xhr.response);
+    };   
+    xhr.send();
+}
+
+loadAsset('coffee.jpg', 'blob', function(blob) {
+    let objectURL = URL.createObjectURL(blob);
+    let image = document.createElement('img');
+    image.src = objectURL;
+    document.body.appendChild(image);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Callback hell</h2>
+                    <img src="img/callback_hell.jpeg">
+                    <p>
+                        Добро пожаловать в ад коллбэков
+                    </p>
+                </section>
+                <section>
+                    <h3>Много коллбэков. Слишком много коллбэков</h3>
+                    <p>
+                        Сперва кажется, что асинхронные функции с коллбэками очень удобное и простое для восприятия
+                        решение для написания неблокирующего кода.
+                    </p>
+                    <p>
+                        Но в больших проектах на JavaScript асинхронные функции встречаются на каждом шагу. Почти всегда
+                        в коде требуется обращение к удалённым серверам, чтобы получить или обновить какую-то 
+                        информацию, необходимую для функционирования веб приложения.
+                    </p>
+                    <p>
+                        И когда выполнение асинхронной операции начинает зависеть от выполнения другой асинхронной
+                        операции, которая зависит от третьей асинхронной операции, это превращается в лестницеобразный
+                        трудночитаемый и неподдерживаемый код.
+                    </p>
+                </section>
+                <section>
+                    <h2>Обычная ситуация в JS</h2>
+                    <img src="img/callback_hell_2.jpeg">
+                </section>
+                <section>
+                    <h2>Пирамида из скобочек</h2>
+                    <pre>
+                        <code class="js">
+fs.readdir(source, function (err, files) {
+    if (err) {
+        console.log('Error finding files: ' + err);
+    } else {
+        files.forEach(function (filename, fileIndex) {
+            console.log(filename);
+            gm(source + filename).size(function (err, values) {
+                if (err) {
+                    console.log('Error identifying file size: ' + err);
+                } else {
+                    console.log(filename + ' : ' + values);
+                    aspect = (values.width / values.height);
+                    widths.forEach(function (width, widthIndex) {
+                        height = Math.round(width / aspect);
+                        console.log('resizing ' + filename + 'to ' + height + 'x' + height);
+                        this.resize(width, height).write(dest + 'w' + width + '_' + filename, function(err) {
+                            if (err) {
+                                console.log('Error writing file: ' + err);
+                            }
+                        });
+                    }.bind(this));
+                }
+            });
+        });
+    }
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1>Промисы</h1>
+                    <p>
+                        <span class="purple">Промисы</span> - это альтернативный более удобный способ записи асинхронных
+                        операций.
+                    </p>
+                    <p>
+                        <span class="blue">Promise</span> (<i>англ. обещание</i>) - это объект, в который оборачивается асинхронная функция,
+                        чтобы предоставить удобный синтаксис для описания последующих действий, после выполнения
+                        асинхронной операции, т.е. коллбэков.
+                    </p>
+                </section>
+                <section>
+                    <h2>Принципы в основе Промисов</h2>
+                    <p>
+                        Промисы предоставляют контроль над результатом выполнения асинхронной операции: выполнить ли
+                        коллбэк (<span class="purple">resolve</span>), если асинхронная операция завершилась корректно,
+                        или же отказаться выполнять (<span class="purple">reject</span>), если возникла ошибка
+                        или что-то пошло не так.
+                    </p>
+                    <p>
+                        У любого промиса есть метод <span class="blue">then()</span> (<i>англ. затем, потом</i>),
+                        с помощью которого задаётся коллбэк.
+                    </p>
+                </section>
+                <section>
+                    <h2>Анатомия промиса</h2>
+                    <pre>
+                        <code class="js">
+// Создаётся объект Promise, в который оборачивается асинхронная операция
+const takeTheTrashOut = new Promise(function(resolve, reject) {
+    // Делаем всю работу
+    console.log('Я пошел выбрасывать мусор...');
+    let trashIsOut = taskTrashOut();
+    // Если что-то пошло не так
+    if (!trashIsOut) {
+        // Вызывается reject
+        // Говорим, что мы не можем продолжить, потому что что-то пошло не так
+        reject('Я не смог.');
+    } else {
+        // Вызывается resolve
+        // Говорим, что действие выполнено, и можно продолжать
+        resolve('Дело сделано!');
+    }
+});
+
+// Обещаем выбросить мусор
+takeTheTrashOut.then(function(fromResolve) {
+    // И затем сделать это
+    console.log('Ну и что вышло?');
+    console.log(fromResolve);
+}).catch(function(fromReject) {
+    // А если не выполним обещание, сделать это
+    console.log('Ну и что вышло?');
+    console.log(fromReject);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Чистый код</h2>
+                    <p>
+                        Промисы позволяют писать чистый код. Вы не можете переплыть океан, пока не построите лодку:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Функция Собрать древесину
+const getWood = function() {
+    return new Promise((resolve, reject) {
+        resolve('Собрано дерево.');
+    });
+}
+// Функция Сделать доски
+const makePlank = function() {
+    return new Promise((resolve, reject) {
+        resolve('Доски сделаны.');
+    });
+}
+// Функция Построить лодку
+const buildBoat = function() {
+    return new Promise((resolve, reject) {
+        resolve('Лодка построена');
+    });
+}
+// Функция Уплыть в океан
+const sailTheOcean = function() {
+    return new Promise((resolve, reject) {
+        resolve('Вы посреди океана на маленькой самодельной деревянной лодке. Поздравляю.');
+    });
+}
+
+getWood().then(function(res) {
+    console.log(res);
+    return makePlank();
+}).then(function(res) {
+    console.log(res);
+    return buildBoat();
+}).then(function(res) {
+    console.log(res);
+    return sailTheOcean();
+}).then(function(res)) {
+    console.log(res);
+    console.log('И что дальше?');
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Продолжение</h2>
+                    <p>
+                        Добавим реальной асинхронности с помощью функции <span class="blue">setTimeout()</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Функция Собрать древесину
+const getWood = function() {
+    return new Promise((resolve, reject) {
+        setTimeout(function() {
+            resolve('Собрано дерево.'); 
+        }, 4000);
+    });
+}
+// Функция Сделать доски
+const makePlank = function() {
+    return new Promise((resolve, reject) {
+        setTimeout(function() {
+            resolve('Доски сделаны.');
+        }, 2000);
+    });
+}
+// Функция Построить лодку
+const buildBoat = function() {
+    return new Promise((resolve, reject) {
+        setTimeout(function() {
+            resolve('Лодка построена');
+        }, 6000);
+    });
+}
+// Функция Уплыть в океан
+const sailTheOcean = function() {
+    return new Promise((resolve, reject) {
+        setTimeout(function() {
+            resolve('Вы посреди океана на маленькой самодельной деревянной лодке. Поздравляю.');
+        }, 10000);
+    });
+}
+
+getWood().then(function(res) {
+    console.log(res);
+    return makePlank();
+}).then(function(res) {
+    console.log(res);
+    return buildBoat();
+}).then(function(res) {
+    console.log(res);
+    return sailTheOcean();
+}).then(function(res)) {
+    console.log(res);
+    console.log('И что дальше?');
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Тот же пример через коллбэки</h3>
+                    <pre>
+                        <code class="js">
+// Функция Собрать древесину
+const getWood = function(callback) {
+    setTimeout(function() {
+        callback('Собрано дерево.'); 
+    }, 4000);
+}
+// Функция Сделать доски
+const makePlank = function(callback) {
+    setTimeout(function() {
+        callback('Доски сделаны.');
+    }, 2000);
+}
+// Функция Построить лодку
+const buildBoat = function() {
+    setTimeout(function() {
+        callback('Лодка построена');
+    }, 6000);
+}
+// Функция Уплыть в океан
+const sailTheOcean = function(callback) {
+    setTimeout(function() {
+        callback('Вы посреди океана на маленькой самодельной деревянной лодке. Поздравляю.');
+    }, 10000);
+}
+
+getWood(function(res) {
+    console.log(res);
+    makePlank(function(res) {
+        console.log(res);
+        buildBoat(function(res) {
+            console.log(res);
+            sailTheOcean(function(res)) {
+                console.log(res);
+                console.log('И что дальше?');
+            });
+        });
+    });
+});                        
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Ещё</h2>
+                    <p>
+                        <a href="https://makshladki.github.io/DDWA/lecture/ECMAScript_6/index.html#/43">Там</a>
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h1>fetch API</h1>
+            </section>
+            <section>
+                <h2>Публичные сервера</h1>
+            </section>
+            <section>
+                <h2>Итераторы и генераторы</h2>
+                <p>
+                    <a href="https://makshladki.github.io/DDWA/lecture/ECMAScript_6/index.html#/29">Там</a>
+                </p>
+            </section>
+            <section>
+                <section>
+                    <h2>Пример fetch</h2>
+                    <p>
+                        <a href="https://mdn.github.io/dom-examples/streams/grayscale-png/">Интересный пример</a>
+                    </p>
+                </section>
+            </section>
+            <section>
+                <h1>async & await</h1>
+                <p>
+                    <a href="https://makshladki.github.io/DDWA/lecture/ECMAScript_8/index.html#/11">Там</a>
+                </p>
+            </section>
+
 		</div>
 	</div>
 
