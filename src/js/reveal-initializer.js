@@ -6,7 +6,7 @@
 
     Reveal.initialize({
         controls: true,
-        progress: true,
+        progress: false,
         history: true,
         center: true,
         slideNumber: true,
