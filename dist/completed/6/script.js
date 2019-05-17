@@ -1,4 +1,6 @@
 
+import {Yakubovich} from './Yakubovich.js';
+
 let squares = document.querySelectorAll(".main-area > div");
 
 for (let i = 0; i < squares.length; ++i) {

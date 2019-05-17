@@ -31,6 +31,7 @@ async function showAnimal(kind) {
   const reloadButton = document.createElement('button');
   reloadButton.classList.add('reload');
   const image = document.createElement('img');
+  image.referrerPolicy = 'no-referrer';
   image.src = await getRandomAnimalImage(kind);
   const paragraph = document.createElement('p');
   paragraph.textContent = await getRandomAnimalFact(kind);

@@ -94,23 +94,37 @@ body {
     background-color: orange;
 }
 .animal {
+    height: 100%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: center;
 }
 .reload {
-    height: 8vw;
-    width: 8vw;
-    padding: 0;
-    background: url('img/refresh.png') center no-repeat;
-    background-size: cover;
+    box-sizing: border-box;
+    height: 5vw;
+    width: 5vw;
+    padding: 1vw;
     outline: none;
     border: none;
     cursor: pointer;
-    border-radius: 20%;
-    box-shadow: 0 0 10px 2px rgb(83, 83, 83);
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px 0 black;
+    margin-bottom: 40px;
+    background-color: white;
+}
+.reload > img {
+    width: 100%;
+    height: 100%;
 }
 .animal > img {
+    height: 60%;
+    box-shadow: 20px 20px 0 0 #f1f068;
 }
 .animal > p {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+    text-shadow: 1px 1px 0 white;
 }

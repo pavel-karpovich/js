@@ -1,13 +1,57 @@
 
-let disp = document.querySelector(".display");
-let i = 0;
-setInterval(function() {
-    disp.innerHTML += `
-    <div class="card">
-        <img src="https://thispersondoesnotexist.com/image?${i}" alt="Avatar">
-        <div class="description">
-            <p>Персона номер 2</p> 
-        </div>
-    </div>`;
-    i++;
-}, 2000);
+import {DisLike} from './DisLike.js';
+
+async function proxyFetch(url, options) {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const response = await fetch(proxyUrl + url, options);
+    return await response.json();
+}
+
+async function receiveUserData() {
+    return await proxyFetch('https://randus.org/api.php');
+}
+
+async function getRandomName() {
+    const userData = await receiveUserData();
+    const name = `${userData.lname} ${userData.fname} ${userData.patronymic}`;
+    return name;
+}
+
+let counter = 0;
+async function changePerson() {
+    const personImage = document.querySelector('.card > img');
+    const personNameText = document.querySelector('.description > p');
+    if (!(personImage && personNameText)) {
+        return;
+    }
+    const getRandomNamePromise = getRandomName();
+    personImage.src = 'https://thispersondoesnotexist.com/image?' + counter;
+    counter++;
+    personImage.addEventListener('load', async function() {
+        const randomName = await getRandomNamePromise;
+        personNameText.textContent = randomName;
+    });
+}
+
+changePerson();
+const app = new DisLike();
+
+const rightDiv = document.querySelector('.right');
+const leftDiv = document.querySelector('.left');
+if (rightDiv) {
+    rightDiv.addEventListener('click', function() {
+        const likes = app.like();
+        const visualLikeCounter = document.querySelector('.like > div');
+        visualLikeCounter.textContent = likes;
+        changePerson();
+    });
+}
+
+if (leftDiv) {
+    leftDiv.addEventListener('click', function() {
+        const dislikes = app.dislike();
+        const visualDislikeCounter = document.querySelector('.dislike > div');
+        visualDislikeCounter.textContent = dislikes;
+        changePerson();
+    });
+}

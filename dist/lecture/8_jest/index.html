@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>Jest</title>
+	<meta name="description" content="JavaScript testing with Jest framework">
+	<meta name="keywords" content="js, testing, unit-test, jest">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Тестирование</h1>
+                    <h3>Юнит тесты на JavaScript</h3>
+					<div>
+						<p style="display: inline-block;">
+							Карпович Павел / 
+						</p>
+						<a href="https://github.com/tgjmjgj" class="icon-button github">
+							<i class="fa fa-github"></i><span></span>
+						</a>
+						<a href="https://facebook.com/paradox7master" class="icon-button facebook">
+							<i class="fa fa-facebook"></i><span></span>
+						</a>
+					</div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <section>
+                    <h1>Тестирование</h1>
+                    <p>
+                        Ни один серьёзный проект не обходится без тестирования.
+                    </p>
+                    <p>
+                        Если заглянуть, например, на GitHub - в любом мало-мальски объёмном и поддерживаемом
+                        проекте можно будет найти папку с тестами.
+                    </p>
+                    <p>
+                        Это - <span class="purple">Юнит-тесты</span>, - цемент, скрепляющий весь код и не дающий
+                        ему развалиться.
+                    </p>
+                </section>
+                <section>
+                    <h2>Юнит-тесты</h1>
+                    <blockquote>
+                        <span class="purple">Юнит-тесты,</span> или Модульные тесты - тесты, которые проверяют
+                        работоспособность отдельных функций в программного коде системы.
+                    </blockquote>
+                    <p>
+                        Юнит-тесты пишет программист, а не тестировщик.
+                    </p>
+                    <p>
+                        Когда программист пишет код, вместе с этим кодом он должен писать для него юнит-тесты.
+                        Юнит-тесты проверяют работоспособность написанного кода.
+                    </p>
+                    <p>
+                        И это не что-то дополнительное или необязательное. Это - обязанность любого (практически)
+                        программиста, над каким бы проектом он не работал.
+                    </p>
+                    <p>
+                        Если вы пишете код для реального проекта, который нужно будет поддерживать и обновлять, -
+                        вам нужны будут юнит-тесты.
+                    </p>
+                </section>
+                <section>
+                    <h2>Юнит-тесты</h2>
+                    <p>
+                        Любой код состоит из набора функций, ну или объектов с методами. И юнит тесты позволяют 
+                        точечно оценить работоспособность функций, и сказать, где и что работает не по плану.
+                    </p>
+                    <p>
+                        Это чрезвычайно важно для <span class="purple">Регрессионного тестирования</span> - когда
+                        вы обновляете часть кода, и нужно убедиться, что ничего из того, что работало раньше, не
+                        поломалось.
+                    </p>
+                    <p>
+                        Или, вот ещё один пример, когда у вас относительно большая кодовая база, например, несколько
+                        десятков тысяч строк, вы можете долгое время не работать над какой-то частью программы, 
+                        и забыв, как работает код, вернуться, и наломать дров. В таком случае, юнит тесты 
+                        сразу дадут знать, что именно, и в каких местах, пошло не так. 
+                    </p>
+                </section>
+                <section>
+                    <h3>График</h3>
+                    <img src="img/graph.png" alt="">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Юнит тесты в JavaScript</h2>
+                    <p>
+                        В JS существует множество библиотек (фреймворков) для написания юнит тестов:
+                    </p>
+                    <ul>
+                        <li>Jest</li>
+                        <li>Mocha</li>
+                        <li>Jasmine</li>
+                        <li>Karma</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Jest</h2>
+                    <p>
+                        Jest - самый многофункциональный и универсальный фреймворк тестирования, и мы рассмотрим 
+                        юнит тесты именно на его примере.
+                    </p>
+                </section>
+                <section>
+                    <h3>Установка Jest 1</h3>
+                    <p>
+                        Чтобы установить Jest, понадобится установленный NodeJS на компьютере. А именно, пакетный менеджер
+                        npm.
+                    </p>
+                    <p>
+                        Также проект, к которому нужно подключить Jest, должен являться пакетом NodeJS, т.е. содержать
+                        файл <i>package.json</i>.
+                    </p>
+                    <p>
+                        Создать этот файл можно консольной командой:
+                    </p>
+                    <pre>
+                        <code class="bash">
+npm init
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Установка Jest 2</h3>
+                    <p>
+                        Устанавливается Jest с помощью команды:
+                    </p>
+                    <pre>
+                        <code class="bash">
+npm i -D jest
+npm i -D @babel/core
+                        </code>
+                    </pre>
+                    <p>
+                        Для того, чтобы его можно было удобно запускать из консоли, нужно прописать соответствующую
+                        задачу в разделе scripts в файле package.json:
+                    </p>
+                    <pre>
+                        <code class="json">
+"scripts": {
+    "test": "jest"
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Запуск</h2>
+                    <p>
+                        Чтобы запустить все юнит тесты на исполнение, нужно выполнить команду:
+                    </p>
+                    <pre>
+                        <code class="bash">
+npm test
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Файлы с тестами</h2>
+                    <p>
+                        По умолчанию, Jest ищет все файлы, название которых заканчивается на <i>test.js</i>.
+                    </p>
+                    <p>
+                        Например, если у вас есть файл index.js, то тесты для функций этого файла обычно выносят
+                        в файл index.test.js. Или создают отдельную директорию test в корне проекта, куда
+                        размещают все файлы тестов.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Юнит тесты</h2>
+                    <p>
+                        Но есть одна важная особенность. Юнит тесты обычно запускаются в среде NodeJs, а не в браузере,
+                        даже если это браузерный JavaScript.
+                    </p>
+                    <p>
+                        В браузере запускают другой тип тестов - функциональные, но про них будет следующая лекция.
+                    </p>
+                </section>
+                <section>
+                    <h2>Правила написания функций</h2>
+                    <p>
+                        Для того, чтобы код было удобно тестировать, нужно стараться как можно больше использовать
+                        <span class="purple">чистые функции</span>.
+                    </p>
+                    <blockquote>
+                        <span class="purple">Чистые функции</span> - функции, никак не изменяющие общего состояния
+                        системы и не имеющие побочных эффектов. Для одного и того же набора входных параметров
+                        функция всегда должна возвращать одинаковый результат.
+                    </blockquote>
+                    <p>
+                        Более подробно о чистых функциях можно почитать <a href="https://habr.com/ru/post/437512/">здесь</a>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Суть</h2>
+                    <blockquote>
+                        Главное правило, которого следует придерживаться в браузерном JS - всегда отделять 
+                        чистую логику от кода изменения интерфейса (HTML страницы).
+                    </blockquote>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Модули</h2>
+                    <p>
+                        Тесты всегда пишут в отдельных файлах, поэтому возникает необходимость в получении кода из
+                        исходных файлов. Нужно ведь как-то обращаться к функциям, которые собираетесь тестировать.
+                    </p>
+                    <p>
+                        Обычные скриптовые файлы, которые подключаются к HTML странице, нельзя подключить к другому
+                        JavaScript файлу. Ведь тесты запускаются в NodeJS, где никакого HTML документа нет.
+                    </p>
+                    <p>
+                        И получается, что нужно так писать код, чтобы файлы можно было подключить и к HTML странице,
+                        и к другому файлу в NodeJS.
+                    </p>
+                    <p>
+                        И этого можно добиться, структурировав файлы в модули ES6.
+                    </p>
+                </section>
+                <section>
+                    <h2>Модули ES6</h2>
+                    <blockquote>
+                        <span class="purple">Модули</span> - способ структуризации и группировки JavaScript кода,
+                        когда каждый отдельный файл JS предоставляет свое собственное пространство имён с 
+                        приватными и публичными элементами.
+                    </blockquote>
+                    <p>
+                        Модули - это те же файлы JavaScript, только с небольшими дополнениями в коде, и альтернативным
+                        способом подключения.
+                    </p>
+                </section>
+                <section>
+                    <h2>Закрытые модули</h2>
+                    <p>
+                        При обычном подключение JS файлов, все глобально объявленные переменные и функции попадают
+                        в общий глобальный контекст.
+                    </p>
+                    <p>
+                        При использовании модулей же такого не происходит - в глобальный контекст ничего не добавляется.
+                        У каждого модуля своё закрытое пространство имён.
+                    </p>
+                    <p>
+                        По умолчанию, в модуле все переменные и функции закрыты. Это значит, что к ним никак нельзя
+                        получить доступ из других файлов/модулей.
+                    </p>
+                </section>
+                <section>
+                    <h2>Экспорт</h2>
+                    <p>
+                        В модулях можно помечать, к каким элементам нужно дать возможность обращаться из других модулей.
+                    </p>
+                    <p>
+                        Это называется <span class="purple">Экспортом</span>.
+                    </p>
+                    <p>
+                        Каждый модуль может экспортировать свои элементы, которые должны быть публичными.
+                    </p>
+                    <p>
+                        Например, если в модуле (файле) у вас описано 10 функций, и вы экспортируете одну из них - главную,
+                        то только эту функцию можно будет использовать в других модулях (файлах).
+                    </p>
+                </section>
+                <section>
+                    <h2>Импорт</h2>
+                    <p>
+                        Подключение в один модуль экспортируемых элементов из другого модуля называется
+                        <span class="purple">Импортом</span>.
+                    </p>
+                    <p>
+                        Т.е. сам по себе экспорт не делает глобально видимыми экспортируемые объекты. Экспорт просто позволяет
+                        делать импорт.
+                    </p>
+                    <p>
+                        Если вы хотите что-то из одного файла использовать в другом файле, то в файле-источнике нужно
+                        прописать экспорт нужного элемента, а в другом файле сделать его импорт.
+                    </p>
+                </section>
+                <section>
+                    <h2>Ключевое слово export</h2>
+                    <p>
+                        Для того, чтобы отметить элемент, как экспортируемый, к нему в начале, перед определением,
+                        нужно прописать ключевое слово <span class="blue">export</span>.
+                    </p>
+                    <p>
+                        Хоть можно экспортировать и переменные, рекомендуется экспортировать только функции или классы.
+                    </p>
+                    <pre>
+                        <code class="js">
+export function myFunc(arg1) {
+    console.log('I work with ' + arg1);
+    return 0;
+}
+
+export class SomeClass {
+    constructor() {
+        console.log('Constructing an instance of the class SomeClass');
+    }
+}
+
+export const key = '6723tgfbvysdbcswygr23gd8237Tr3rwrr';
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Комбинированный экспорт</h2>
+                    <p>
+                        Можно записывать экспорт иначе, не прописывая ключевое слово <span class="blue">export</span>
+                        по всему коду, а написав весь перечень экспортируемых объектов за один раз:
+                    </p>
+                    <pre>
+                        <code class="js">
+function myFunc(arg1) {
+    console.log('I work with ' + arg1);
+    return 0;
+}
+
+class SomeClass {
+    constructor() {
+        console.log('Constructing an instance of the class SomeClass');
+    }
+}
+
+const key = '6723tgfbvysdbcswygr23gd8237Tr3rwrr';
+
+// Комбинированный список экспортируемых объектов
+export { myFunc, SomeClass, key };
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Ключевое слово import</h2>
+                    <p>
+                        Подключение экспортируемых элементов осуществляется с помощью ключевого слова
+                        <span class="blue">import</span>. Обычно это прописывается в самом начале файла.
+                    </p>
+                    <p>
+                        Есть несколько вариаций записи этой команды.
+                    </p>
+                </section>
+                <section>
+                    <h2>Выборочный импорт</h2>
+                    <p>
+                        Можно импортировать конкретные объекты по имени, тогда это записывается следующим образом:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Импорт функции myFunc и класса SomeClass из другого модуля (файла) module-file-name.js
+import {myFunc, SomeClass} from './module-file-name.js';
+                        </code>
+                    </pre>
+                    <p>Тогда объекты будут доступны по прописанным именам:</p>
+                    <pre>
+                        <code class="js">
+const retVal = myFunc(123);
+const instance = new SomeClass();
+                        </code>
+                    </pre>
+                    <p>
+                        Суть этого способа в том, что мы импортируем не всё, что экспортирует модуль, а только то,
+                        что нам нужно.
+                    </p>
+                </section>
+                <section>
+                    <h2>Полный импорт</h2>
+                    <p>
+                        Также можно импортировать весь модуль целиком:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Импортируем всё в объект myModule из модуля (файла) module-file-name.js
+import * as myModule from './module-file-name.js';
+                        </code>
+                    </pre>
+                    <p>
+                        Тогда доступ к импортированным элементам будет осуществляться через ключи (свойства)
+                        объекта импорта:
+                    </p>
+                    <pre>
+                        <code class="js">
+const retVal = myModule.myFunc(123);
+const instance = new myModule.SomeClass();
+let a = 'key string: ' + myModule.key;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Подключение модуля к странице</h2>
+                    <p>
+                        Для того, чтобы подключить к HTML странице JavaScript файл, являющийся модулем (а модулем
+                        будет считаться любой JavaScript файл, в котором присутствуют команды
+                        <span class="blue">import</span> или <span class="blue">export</span>), нужно в теге
+                        <i>script</i> использовать дополнительный атрибут <i>type="module"</i>.
+                    </p>
+                    <pre>
+                        <code class="js">
+&lt;script src="js/module-file-name.js" type="module"&gt;&lt;/script&gt;
+                        </code>
+                    </pre>
+                    <p>
+                        Модули, которые используются в других модулях (через import), дополнительно подключать к
+                        HTML документу не нужно. Обычно подключается лишь один главный модуль, а через него уже
+                        идут связи с остальными.
+                    </p>
+                </section>
+                <section>
+                    <h2>Связывание модулей</h2>
+                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/10_construction.png">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Jest</h2>
+                    <a href="https://jestjs.io/docs/en/getting-started">Пока что только так</a>
+                </section>
+                <section>
+                    <h2>Демонстрация</h2>
+                    <ul>
+                        <li><a href="../../completed/5/">Задание 5</a></li>
+                        <li><a href="../../completed/6/">Задание 6</a></li>
+                        <li><a href="../../completed/1/">Просто так</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Матчеры</h2>
+                </section>
+                <section>
+                    <h2>Моки</h2>
+                </section>
+                <section>
+                    <h2>Спаи</h2>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Покрытие кода</h2>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Расширение VS Code для Jest</h2>
+                    <img src="img/vscode-jest.png" alt="">
+                </section>
+            </section>
+		</div>
+	</div>
+
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x controls"></i>
+		</a>
+	</aside>
+	<aside id="presentable-icon-close">
+		<a title="К списку материалов" href="../../index.html#/1">
+			<i class="fa fa-times fa-2x controls"></i>
+		</a>
+	</aside>
+	<aside id="presentable-theme-picker">
+		<div id="hidden-bar" class="invisible">
+			<div>
+				<div data-theme="beige" class="theme-circle theme-beige"></div>
+				<div data-theme="black" class="theme-circle theme-black"></div>
+				<div data-theme="blood" class="theme-circle theme-blood"></div>
+				<div data-theme="league" class="theme-circle theme-league"></div>
+				<div data-theme="moon" class="theme-circle theme-moon"></div>
+				<div data-theme="night" class="theme-circle theme-night"></div>
+				<div data-theme="serif" class="theme-circle theme-serif"></div>
+				<div data-theme="simple" class="theme-circle theme-simple"></div>
+				<div data-theme="sky" class="theme-circle theme-sky"></div>
+				<div data-theme="solarized" class="theme-circle theme-solarized"></div>
+				<div data-theme="white" class="theme-circle theme-white"></div>
+			</div>
+		</div>
+		<div id="selected-theme" class="theme-circle"></div>
+	</aside>
+
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>
