@@ -161,7 +161,7 @@ npm init
                     <pre>
                         <code class="bash">
 npm i -D jest
-npm i -D @babel/core
+npm i -D @types/jest
                         </code>
                     </pre>
                     <p>
@@ -177,6 +177,33 @@ npm i -D @babel/core
                     </pre>
                 </section>
                 <section>
+                    <h2>Необходимые зависимости</h2>
+                    <p>
+                        Чтобы тесты могли работать с файлами модулей, необходимо дополнительно установить еще
+                        и эти пакеты:
+                    </p>
+                    <pre>
+                        <code class="bash">
+npm i -D @babel/core
+npm i -D @babel/preset-env
+                        </code>
+                    </pre>
+                    <p>
+                        Затем, в корне проекта создать файл .babelrc, и написать в нём:
+                    </p>
+                    <pre>
+                        <code class="json">
+{
+    "env": {
+        "test": {
+            "presets": ["@babel/preset-env"]
+        }
+    }
+}
+                        </code>
+                    </pre>
+                </section>
+                <section>
                     <h2>Запуск</h2>
                     <p>
                         Чтобы запустить все юнит тесты на исполнение, нужно выполнить команду:
@@ -186,6 +213,10 @@ npm i -D @babel/core
 npm test
                         </code>
                     </pre>
+                    <p>
+                        Или установить расширение для VS Code для Jest:
+                    </p>
+                    <img src="img/vscode-jest.png">
                 </section>
                 <section>
                     <h2>Файлы с тестами</h2>
