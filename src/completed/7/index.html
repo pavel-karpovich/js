@@ -27,6 +27,8 @@
                 <div class="step">2</div>
                 <div class="step">3</div>
                 <div class="wire"></div>
+                <div class="micro-wire-1"></div>
+                <div class="micro-wire-2"></div>
             </div>
             <section id="frame_1">
                 <p>Добро пожаловать в <span>Сервис</span>!</p>
@@ -65,13 +67,13 @@
                     <div>
                         <div>
                             <label for="password">Пароль:</label>
-                            <input type="text" name="password">
+                            <input type="password" name="password">
                         </div>
                     </div>
                     <div>
                         <div>
                             <label for="repassword">Повторите пароль:</label>
-                            <input type="text" name="repassword">
+                            <input type="password" name="repassword">
                         </div>
                     </div>
                 </div>
@@ -84,16 +86,16 @@
                 <p class="frame-header">Шаг 2. Телефонный номер</p>
                 <div class="phone-data">
                     <p>В целях безопасности Сервису нужно подтверждение вашего телефонного номера.
-                    На ваш номер будет отправлен 4-значный код подтверждения.</p>
-                    <div class="phone-entry">
+                    На ваш номер будет отправлен четырёхзначный код подтверждения.</p>
+                    <div class="phone-entry">   
                         <input type="text" name="phone" placeholder="+___(__)___-__-__">
-                        <button name="fr2_send_btn" type="button" class="active-button">Отправить</button>
+                        <button name="fr2_send_btn" type="button" class="locked-button">Отправить</button>
                     </div>
-                    <div class="ver-code">
+                    <div class="ver-code invisible">
                         <label for="verufy">Код подтверждения:</label>
                         <div>
                             <input type="text" name="verify" placeholder="XXXX" maxlength="4">
-                            <button name="fr2_verify_btn" type="button" class="active-button">Проверить</button>
+                            <button name="fr2_verify_btn" type="button" class="locked-button">Проверить</button>
                         </div>
                     </div>
                 </div>

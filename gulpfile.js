@@ -25,12 +25,12 @@ const srcPath = {
     'img': './src/**/*.+(jpg|jpeg|png|svg|gif)',
     'css': ['./src/!(css|js)*/**/*.css'],
     'cssLint': './src/**/*.css',
-    'js': './src/!(js)*/**/*.js',
-    'jsLint': ['./src/**/*.js', '!./src/**/*.min.js'],
+    'js': './src/!(js|completed)*/**/*.js',
+    'jsLint': ['./src/**/*.js', '!./**/node_modules/**', '!./src/**/*.min.js'],
     'font': './src/font/**/*.*',
     'analysis': './code-analysis/',
     'task': './src/task/**/*.+(pdf|тых|html|css)',
-    'cmpl': './src/completed/**/*.*',
+    'cmpl': ['./src/completed/**/*.*', '!./**/node_modules/**'],
     'print': './src/css/print/*.css'
 };
 

@@ -59,8 +59,25 @@
                         Ни один серьёзный проект не обходится без тестирования.
                     </p>
                     <p>
-                        Если заглянуть, например, на GitHub - в любом мало-мальски объёмном и поддерживаемом
-                        проекте можно будет найти папку с тестами.
+                        Бывает тестирование методом чёрного ящика - когда тестируется конечный
+                        интерфейс продукта без доступа и знания исходного кода. 
+                    </p>
+                    <p>
+                        И бывает тестирование методом белого ящика - когда тестируется исходный код
+                        программной системы.
+                    </p>
+                    <p>
+                        Тестирование методом чёрного ящика обычно занимаются тестировщики.
+                    </p>
+                    <p>
+                        Тестированием белого ящика - программисты. И как раз о таком тестировании мы сейчас и поговорим.
+                    </p>
+                </section>
+                <section>
+                    <h2>Юнит тесты</h2>
+                    <p>
+                        Любому проекту нужны тесты. Если заглянуть, например, на GitHub - в каждом мало-мальски 
+                        объёмном и поддерживаемом проекте можно будет найти папку с тестами.
                     </p>
                     <p>
                         Это - <span class="purple">Юнит-тесты</span>, - цемент, скрепляющий весь код и не дающий
@@ -114,6 +131,21 @@
             </section>
             <section>
                 <section>
+                    <h2>Юнит тесты</h2>
+                    <p>
+                        В первую очередь юнит тесты используются для тестирования логики. Для тестирования интерфейса
+                        пользователя существуют другие виды тестов.
+                    </p>
+                    <p>
+                        А в веб программировании вся основная логика обычно располагается на бэкенде - серверной части
+                        приложения. Поэтому юнит тесты не так активно используются во фронтенд разработке.
+                    </p>
+                    <p>
+                        Но всё равно есть возможности писать юнит тесты для кода, предназначенного для браузера, и 
+                        мы сейчас научимся это делать.
+                    </p>
+                </section>
+                <section>
                     <h2>Юнит тесты в JavaScript</h2>
                     <p>
                         В JS существует множество библиотек (фреймворков) для написания юнит тестов:
@@ -130,15 +162,25 @@
                 <section>
                     <h2>Jest</h2>
                     <p>
-                        Jest - самый многофункциональный и универсальный фреймворк тестирования, и мы рассмотрим 
-                        юнит тесты именно на его примере.
+                        Jest - самый многофункциональный и универсальный фреймворк тестирования.
+                    </p>
+                    <p>
+                        Многие другие фреймворки тестирования сосредоточены на каком-то одном аспекте юнит тестов,
+                        и для добавления новой функциональности, которая практически всегда бывает необходимо,
+                        требуется устанавливать дополнительные пакеты.
+                    </p>
+                    <p>
+                        В Jest-е же есть всё и сразу.
+                    </p>
+                    <p>
+                        Поэтому мы будем рассматривать юнит тесты именно с этим фреймворком.
                     </p>
                 </section>
                 <section>
                     <h3>Установка Jest 1</h3>
                     <p>
-                        Чтобы установить Jest, понадобится установленный NodeJS на компьютере. А именно, пакетный менеджер
-                        npm.
+                        Чтобы установить Jest, понадобится установленный NodeJS на компьютере. А также пакетный менеджер
+                        NodeJS - npm, идущий в комплекте со средой.
                     </p>
                     <p>
                         Также проект, к которому нужно подключить Jest, должен являться пакетом NodeJS, т.е. содержать
@@ -476,7 +518,96 @@ let a = 'key string: ' + myModule.key;
             <section>
                 <section>
                     <h2>Jest</h2>
-                    <a href="https://jestjs.io/docs/en/getting-started">Пока что только так</a>
+                    <p>
+                        Jest - наиболее объёмный и функциональный фреймворк.
+                    </p>
+                    <p>
+                        В нём из коробки идут все необходимые компоненты:
+                    </p>
+                    <ul>
+                        <li>Богатый набор матчеров</li>
+                        <li>Моки для функций и модулей</li>
+                        <li>Спаи</li>
+                        <li>Интеграции с babel, rewire, jsdom и др.</li>
+                        <li>Множество CLI опций</li>
+                        <li>Метрики покрытия тестами</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Первый тест</h2>
+                    <p>
+                        Простейший пример теста:
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Два плюс два равно четыре', function() {
+    expect(2 + 2).toBe(4);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Структура теста</h2>
+                    <p>
+                        Любой тест задаётся вызовом функции <span class="blue">test</span>, или функции
+                        <span class="blue">it</span> - это синонимы.
+                    </p>
+                    <p>
+                        Эта функция принимает первым параметром строку - описание теста. Здесь принято кратко,
+                        в двух словах, описывать, что проверяет данный тест. 
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Что проверяем', function() {
+    // Тело теста
+});
+// или
+it('Что проверяем', function() {
+    // Тело теста
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Triple A</h2>
+                    <p>
+                        Стандарт оформления юнит тестов - схема ААА, когда тело теста условно разделяется на три части:
+                    </p>
+                    <ul>
+                        <li>Arrange - назначение. Создание всех необходимых переменных и объектов для выполнения проверяемого действия.</li>
+                        <li>Act - действие. Выполнение тестируемого действия.</li>
+                        <li>Assert - проверка. Сравнение ожидаемого результата тестируемого действия с фактическим результатом.</li>
+                    </ul>
+                    <pre>
+                        <code class="js">
+test('Что тестируем', function() {
+    // Arrange
+
+    // Act
+
+    // Assert
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пример ААА</h2>
+                    <p>
+                        Тестируем функцию <i>Math.sqrt()</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Корень из 36 это 6', function() {
+    // Arrange - создаём переменные
+    const number = 36;
+    const expectedSqrt = 6;
+    // Act - тестируемое действие и получение реального результата
+    const realSqrt = Math.sqrt(number);
+    // Assert - сравнение, совпал ли ожидаемый и реальный результат
+    expect(realSqrt).toBe(expectedSqrt);
+});
+                        </code>
+                    </pre>
                 </section>
             </section>
             <section>
@@ -489,10 +620,929 @@ let a = 'key string: ' + myModule.key;
                     </p>
                     <p>
                         Собственно, <span class="purple">Матчеры</span> - это категория функций и объектов в библиотеке
-                        тестирования, которые используются для написания проверок в тесте.
+                        тестирования, которые используются для написания проверок в тесте (секции Assert).
                     </p>
                     <p>
-                        Из этого следует, что любой тест опирается на какой-нибудь матчер. Не может быть теста без матчера.
+                        Любой тест опирается на какой-нибудь матчер. Не может быть теста без матчера.
+                    </p>
+                </section>
+                <section>
+                    <h2>Матчеры в Jest</h2>
+                    <p>
+                        Все матчеры в Jest прописываются с помощью функции <span class="blue">expect()</span>.
+                    </p>
+                    <p>
+                        Например, самая стандартная проверка на равенство:
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(8 * 6).toBe(48);
+                        </code>
+                    </pre>
+                    <p>
+                        И такой синтаксис всегда: вызывается функция <span class="blue">expect()</span>, в неё передаётся
+                        <u>полученный результат</u>, а затем у вернувшегося объекта вызывается один из методов (здесь - toBe)
+                        проверки, в котором уже указывается <u>ожидаемый результат</u>.
+                    </p>
+                    <p>
+                        Вызовов функции <span class="blue">expect()</span> может быть несколько в тесте, но лучше
+                        без необходимости не использовать больше одного.
+                    </p>
+                </section>
+                <section>
+                    <h2>Функции-матчеры</h2>
+                    <p>
+                        В объекте, который возвращает функция <span class="blue">expect()</span>, целая куча разных
+                        матчеров на любую ситуацию.
+                    </p>
+                    <p>
+                        Полный их список можно найти <a href="https://jestjs.io/docs/en/expect">в официальной документации</a>.
+                    </p>
+                    <p>
+                        Функции матчеры называются таким образом, чтобы из строки кода проверки 
+                        формировалось практически полноценное английское предложение.
+                    </p>
+                    <p>
+                        Например:
+                    </p>
+                    <pre>
+                        <code class="js">
+// Ожидаем, что строка будет иметь длину 7
+expect(string).toHaveLength(7);
+// Ожидаем, что число будет больше или равно 25
+expect(number).toBeGreaterThanOrEqual(25);
+// Ожидаем, что имя не будет содержать символа '-'
+expect(name).not.toContain('-');
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Виды матчеров</h2>
+                    <p>
+                        Условно, все функции-матчеры можно разбить на следующие категории:
+                    </p>
+                    <ul>
+                        <li>Проверки на равенство</li>
+                        <li>Проверки для чисел</li>
+                        <li>Проверки для строк</li>
+                        <li>Проверки для коллекций</li>
+                        <li>Проверки объектов</li>
+                        <li>Проверки исключений</li>
+                        <li>Проверки снапшотов</li>
+                        <li>Проверки моков и спаев</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Проверки на равенство</h2>
+                    <p>
+                        Самая основная проверка, которая используется в 3/4 тестов - <span class="blue">toBe()</span>.
+                    </p>
+                    <p>
+                        <span class="blue">toBe()</span> сравнивает полученное значение с ожидаемым, по подобию
+                        оператора ===. Т.е. строгое сравнение для примитивов, и ссылочное сравнение для объектов.
+                    </p>
+                    <pre>
+                        <code class="js">
+const item = {
+    name: 'Сливочное масло',
+    mass: 250,
+};
+test('Весит 250 грамм', function() {
+    expect(item.mass).toBe(250);
+});
+test('Называется "Сливочное масло"', () => {
+    expect(item.name).toBe('Сливочное масло');
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>toBe - по ссылке</h2>
+                    <p>
+                        Матчер <span class="blue">toBe()</span> не подойдёт, если нужно сравнить по значению 
+                        два объекта с разными ссылками:
+                    </p>
+                    <pre>
+                        <code class="js">
+function getCart() {
+    return {
+        name: 'Сливочное масло',
+        mass: 250,
+    };
+}
+test('В корзине находится указанная пачка масла', function() {
+    const expectedItem = {
+        name: 'Сливочное масло',
+        mass: 250,
+    };
+    const cartItem = getCart();
+    // Упсс... Тест не проходит
+    expect(cartItem).toBe(expectedItem);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Матчер toEqual</h2>
+                    <p>
+                        Для сравнения объектов по значению нужно использовать матчер <span class="blue">toEqual()</span>.
+                    </p>
+                    <p>
+                        <span class="blue">toEqual()</span> рекурсивно сравнивает все ключи и значения между двумя объектами.
+                    </p>
+                    <pre>
+                        <code class="js">
+function getCart() {
+    return {
+        name: 'Сливочное масло',
+        mass: 250,
+    };
+}
+test('В корзине находится указанная пачка масла', function() {
+    const expectedItem = {
+        name: 'Сливочное масло',
+        mass: 250,
+    };
+    const cartItem = getCart();
+    // Все работает!
+    expect(cartItem).toEqual(expectedItem);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Сравнения с константами</h2>
+                    <p>
+                        В Jest есть много матчеров, которые сравнивают полученный результат с какими-то
+                        константными значениями. Можно обойтись и без них, используя универсальный 
+                        <span class="blue">toBe()</span>, но они позволяют упростить чтение теста и
+                        сделать код чище.
+                    </p>
+                    <p>
+                        Например, матчер <span class="blue">toBeFalsy()</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(1 === 8).toBeFalsy();
+                        </code>
+                    </pre>
+                    <p>
+                        То же самое можно написать с использованием стандартного <span class="blue">toBe()</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(1 === 8).toBe(false);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Специфичные матчеры</h2>
+                    <p>
+                        К подобным матчерам относятся:
+                    </p>
+                    <ul>
+                        <li><span class="blue">toBeDefined()</span> - что угодно, кроме undefined</li>
+                        <li><span class="blue">toBeFalsy()</span> - равно false</li>
+                        <li><span class="blue">toBeNull()</span> - равно null</li>
+                        <li><span class="blue">toBeTruthy()</span> - равно true</li>
+                        <li><span class="blue">toBeUndefined()</span> - равно undefined</li>
+                        <li><span class="blue">toBeNaN()</span> - равно NaN</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример тестирования функции деления</h3>
+                    <pre>
+                        <code class="js">
+function divide(a, b) {
+    return a / b;
+}
+
+test('Целочисленное деление', function() {
+    const a = 32;
+    const b = 2;
+    const expected = 16;
+    const result = divide(a, b);
+    expect(result).toBe(expected);
+});
+test('Деление нуля', function() {
+    const a = 0;
+    const b = 2;
+    const expected = 0;
+    const result = divide(a, b);
+    expect(result).toBe(expected);
+});
+test('Деление на ноль', function() {
+    const a = 32;
+    const b = 0;
+    const expected = Infinity;
+    const result = divide(a, b);
+    expect(result).toBe(Infinity);
+});
+test('Деление непонятно чего непонятно на что', function() {
+    const a = [1,2,3,4,5,6];
+    const b = ',';
+    const result = divide(a, b);
+    expect(result).toBeNaN();
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Отрицание матчера</h2>
+                    <p>
+                        Любой матчер можно обратить. Т.е. вместо матчера "должно быть равно" сделать матчер
+                        "<u>не</u>должно быть равно".
+                    </p>
+                    <p>
+                        И это делается с помощью специального свойства <span class="blue">not</span>.
+                    </p>
+                    <p>
+                        Оно прописывается перед вызовом функции-матчера, и меняет логику проверки на противоположную.
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(что-то).not.матчер(что-то);
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример отрицания</h3>
+                    <pre>
+                        <code class="js">
+function bestFlavor() {
+    return 'картошка';
+}
+
+test('Лучший вкус - не кокос', function() {
+    const flavor = bestFlavor();
+    expect(flavor).not.toBe('кокос');
+});
+test('Лучший вкус - не банан', function() {
+    const flavor = bestFlavor();
+    expect(flavor).not.toBe('банан');
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Матчеры для чисел</h2>
+                    <p>
+                        К специфичным для проверки чисел матчерам, относятся матчеры диапазонов, которые
+                        позволяют проверить, попадает ли полученное число в ожидаемый диапазон значений.
+                    </p>
+                    <p>
+                        Это матчеры:
+                    </p>
+                    <ul>
+                        <li><span class="blue">toBeGreaterThan()</span> - больше чем</li>
+                        <li><span class="blue">toBeGreaterThanOrEqual()</span> - больше или равно чем</li>
+                        <li><span class="blue">toBeLessThan()</span> - меньше чем</li>
+                        <li><span class="blue">toBeLessThanOrEqual()</span> - меньше или равно чем</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример диапазонных матчеров</h3>
+                    <pre>
+                        <code class="js">
+function getRandomInt(min, max) {
+    return Math.ceil(min) + Math.floor(Math.random() * max);
+}
+
+test('Случайное число из диапазона положительных чисел', function() {
+    const min = 20;
+    const max = 30;
+    const value = getRandomInt(min, max);
+    expect(value).toBeGreaterThanOrEqual(min);
+    expect(value).toBeLessThanOrEqual(max);
+});
+test('Случайное число из диапазона отрицательных чисел', function() {
+    const min = -50;
+    const max = -10;
+    const value = getRandomInt(min, max);
+    expect(value).toBeGreaterThanOrEqual(min);
+    expect(value).toBeLessThanOrEqual(max);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка вещественных чисел</h2>
+                    <p>
+                        Из-за своей природы, в JavaScript нельзя надёжно сравнивать два вещественных числа. Поэтому
+                        и матчер <span class="blue">toBe()</span> здесь не подходит.
+                    </p>
+                    <p>
+                        Вещественные (дробные) числа нужно всегда сравнивать с помощью матчера
+                        <span class="blue">toBeCloseTo()</span>!
+                    </p>
+                    <pre>
+                        <code class="js">
+test('0.1 плюс 0.2 не равно 0.3 в JS', function() {
+    // Тест пройдёт, 0.1 + 0.2 действительно НЕ равно 0.3
+    expect(0.1 + 0.2).not.toBe(0.3);
+});
+test('0.1 плюс 0.2 равно примерно 0.3', function() {
+    // Такой тест будет работать
+    expect(0.1 + 0.2).toBeCloseTo(0.3);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Проверка строк по регулярным выражениям</h2>
+                    <p>
+                        Строки можно проверять на соответствие регулярному выражению через матчер
+                        <span class="blue">toMatch()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+function generateRandomName() {
+    const surnames = ['Пётр', 'Владислав', 'Евгений', 'Марат', 'Николай', 'Валерий', 'Василий'];
+    const lastnames = ['Мельчиков', 'Доргало', 'Крючочкин', 'Дикай', 'Ломоносов', 'Скорожевский', 'Вепрь', 'Степной'];
+    const randomSurname = surnames[Math.floor(Math.random() * surnames.length)];
+    const randomLastname = lastnames[Math.floor(Math.random() * lastnames.length)];
+    return randomSurname + ' ' + randomLastname;
+}
+test('Имя состоит из двух слов', function() {
+    const newName = generateRandomName();
+    expect(newName).toMatch(/^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$/);
+});
+test('Тот же тест, только в профиль', function() {
+    const pattern = new RegExp('^[А-ЯЁ][а-яё]+ [А-ЯЁ][а-яё]+$');
+    const newName = generateRandomName();
+    expect(newName).toMatch(pattern);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Проверки для коллекций</h2>
+                    <h3>Вхождение в коллекцию</h3>
+                    <p>
+                        С помощью матчера <span class="blue">toContain()</span> и <span class="blue">toContainEqual()</span>
+                        проверяется вхождение элемента в коллекцию (массив, строку, или другое перечисление).
+                    </p>
+                    <p>
+                        При использовании этого матчера, в <span class="blue">expect()</span> нужно передавать
+                        само перечисление, а в <span class="blue">toContain()</span> - значение, наличие которого в
+                        предыдущем перечислении нужно проверить.
+                    </p>
+                    <pre>
+                        <code class="js">
+const arr = [2, 53, 11, 8, 25];
+function addToArr(value) {
+    arr.push(value);
+}
+test('Добавление в массив работает корректно', function() {
+    const newItem = 17;
+    addToArr(newItem);
+    expect(arr).toContain(newItem);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка длины перечисления</h2>
+                    <p>
+                        Если нужно проверить количество элементов в перечислении, можно воспользоваться матчером
+                        <span class="blue">toHaveLength()</span>, который проверяет значение свойства <i>length</i>.
+                    </p>
+                    <pre>
+                        <code class="js">
+function makeLongString(char, length) {
+    return char.repeat(length);
+}
+test('Получается строка верной длины', function() {
+    const desiredLength = 20;
+    const resultStr = makeLongString('0', desiredLength);
+    expect(resultStr).toHaveLength(desiredLength);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Проверки объектов</h2>
+                    <p>
+                        Объекты можно проверять на наличие "под-объектов", или, если выразиться иначе, на соответствие
+                        шаблона объекта.
+                    </p>
+                    <p>
+                        Т.е. можно задать объект, и ожидать, что этот объект (его ключи и значения по ним), будет
+                        содержаться внутри другого проверяемого объекта.
+                    </p>
+                    <p>
+                        Это производится с помощью матчера <span class="blue">toMatchObject()</span>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример с toMatchObject</h3>
+                    <pre>
+                        <code class="js">
+const houseForSale = {
+    bath: true,
+    bedrooms: 4,
+    kitchen: {
+        amenities: ['плита', 'духовка', 'стиральная машина'],
+        area: 20,
+        wallColor: 'белый'
+    },
+};
+    
+test('the house has my desired features', function() {
+    const desiredHouse = {
+        bath: true,
+        kitchen: {
+            // Интересность
+            amenities: expect.arrayContaining(['плита']),
+            wallColor: expect.stringMatching(/белый|желтый/)
+        }
+    };
+    expect(houseForSale).toMatchObject(desiredHouse);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка наличия ключа</h2>
+                    <p>
+                        Матчер <span class="blue">toHaveProperty()</span> используется для проверки объекта
+                        на наличие в нём указанного свойства (ключа).
+                    </p>
+                    <pre>
+                        <code class="js">
+// Тестируемый объект
+const houseForSale = {
+    bath: true,
+    bedrooms: 4,
+    kitchen: {
+        amenities: ['плита', 'духовка', 'стиральная машина']
+        area: 20,
+        wallColor: 'белый',
+        'nice.oven': true
+    },
+    'ceiling.height': 2
+};
+
+test('в этом доме есть всё что нужно', function() {
+    // Обычный синтаксис
+    expect(houseForSale).toHaveProperty('bath');
+    expect(houseForSale).toHaveProperty('bedrooms', 4);
+
+    expect(houseForSale).not.toHaveProperty('pool');
+
+    // Используя точечную нотацию
+    expect(houseForSale).toHaveProperty('kitchen.area', 20);
+    expect(houseForSale).toHaveProperty('kitchen.amenities', ['плита', 'духовка', 'стиральная машина']);
+
+    expect(houseForSale).not.toHaveProperty('kitchen.open');
+
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Проверки исключений</h2>
+                    <p>
+                        Можно тестировать возникновение исключений при помощи матчера <span class="blue">toThrow()</span>. 
+                    </p>
+                    <p>
+                        В параметрах можно указывать, какое конкретно исключение ожидается получить.
+                    </p>
+                    <p>
+                        Для этого матчера используется несколько иной синтаксис чем раньше.
+                    </p>
+                    <p>
+                        Функция, в которой ожидается происхождение исключения, должна быть вызвана внутри метода
+                        <span class="blue">expect()</span>, вот по такому принципу:
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(() => {
+    // Вот здесь должен находиться код, в котором
+    // Ожидается возникновение исключения
+}).toThrow();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с toThrow()</h3>
+                    <pre>
+                        <code class="js">
+let compile = function() {
+    console.log([].join.call(arguments, ' -> '));
+}
+function drink(something) {
+    if (something === 'чернила осьминога') {
+        compile = function() {
+            if (arguments.length === 3) {
+                const includes = [].includes.bind(arguments);
+                if (includes('волосы козы') && includes('гнилая груша') && includes('муравьиный яд')) {
+                    throw Error('Ктулху');
+                }
+            }
+        }
+    } else {
+        console.log('Bueeeh..');
+    }
+}
+
+                
+test('вызов Ктулху', function() {
+    expect(function() {
+        drink('чернила осьминога');
+        compile('волосы козы', 'гнилая груша', 'муравьиный яд');
+    }).toThrow('Ктулху');
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Снапшоты, или магия Jest</h2>
+                    <blockquote>
+                        <span class="purple">Снапшот</span> - это автоматически генерируемое значение ожидаемого
+                        результата, полученное из фактического результата при первом запуске теста.
+                    </blockquote>
+                    <p>
+                        Т.е. снапшоты можно использовать только тогда, когда вы уверены, что ваша функция написана
+                        правильно и работает как надо.
+                    </p>
+                    <p>
+                        Тогда можно даже не думать, какой должен быть ожидаемый результат: вы просто задаёте начальные
+                        условия, и результат выводится и запоминается сам.
+                    </p>
+                </section>
+                <section>
+                    <h2>Области применения снапшотов</h2>
+                    <p>
+                        Но не стоит злоупотреблять снапшотами. Их рекомендуется использовать только тогда, когда
+                        ожидаемым результатом является какая-нибудь массивная структура, которую долго прописывать
+                        вручную.
+                    </p>
+                    <p>
+                        Например, JSON объект, получаемый в качестве ответа от сервера по какому-нибудь API. Или
+                        ветвь из DOM дерева.
+                    </p>
+                    <p>
+                        Если вы ожидаете, что результатом функции должно быть простое значение,
+                        типа <span class="blue">true</span>, то для этих целей снапшоты точно лучше не использовать.  
+                    </p>
+                </section>
+                <section>
+                    <h2>Виды снапшотов</h2>
+                    <p>
+                        Снапшоты в Jest бывают двух видов:
+                    </p>
+                    <ul>
+                        <li>Внешние</li>
+                        <li>Встроенные</li>
+                    </ul>
+                    <p>
+                        Значения внешних снапшотов Jest хранит в отдельных файлах.
+                    </p>
+                    <p>
+                        А значения встроенных снапшотов включаются прямо в код файла тестов.
+                    </p>
+                </section>
+                <section>
+                    <h2>Внешние снапшоты</h2>
+                    <p>
+                        Для использования внешнего снапшота предназначен матчер <span class="blue">toMatchSnapshot()</span>.
+                    </p>
+                    <p>
+                        Самостоятельно нигде не нужно прописывать ожидаемого результата. Вы просто получаете
+                        фактический результат и используете для него этот матчер:
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(полученныйРезультат).toMatchSnapshot();
+                        </code>
+                    </pre>
+                    <p>
+                        И тогда, после первого запуска такого теста, в папке с этим тестом будет создана подпапка
+                        __snapshots__, в которой появится файл с ожидаемым результатом для данного теста.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример с внешним снапшотом</h3>
+                    <pre>
+                        <code class="js">
+// Тестируемая функция
+function getDataById(id) {
+    if (id === 1) {
+        return { name: "The Great Gatsby", year: 1925, genre: "novel" };
+    } else if (id === 2) {
+        return { name: "Ulysses", year: 1918, genre: "modernist novel" };
+    } else {
+        return null;
+    }
+}
+
+test('Получение данных по id', function() {
+    const id = 1;
+    const data = getDataById(id);
+    expect(data).toMatchSnapshot();
+});
+                        </code>
+                    </pre>
+                    <pre>
+                        <code class="js">
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dwadad 1`] = `
+Object {
+    "genre": "novel",
+    "name": "The Great Gatsby",
+    "year": 1925,
+}
+`;
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Встроенные снапшоты</h2>
+                    <p>
+                        Для использования встроенных снапшотов может понадобится установка пакета <i>prettier</i>:
+                    </p>
+                    <pre>
+                        <code class="bash">
+npm i -D prettier
+                        </code>
+                    </pre>
+                    <p>
+                        Суть встроенных снапшотов аналогична, только они интегрируются прямо в текст вашего теста,
+                        а не в отдельный файл.
+                    </p>
+                    <p>
+                        Матчер для использования - <span class="blue">toMatchInlineSnapshot()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+expect(полученныйРезультат).toMatchInlineSnapshot();
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример со встроенным снапшотом</h3>
+                    <p>
+                        Переделаем предыдущий пример под встроенные снапшоты:
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Получение данных по id', function() {
+    const id = 2;
+    const data = getDataById(id);
+    expect(data).toMatchInlineSnapshot();
+});
+                        </code>
+                    </pre>
+                    <p>
+                        Стоит запустить этот тест, и немножко подождать, как...
+                    </p>
+                    <pre>
+                        <code class="js">
+test("Получение данных по id", function() {
+    const id = 2;
+    const data = getDataById(id);
+    expect(data).toMatchInlineSnapshot(`
+        Object {
+        "genre": "modernist novel",
+        "name": "Ulysses",
+        "year": 1918,
+        }
+    `);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Обновление снапшота</h2>
+                    <p>
+                        После первого запуска, результат каждого нового запуска теста будет сравниваться с 
+                        первым результатом.
+                    </p>
+                    <p>
+                        Но если вам необходимо обновить снапшот (допустим, вы переделали тестируемую функцию),
+                        то это выполняется следующей командой в терминале:
+                    </p>
+                    <pre>
+                        <code class="js">
+npm test -- --updateSnapshot
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>setup и teardown</h2>
+                    <p>
+                        Не редко возникает ситуация, когда для выполнения теста нужна какая-то предварительная
+                        инициализация. Или наоборот, после каждого теста требуется подчищать оставленный мусор.
+                    </p>
+                    <p>
+                        Для этого в Jest есть 4 глобальных функции:
+                    </p>
+                    <ul>
+                        <li><span class="blue">beforeAll()</span> - выполняется 1 раз перед всеми тестами</li>
+                        <li><span class="blue">afterAll()</span> - выполняется 1 раз после всех тестов</li>
+                        <li><span class="blue">beforeEach()</span> - выполняется каждый раз перед каждым тестом</li>
+                        <li><span class="blue">afterEach()</span> - выполняется каждый раз после каждого теста</li>
+                    </ul>
+                    <p>
+                        В эти функции передаётся функция, в которой уже и описываются все действия:
+                    </p>
+                    <pre>
+                        <code class="js">
+beforeAll(function() {
+    // Действия
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Примеры c -All</h3>
+                    <pre>
+                        <code class="js">
+const globalDatabase = null;
+
+beforeAll(function() {
+    // Инициализируем БД и
+    // Добавляем в БД данные для тестирования
+    globalDatabase = makeGlobalDatabase();
+    globalDatabase.insert({testData: 'foo'});
+    globalDatabase.insert({testData: 'bar'});
+    globalDatabase.insert({testData: 'baz'});
+});
+
+afterAll(function() {
+    // Удаляем все тестовые данные из БД
+    globalDatabase.remove({testData: 'foo'});
+    globalDatabase.remove({testData: 'bar'});
+    globalDatabase.remove({testData: 'baz'});
+});
+
+test('Поиск на одно поле работает', function() {
+    return globalDatabase.find('foo', {}, function(res) {
+        expect(res.length).toBeGreaterThan(0);
+    });
+});
+
+test('Поиск на несколько полей работает', function() {
+    return globalDatabase.find(['foo', 'bar'], {}, function(res) {
+        expect(res.length).toBeGreaterThan(0);
+    });
+});
+
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с afterEach()</h3>
+                    <pre>
+                        <code class="js">
+const globalDatabase = makeGlobalDatabase();
+
+function cleanUpDatabase(db) {
+    db.cleanUp();
+}
+
+afterEach(function() {
+    cleanUpDatabase(globalDatabase);
+});
+
+test('Поиск работает', function() {
+    return globalDatabase.find('ret', {}, function(res) {
+        expect(results.length).toBeGreaterThan(0);
+    });
+});
+
+test('Добавление работает', function() {
+    return globalDatabase.insert('veg', makeThing(), function(res) {
+        expect(response.success).toBeTruthy();
+    });
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Группировка тестов</h2>
+                    <p>
+                        С помощью глобальной функции <span class="blue">describe()</span> можно разбивать тесты на
+                        группы.
+                    </p>
+                    <p>
+                        Например, так обычно разбивают на группы тесты, относящиеся к разной функциональности.
+                    </p>
+                    <pre>
+                        <code class="js">
+describe('Описание группы тестов 1', function() {
+    test('Тест 1 из группы 1', function() {
+        // AAA
+    });
+    test('Тест 2 из группы 1', function() {
+        // AAA
+    });
+});
+describe('Описание группы тестов 2', function() {
+    test('Тест 1 из группы 2', function() {
+        // AAA
+    });
+    test('Тест 2 из группы 2', function() {
+        // AAA
+    });
+    test('Тест 3 из группы 2', function() {
+        // AAA
+    });
+})
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Вложенность</h2>
+                    <p>
+                        Функции <span class="blue">describe()</span> могут быть свободно вложены друг в друга.
+                    </p>
+                    <pre>
+                        <code class="js">
+describe('Группа 1', function() {
+    describe('Подгруппа 1', function() {
+        // Тесты подгруппы 1 группы 1
+    });
+    describe('Подгруппа 2', function() {
+        describe('Под-подгруппа 1', function() {
+            // Тесты под-подгруппы 1 подгруппы 2 группы 1
+        });
+        // Тесты подгруппы 2 группы 1
+    });
+    // Тесты группы 1
+});
+describe('Группа 2', function() {
+    // Тесты группы 2
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h3>Пример с группировкой</h3>
+                    <pre>
+                        <code class="js">
+const binaryStringToNumber = function(binString) {
+    if (!/^[01]+$/.test(binString)) {
+        throw new CustomError('Not a binary number.');
+    }
+    return parseInt(binString, 2);
+};
+    
+describe('Тесты функции преобразования битовой строки в число', function() {
+    describe('Использование неправильной битовой строки', function() {
+        test('Сравнение не чисел вызывает исключение CustomError', function() {
+            expect(function() {
+                binaryStringToNumber('abc')
+            }).toThrowError(CustomError);
+        });
+    
+        test('Лишние пробелы вызывают исключение CustomError', function() {
+        expect(dunction() {
+            binaryStringToNumber('  100')).toThrowError(CustomError);
+        });
+    });
+    
+    describe('Использование правильной битовой строки', function() {
+        test('Возвращает корректное число', function() {
+            expect(binaryStringToNumber('100')).toBe(4);
+        });
+    });
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Группировка с setup и teardown</h2>
+                    <p>
+                        Но помимо семантических отличий, у группировки тестов есть ещё и функциональные отличия.
+                    </p>
+                    <p>
+                        В каждой группе <span class="blue">describe()</span> могут присутствовать свои 
+                        функции <span class="blue">before-</span> и <span class="blue">after-</span>.
                     </p>
                 </section>
             </section>

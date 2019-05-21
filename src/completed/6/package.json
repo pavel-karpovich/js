@@ -1,8 +1,8 @@
 {
-  "name": "11",
+  "name": "6",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Yakubovich.js",
   "scripts": {
     "test": "jest"
   },
@@ -12,8 +12,6 @@
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@types/jest": "^24.0.13",
-    "jest": "^24.8.0",
-    "prettier": "^1.17.1"
-  },
-  "type": "module"
+    "jest": "^24.8.0"
+  }
 }

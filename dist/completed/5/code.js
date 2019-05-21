@@ -33,25 +33,39 @@ async function changePerson() {
     });
 }
 
+let canChange = true;
+const timeout = 2000;
+function timeoutBetweenChanges() {
+    canChange = false;
+    setTimeout(function() {
+        canChange = true;
+    }, timeout);
+}
 changePerson();
+timeoutBetweenChanges();
 const app = new DisLike();
-
 const rightDiv = document.querySelector('.right');
 const leftDiv = document.querySelector('.left');
 if (rightDiv) {
     rightDiv.addEventListener('click', function() {
-        const likes = app.like();
-        const visualLikeCounter = document.querySelector('.like > div');
-        visualLikeCounter.textContent = likes;
-        changePerson();
+        if (canChange) {
+            const likes = app.like();
+            const visualLikeCounter = document.querySelector('.like > div');
+            visualLikeCounter.textContent = likes;
+            changePerson();
+            timeoutBetweenChanges();
+        }
     });
 }
 
 if (leftDiv) {
     leftDiv.addEventListener('click', function() {
-        const dislikes = app.dislike();
-        const visualDislikeCounter = document.querySelector('.dislike > div');
-        visualDislikeCounter.textContent = dislikes;
-        changePerson();
+        if (canChange) {
+            const dislikes = app.dislike();
+            const visualDislikeCounter = document.querySelector('.dislike > div');
+            visualDislikeCounter.textContent = dislikes;
+            changePerson();
+            timeoutBetweenChanges();
+        }
     });
 }

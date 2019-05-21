@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dwadad 1`] = `
+Object {
+  "genre": "novel",
+  "name": "The Great Gatsby",
+  "year": 1925,
+}
+`;

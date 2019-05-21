@@ -1,8 +1,6 @@
 
-const RUS = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-
 export class Yakubovich {
-  constructor() {
+  constructor(abc, dict) {
     this.history = new Map();
     this.score = 0;
     this.completed = 0;
@@ -10,41 +8,51 @@ export class Yakubovich {
     this.onguessed = null;
   }
 
-  async init(abc = RUS) {
-    this.loadDictionary();
-    this.setAlphabet(abc)
-    this._newQuestion();;
+  start(abc, dict) {
+    this._setAlphabet(abc);
+    this._setDictionary(dict);
+    this._newQuestion();
   }
 
-  async loadDictionary() {
-    const response = await fetch('dictionary.json');
-    const dict = await response.json();
-    this.dictionary = new Map(dict);
-  }
-
-  setAlphabet(abc) {
-    if (typeof this.alphabet === 'string') {
-      this.alphabet = abc;
-      return true;
+  _setAlphabet(abc) {
+    if (typeof abc === 'string' && abc !== '') {
+      this.alphabet = abc.toUpperCase();;
     } else {
-      return false;
+      throw new Error('Alphabet is not correct.');
     }
+  }
+
+  _setDictionary(dict) {
+    if (typeof dict !== 'object') {
+      throw new Error('Dictionary is not correct.');
+    }
+    if (!(dict instanceof Map)) {
+      dict = new Map(Object.entries(dict));
+    }
+    const keyArr = Array.from(dict.keys());
+    for (const key of keyArr) {
+      const upperKey = key.toUpperCase();
+      if (upperKey !== key) {
+        dict.set(upperKey, dict.get(key));
+        dict.delete(key);
+      }
+    }
+    const regex = new RegExp(`^[${this.alphabet}${this.alphabet.toLowerCase()}]+$`);
+    for (const key of dict.keys()) {
+      if (!regex.test(key)) {
+        throw new Error('Dictionary is not correct.');
+      }
+    }
+    this.dictionary = dict;
   }
 
   _newQuestion() {
     this.revealedLetters = [];
-    const remainingQuestionsCount = this.dictionary.keys.length;
-    const randomQuestionIndex = Math.floor(remainingQuestionsCount * Math.random());
-    const randomAnswer = this.dictionary.keys[randomQuestionIndex];
+    const remainingQuestionsCount = this.dictionary.size;
+    const randomQuestionIndex = Math.floor(Math.random() * remainingQuestionsCount);
+    const items = Array.from(this.dictionary.keys());
+    const randomAnswer = items[randomQuestionIndex];
     this._answer = randomAnswer;
-  }
-
-  get numberOfLetters() {
-    return this._answer.length;
-  }
-
-  get question() {
-    return this.dictionary.get(this._answer);
   }
 
   _guessed() {
@@ -57,7 +65,27 @@ export class Yakubovich {
     }
   }
 
+  get numberOfLetters() {
+    if (!this._answer) {
+      throw Error('Capital-show is not init.');
+    }
+    return this._answer.length;
+  }
+
+  get question() {
+    if (!this._answer) {
+      throw Error('Capital-show is not init.');
+    }
+    return this.dictionary.get(this._answer);
+  }
+
   pickLetter(letter) {
+    letter = letter.toUpperCase();
+    if (!this._answer) {
+      throw Error('Capital-show is not init.');
+    } else if (!this.alphabet.includes(letter)) {
+      throw Error(`Letter ${letter} is not included in the alphabet.`);
+    };
     const guessedLetters = [];
     if (this.revealedLetters.includes(letter)) {
       return guessedLetters;
@@ -74,13 +102,15 @@ export class Yakubovich {
     return guessedLetters;
   }
 
-  guessWord(word) {
-    if (word === this._answer) {
+  tryWord(word) {
+    if (!this._answer) {
+      throw Error('Capital-show is not init.');
+    }
+    if (word.toUpperCase() === this._answer) {
       this._guessed();
       return true;
     } else {
       return false;
     }
   }
-
 }

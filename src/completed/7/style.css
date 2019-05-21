@@ -116,10 +116,12 @@ section#frame_2 {
 #frame_2 .private-data > div > div + div {
     margin-left: 50px;
 }
-main input[type="text"] {
+main input[type="text"],
+main input[type="password"] {
     outline-color: #7161EF;
     font-size: 1.1rem;
     border: none;
+    outline: none;
     border-bottom: 2px solid #7161EF;
 }
 .buttons {
@@ -190,6 +192,7 @@ section#frame_3 {
 }
 #frame_3 .ver-code button {
     margin-left: 20px;
+    margin-bottom: 1px;
 }
 section#frame_4 {
     height: 100%;
@@ -273,6 +276,9 @@ section#frame_4 {
 #frame_4 input::placeholder {
     color: #bebebe;
 }
+#frame_4 input[type="checkbox"] {
+    cursor: pointer;
+}
 section#frame_5 {
     height: 100%;
     width: 100%;
@@ -323,10 +329,11 @@ section#frame_5 {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     background: #fff;
     font-size: .8rem;
     color: black;
+    user-select: none;
 }
 .indicator > div.completed {
     background: #7161EF;
@@ -343,6 +350,24 @@ section#frame_5 {
     top: calc(50% - 4px);
     background: #fff;
     border: 1px solid #7161EF;
-    z-index: 1;
+    z-index: 2;
     margin: 0 2px;
+}
+.indicator > .micro-wire-1 {
+    position: absolute;
+    height: 6px;
+    width: 27px;
+    left: 14px;
+    top: calc(50% - 3px);
+    z-index: 4;
+    background-color: #fff;
+}
+.indicator > .micro-wire-2 {
+    position: absolute;
+    height: 6px;
+    width: 27px;
+    left: 52px;
+    top: calc(50% - 3px);
+    z-index: 4;
+    background-color: #fff;
 }

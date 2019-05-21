@@ -25,6 +25,7 @@ body > header {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: #FFECE4;
     border-bottom: 1px solid #B2B2B2;
     color: rgba(0,0,0,.75);
@@ -164,7 +165,7 @@ input:focus + span {
     padding: 6px;
     box-shadow: -4px 4px 20px 0 rgba(0,0,0,.3);
 }
-.abc > div {
+.abc > span {
     background: white;
     margin: 6px;
     width: 30px;
@@ -178,12 +179,12 @@ input:focus + span {
     border: 1px solid rgba(0,0,0,.75);
     user-select: none;
 }
-div.green {
+span.green {
     cursor: default;
     background-color: #43af3c;
     color: white;
 }
-div.red {
+span.red {
     cursor: default;
     background-color: #e23f3f;
     color: white;
