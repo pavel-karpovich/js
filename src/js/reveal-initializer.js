@@ -6,10 +6,16 @@
 
     Reveal.initialize({
         controls: true,
+        controlsTutorial: true,
+        controlsBackArrows: 'faded',
         progress: false,
-        history: true,
-        center: true,
         slideNumber: true,
+        history: true,
+        keyboard: true,
+        center: true,
+        touch: true,
+        hideInactiveCursor: true,
+        hideAddressBar: true,
         transition: "slide", // none/fade/slide/convex/concave/zoom
     });
     Reveal.addEventListener("ready", function (event) {
