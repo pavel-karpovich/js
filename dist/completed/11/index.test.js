@@ -447,8 +447,8 @@ describe.only('Спаи', function() {
   });
 
   test('Покупаем 1 раз - значит продаём 1 раз', function() {
-      jest.spyOn(myModule, 'soldSomething');
-      myModule.soldSomething.clearMock();
+      const spy = jest.spyOn(myModule, 'soldSomething');
+      spy.clearMock();
       myModule.buySomething();
       expect(myModule.soldSomething).toHaveBeenCalledTimes(1);
   });
