@@ -388,10 +388,123 @@ describe.skip('Тестирование асинхронных запросов'
 
 });
 
+const module1 = { fetchData };
 test('Тестирование спаев', function() {
-  fetchData = jest.fn();
-  return fetchData('electronics').then(function(data) {
+  jest.spyOn(module1, 'fetchData');
+  return module1.fetchData('electronics').then(function(data) {
     expect(data).toBe('nothing');
-    expect(fetchData).toBeCalledTimes(1);
+    expect(module1.fetchData).toBeCalledTimes(1);
   });
+});
+
+const myModule = {
+  soldSomething: function() {
+    if (arguments.length === 0) {
+      return false;
+    }
+    console.log('И что же мы продаём?');
+    console.log('Мы продаём:');
+    for (const item of arguments) {
+      console.log(item);
+    }
+    return true;
+  },
+  buySomething: function() {
+    const itemsToSold = ['Велосипед', 'Телевизор', 'Холодильник', 'Машина', 'Дача', 'Квартира'];
+    const solded = [];
+    const buyedItems = [];
+    console.log('И что же мы покупаем?');
+    if (arguments.length === 0) {
+      console.log('Мы покупаем баобаб!');
+      itemsToSold.forEach((item) => solded.push(item));
+      buyedItems.push('Баобаб вот такой ширины!');
+    } else {
+      console.log('Мы покупаем:');
+      for (let i = 0; i < arguments.length; ++i) {
+        console.log(arguments[i]);
+        if (i < itemsToSold.length) {
+          solded.push(itemsToSold[i]);
+        }
+        buyedItems.push(arguments[i]);
+      }
+    }
+    myModule.soldSomething(...solded);
+    return buyedItems;
+  }
+}
+
+describe.only('Спаи', function() {
+
+  test('Чтобы купить что-нибудь ненужное, нужно сначала продать что-нибудь ненужное', function() {
+    jest.spyOn(myModule, 'soldSomething');
+    myModule.buySomething('Гири');
+    expect(myModule.soldSomething).toBeCalledWith('Велосипед');
+  });
+  test('Покупаем - значит продаём', function() {
+      jest.spyOn(myModule, 'soldSomething');
+      myModule.buySomething();
+      expect(myModule.soldSomething).toHaveBeenCalled();
+  });
+
+  test('Покупаем 1 раз - значит продаём 1 раз', function() {
+      jest.spyOn(myModule, 'soldSomething');
+      myModule.soldSomething.clearMock();
+      myModule.buySomething();
+      expect(myModule.soldSomething).toHaveBeenCalledTimes(1);
+  });
+
+  test('Продажа совершается успешно', function() {
+    jest.spyOn(myModule, 'soldSomething');
+    myModule.buySomething('груша');
+    expect(myModule.soldSomething).toHaveReturnedWith(true);
+  });
+
+  test('Получение купленных вещей', function() {
+    jest.spyOn(myModule, 'buySomething');
+    myModule.buySomething('чернила', 'какаду', 'удочка');
+    expect(myModule.buySomething).toHaveReturnedWith(['чернила', 'какаду', 'удочка']);
+  });
+});
+
+
+function longAndComplexQueryToDatabase() {
+  const types = ['el', 'qu', 're', 'co'];
+  types.forEach((value, index) => {
+    if (value.length === index) {
+      value = value.repeat(12);
+      let codes = [];
+      for (const char of value) {
+        codes.push(char.charCodeAt(0));
+      }
+      return codes
+        .filter((n) => n % 2)
+        .map((n) => n += 5 - Math.random() * 10)
+        .reduce((result, n) => result += n);
+    }
+  });
+}
+
+function checkDatabaseCount() {
+  let num = longAndComplexQueryToDatabase();
+  if (num > 1000) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+test('Проверка заполненности БД', function() {
+  longAndComplexQueryToDatabase = jest.fn(function() {
+    return 2000;
+  });
+  const result = checkDatabaseCount();
+  expect(result).toBeTruthy();
+});
+
+test('Проверка заполненности БД', function() {
+  longAndComplexQueryToDatabase = jest.fn(function() {
+    return 400;
+  });
+  const result = checkDatabaseCount();
+  expect(result).toBeFalsy();
 });

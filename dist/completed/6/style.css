@@ -60,7 +60,6 @@ body > header {
     border: 2px solid #B2B2B2;
     user-select: none;
     color: transparent;
-    cursor: pointer;
 }
 .main-area > div.revealed {
     background-image: linear-gradient(#eee, #fff);

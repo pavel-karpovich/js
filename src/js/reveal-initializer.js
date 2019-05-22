@@ -7,7 +7,7 @@
     Reveal.initialize({
         controls: true,
         controlsTutorial: true,
-        controlsBackArrows: 'faded',
+        controlsBackArrows: "faded",
         progress: false,
         slideNumber: true,
         history: true,

@@ -166,7 +166,7 @@
                     </p>
                     <p>
                         Многие другие фреймворки тестирования сосредоточены на каком-то одном аспекте юнит тестов,
-                        и для добавления новой функциональности, которая практически всегда бывает необходимо,
+                        и для добавления новой функциональности, которая практически всегда бывает нужна,
                         требуется устанавливать дополнительные пакеты.
                     </p>
                     <p>
@@ -1351,6 +1351,21 @@ npm test -- --updateSnapshot
             </section>
             <section>
                 <section>
+                    <h2>Дополнительные матчеры</h2>
+                    <p>
+                        Если вам мало стандартных матчеров, то всегда можно дописать свои, с помощью функции
+                        <span class="blue">expect.extend()</span>.
+                    </p>
+                    <p>
+                        Или можно установить пакет с кучей неофициальных, поддерживаемых комьюнити, матчеров для Jest:
+                    </p>
+                    <p>
+                        <a href="https://github.com/jest-community/jest-extended">Ссылка на расширения для матчеров</a>
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
                     <h2>setup и teardown</h2>
                     <p>
                         Не редко возникает ситуация, когда для выполнения теста нужна какая-то предварительная
@@ -2043,6 +2058,42 @@ describe('Тестирование асинхронных запросов', fun
             </section>
             <section>
                 <section>
+                    <h2>Запуск лишь одного теста</h2>
+                    <p>
+                        Если вы хотите быстро запустить всего один тест, пропустив все остальные, можно
+                        временно поменять его определение с <span class="blue">test</span> на
+                        <span class="blue">test.only</span>.
+                    </p>
+                    <p>
+                        Тогда, при следующем запуске тестов (через <span class="turquoise">npm test</span>, например),
+                        из всего файла будет запущен на выполнение только один тест.
+                    </p>
+                    <pre>
+                        <code class="js">
+test.only('Только один', function() {
+    expect(-Infinity).not.toBe(+Infinity);
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Пропуск тестов</h2>
+                    <p>
+                        Также можно пропускать выбранные тесты. Если нужно временно отключить тест, вместо того,
+                        чтобы удалять его код или помещать всё в комментарий, необходимо лишь
+                        поменять его определение с <span class="blue">test</span> на <span class="blue">test.skip</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+test.skip('Вы меня больше не увидете...', function() {
+    expect(Infinity).toBe(0);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
                     <h2>Моки</h2>
                     <p>
                         Часто весь код бывает очень сильно переплетён между собой и связан с какими-то внешними зависимостями.
@@ -2070,6 +2121,460 @@ describe('Тестирование асинхронных запросов', fun
                     <p>
                         Спаи - это засланные в функции шпионы.
                     </p>
+                    <p>
+                        Установив на функцию шпиона можно отслеживать все процессы, связанные с этой функцией.
+                    </p>
+                    <p>
+                        Спаи позволяют отслеживать сколько раз была вызвана функция, какие параметры передавались
+                        в неё при каждом вызове, какие значения она возвращала и т.д.
+                    </p>
+                    <p>
+                        Конечно же, они используются для целей тестирования, чтобы можно было писать связанные с
+                        вызовом функций проверки: была ли вызвана функция или нет; вернула функция правильное значение,
+                        или нет; была ли функция вызвана действительно 2 раза, и т.д. в этом духе.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Моки и спаи в Jest</h2>
+                    <p>
+                        В Jest моки и спаи совмещены.
+                    </p>
+                    <p>
+                        Любой мок имеет встроенную функциональность спая.
+                    </p>
+                    <p>
+                        Но можно делать и чистых спаев - без функциональности моков.
+                    </p>
+                    <p>
+                        Поэтому мы начнём с чистых спаев.
+                    </p>
+                </section>
+                <section>
+                    <h2>Спаи в Jest</h2>
+                    <p>
+                        В Jest спаями можно делать только <u>методы</u> (функции внутри объекта). При импорте модулей
+                        так обычно и происходит, все функции инкапсулируются в импортируемом объекте модуля, или классе.
+                    </p>
+                    <p>
+                        Для регистрации спая используется функция <span class="blue">jest.spyOn()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+jest.spyOn(object, 'method');
+                        </code>
+                    </pre>
+                    <p>
+                        Первый параметр - <i>object</i> - это объект, внутри которого находится функция, за которой
+                        нужно следить.
+                    </p>
+                    <p>
+                        Второй параметр - <i>'method'</i> - строка с названием отслеживаемой функции.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример регистрации спая</h2>
+                    <p>
+                        Допустим, имеется объект <i>myModule</i> с методом <i>buySomething()</i>, который
+                        вызывает внутри себя метод <i>soldSomething()</i>:
+                    </p>
+                    <pre>
+                        <code class="js">
+const myModule = {
+    soldSomething: function() {
+        if (arguments.length === 0) {
+            return false;
+        }
+        console.log('И что же мы продаём?');
+        console.log('Мы продаём:');
+        for (const item of arguments) {
+            console.log(item);
+        }
+        return true;
+    },
+    buySomething: function() {
+        const itemsToSold = ['Велосипед', 'Телевизор', 'Холодильник', 'Машина', 'Дача', 'Квартира'];
+        const solded = [];
+        const buyedItems = [];
+        console.log('И что же мы покупаем?');
+        if (arguments.length === 0) {
+            console.log('Мы покупаем баобаб!');
+            itemsToSold.forEach((item) => solded.push(item));
+            buyedItems.push('Баобаб вот такой ширины!');
+        } else {
+            console.log('Мы покупаем:');
+            for (let i = 0; i < arguments.length; ++i) {
+                console.log(arguments[i]);
+                if (i < itemsToSold.length) {
+                    solded.push(itemsToSold[i]);
+                }
+                buyedItems.push(arguments[i]);
+            }
+        }
+        myModule.soldSomething(...solded);
+        return buyedItems;
+    }
+}
+
+test('Иии?', function() {
+    // Вешаем шпиона на функцию myModule.soldSomething()
+    jest.spyOn(myModule, 'soldSomething');
+    // Продолжаем тест
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Слежка</h2>
+                    <p>
+                        Вызов функции <span class="blue">spyOn()</span> регстрирует шпиона на заданной функции.
+                    </p>
+                    <p>
+                        Но что это даёт?
+                    </p>
+                    <p>
+                        Это даёт возможность использовать на отслеживаемой функции целый набор разнообразных
+                        функций-матчеров для слежки за её использованием.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Матчеры для спаев</h2>
+                    <p>
+                        Для работы со спаями через <span class="blue">expect()</span> есть целая куча функций:
+                    </p>
+                    <ul>
+                        <li><span class="blue">toHaveBeenCalled()</span></li>
+                        <li><span class="blue">toHaveBeenCalledTimes()</span></li>
+                        <li><span class="blue">toHaveBeenCalledWith()</span></li>
+                        <li><span class="blue">toHaveBeenLastCalledWith()</span></li>
+                        <li><span class="blue">toHaveBeenNthCalledWith()</span></li>
+                        <li><span class="blue">toHaveReturned()</span></li>
+                        <li><span class="blue">toHaveReturnedTimes()</span></li>
+                        <li><span class="blue">toHaveReturnedWith()</span></li>
+                        <li><span class="blue">toHaveLastReturnedWith()</span></li>
+                        <li><span class="blue">toHaveNthReturnedWith()</span></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Контроль наличия вызова</h2>
+                    <p>
+                        Проверить, была ли вызвана функция в принципе, можно с помощью матчера
+                        <span class="blue">toHaveBeenCalled()</span>.
+                    </p>
+                    <p>
+                        С помощью матчера <span class="blue">toHaveBeenCalledTimes()</span> можно уточнить, сколько
+                        раз мы ожидаем функция будет вызвана.
+                    </p>
+                    <pre>
+                        <code class="js">
+describe('Чтобы купить что-нибудь ненужное, нужно сначала продать что-нибудь ненужное', function() {
+
+    test('Покупаем - значит продаём', function() {
+        jest.spyOn(myModule, 'soldSomething');
+        myModule.buySomething();
+        expect(myModule.soldSomething).toHaveBeenCalled();
+    });
+
+    test('Покупаем 1 раз - значит продаём 1 раз', function() {
+        jest.spyOn(myModule, 'soldSomething');
+        myModule.buySomething();
+        expect(myModule.soldSomething).toHaveBeenCalledTimes(1);
+    });
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка аргументов вызова</h2>
+                    <p>
+                        С помощью матчера <span class="blue">toHaveBeenCalledWith()</span> можно проверить, была
+                        ли вызвана подозреваемая функция с заданными аргументами.
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Хочешь купить гири - продавай велосипед', function() {
+    jest.spyOn(myModule, 'soldSomething');
+    myModule.buySomething('Гири');
+    expect(myModule.soldSomething).toBeCalledWith('Велосипед');
+});
+
+test('Хочешь купить баобаб - продавай всё, что есть', function() {
+    jest.spyOn(myModule, 'soldSomething');
+    myModule.buySomething();
+    expect(myModule.soldSomething).toBeCalledWith(
+        'Велосипед', 'Телевизор', 'Холодильник', 'Машина', 'Дача', 'Квартира'
+    );
+})
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Проверка возвращаемого значения</h2>
+                    <p>
+                        Матчер <span class="blue">toHaveReturnedWith()</span> позволяет проверить, какое значение
+                        было возвращено из отслеживаемой функции.
+                    </p>
+                    <pre>
+                        <code class="js">
+test('Продажа совершается успешно', function() {
+    jest.spyOn(myModule, 'soldSomething');
+    myModule.buySomething('груша');
+    expect(myModule.soldSomething).toHaveReturnedWith(true);
+});
+
+test('Получение купленных вещей', function() {
+    jest.spyOn(myModule, 'buySomething');
+    myModule.buySomething('чернила', 'какаду', 'удочка');
+    expect(myModule.buySomething).toHaveReturnedWith(['чернила', 'какаду', 'удочка']);
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3>Пример со спаями</h3>
+                    <p>
+                        Допустим, у нас есть следующий модуль:
+                    </p>
+                    <pre>
+                        <code class="js">
+export class Man {
+    constructor(name) {
+        this.name = name;
+    }
+    plantTree() {
+        console.log('Man must plant a tree - ✓');
+    }
+    raiseSon() {
+        console.log('Man must raise a son - ✓');
+    }
+    buildHouse() {
+        console.log('Man must build a house - ✓');
+    }
+    liveMansLife() {
+        this.plantTree();
+        this.raiseSon();
+        this.buildHouse();
+    }
+}
+                        </code>
+                    </pre>
+                    <p>
+                        Как протестировать, что мужчина действительно садит дерево, растит сына и строит дом?
+                    </p>
+                </section>
+                <section>
+                    <h3>Тесты по жизни</h3>
+                    <pre>
+                        <code class="js">
+import {Man} from './life.js';
+
+describe('Проверка жизни мужчины', function() {
+
+    let man = null;
+
+    beforeAll(function() {
+        man = new Man('Piter');
+        jest.spyOn(man, 'plantTree');
+        jest.spyOn(man, 'raiseSon');
+        jest.spyOn(man, 'buildHouse');
+    });
+
+    afterEach(function() {
+        jest.resetAllMocks();
+    });
+
+    test('Посадил дерево', function() {
+        man.liveMansLife();
+        expect(man.plantTree).toHaveBeenCalledTimes(1);
+    });
+
+    test('Вырастил сына', function() {
+        man.liveMansLife();
+        expect(man.raiseSon).toHaveBeenCalledTimes(1);
+    });
+
+    test('Построил дом', function() {
+        man.liveMansLife();
+        expect(man.buildHouse).toHaveBeenCalledTimes(1);
+    });
+
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Сброс счётчиков спая</h2>
+                    <p>
+                        Все тесты в файле тестов, по умолчанию, выполняются последовательно друг за другом.
+                    </p>
+                    <p>
+                        Если функция, за которой следит шпион, вызывается сразу в нескольких тестах, то счётчики
+                        слежки будут общими между всеми тестами.
+                    </p>
+                    <p>
+                        Это значит, что во втором тесте счётчик количества вызовов будет равен 2, а в третьем тесте -
+                        уже 3.
+                    </p>
+                    <p>
+                        Чтобы избежать подобных проблем, необходимо своевременно сбрасывать спаи.
+                    </p>
+                </section>
+                <section>
+                    <h2>Объект спая/мока</h2>
+                    <p>
+                        До этого мы использовали возможности шпионов, но не видили их самих. Настоло время увидеть
+                        наших тайных агентов.
+                    </p>
+                    <p>
+                        Объект спая/мока можно получить через возвращаемое значение функции <span class="blue">spyOn()</span>.
+                    </p>
+                    <pre>
+                        <code class="js">
+const spy = jest.spyOn(object, 'method');
+                        </code>
+                    </pre>
+                    <p>
+                        Это объект спая(мока). В нём хранится вся информация: сколько и как была вызвана отслеживаемая функция.
+                    </p>
+                    <p>
+                        Полное описание этого объекта можно посмотреть
+                        <a href="https://jestjs.io/docs/en/mock-function-api#mockfnmockclear">в официальной документации</a>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Функции для сброса спая</h2>
+                    <p>
+                        В объекте спая есть 3 функции сброса:
+                    </p>
+                    <ul>
+                        <li><span class="blue">mockClear()</span> - очищает счётчики вызова указанного спая</li>
+                        <li><span class="blue">mockReset()</span> - делает то же, что mockClear, дополнительно
+                            удаляя реализацию отслеживаемой функции (актуально для моков)
+                        </li>
+                        <li><span class="blue">mockRestore()</span> - делает то же, что mockReset, но дополнительно
+                            восстанавливает реализацию отслеживаемой функции до момента подмены (актуально для моков)
+                        </li>
+                    </ul>
+                    <pre>
+                        <code class="js">
+const spy = jest.spyOn(object, 'method');
+spy.clearMock();
+                        </code>
+                    </pre>
+                    <p>
+                        Эти функции часто помещают в блоки <span class="blue">before-after</span>, чтобы для каждого
+                        теста использовались чистенькие шпионы.
+                    </p>
+                </section>
+                <section>
+                    <h2>Глобальный сброс</h2>
+                    <p>
+                        По аналогии с предыдущими функциями, есть 3 функции, которые делают то же самое, только
+                        сразу для всех спаев и моков в файле. Их удобно использовать, т.к. не требуется наличия
+                        объекта спая/мока.
+                    </p>
+                    <ul>
+                        <li><span class="blue">jest.clearAllMocks()</span></li>
+                        <li><span class="blue">jest.resetAllMocks()</span></li>
+                        <li><span class="blue">jest.restoreAllMocks()</span></li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Моки в Jest</h2>
+                    <p>
+                        Моки имеют всю функциональность спаев, но добавляют к указанной функции свою реализацию,
+                        вместо оригинальной.
+                    </p>
+                    <p>
+                        Мок можно создать несколькими способами.
+                    </p>
+                    <p>
+                        Поверх спая, используя метод <span class="blue">mockImplementation()</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+jest.spyOn(object, 'method').mockImplementation(function() {
+    // Фальшивая реализация для object.method
+});
+                        </code>
+                    </pre>
+                    <p>
+                        Или с помощью более простой записи с функцией <span class="blue">jest.fn()</span>:
+                    </p>
+                    <pre>
+                        <code class="js">
+object.method = jest.fn(function() {
+    // Фальшивая реализация для object.method
+});
+                        </code>
+                    </pre>
+                </section>
+                <section>
+                    <h2>Использование моков</h2>
+                    <p>
+                        Моки используются, чтобы заменить реальные зависимости тестируемой функции на наши
+                        подставные, в которых мы уверены:
+                    </p>
+                    <pre>
+                        <code class="js">
+function longAndComplexQueryToDatabase() {
+    const types = ['el', 'qu', 're', 'co'];
+    types.forEach((value, index) => {
+        if (value.length === index) {
+            value = value.repeat(12);
+            let codes = [];
+            for (const char of value) {
+                codes.push(char.charCodeAt(0));
+            }
+            return codes
+                .filter((n) => n % 2)
+                .map((n) => n += 5 - Math.random() * 10)
+                .reduce((result, n) => result += n);
+        }
+    });
+}
+    
+function checkDatabaseCount() {
+    let num = longAndComplexQueryToDatabase();
+    if (num > 1000) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+test('Проверка заполненности БД', function() {
+    longAndComplexQueryToDatabase = jest.fn(function() {
+        return 2000;
+    });
+    const result = checkDatabaseCount();
+    expect(result).toBeTruthy();
+});
+
+test('Проверка заполненности БД', function() {
+    longAndComplexQueryToDatabase = jest.fn(function() {
+        return 400;
+    });
+    const result = checkDatabaseCount();
+    expect(result).toBeFalsy();
+});
+                        </code>
+                    </pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Доступ к приватным элементам</h2>
+                    <h3>Пакет Rewire</h3>
                 </section>
             </section>
             <section>
@@ -2085,12 +2590,6 @@ describe('Тестирование асинхронных запросов', fun
             <section>
                 <section>
                     <h2>Покрытие кода</h2>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h2>Расширение VS Code для Jest</h2>
-                    <img src="img/vscode-jest.png" alt="">
                 </section>
             </section>
 		</div>
