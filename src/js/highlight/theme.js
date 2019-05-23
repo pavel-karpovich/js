@@ -9,7 +9,7 @@ function setTheme(themeName) {
     linkTheme.rel = "stylesheet";
     linkTheme.id = "theme";
     linkTheme.type = "text/css";
-    if (document.body.children[0].src === 'js/theme.js') {
+    if (document.body.children[0].getAttribute('src') === 'js/theme.js') {
         linkTheme.href = `css/theme/${themeName}.css`;
     } else {
         linkTheme.href = `../../css/theme/${themeName}.css`;
