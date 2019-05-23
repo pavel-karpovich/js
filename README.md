@@ -90,7 +90,7 @@ DOM события. Категории событий. Обработка соб
 
 * Задание 8.
 
-[*Использование Web API*](https://docs.google.com/document/d/1f8mArr8ueNpY6SozuJZykEuA_YmBnRubWXpAQGDjuMY/edit?usp=sharing "Использование Web API")
+[*Использование API*](https://docs.google.com/document/d/1f8mArr8ueNpY6SozuJZykEuA_YmBnRubWXpAQGDjuMY/edit?usp=sharing "Использование API")
 
 * Задание 9.
 
