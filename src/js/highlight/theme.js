@@ -9,7 +9,11 @@ function setTheme(themeName) {
     linkTheme.rel = "stylesheet";
     linkTheme.id = "theme";
     linkTheme.type = "text/css";
-    linkTheme.href = `../../css/theme/${themeName}.css`;
+    if (document.body.children[0].src === 'js/theme.js') {
+        linkTheme.href = `css/theme/${themeName}.css`;
+    } else {
+        linkTheme.href = `../../css/theme/${themeName}.css`;
+    }
     head.appendChild(linkTheme);
 }
 const defaultTheme = "beige";
