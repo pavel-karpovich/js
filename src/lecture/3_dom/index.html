@@ -170,23 +170,19 @@
                     <p>
                         Например, простое объявление переменной: 
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let a = 2;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Эта переменная будет хранится в виде ключа <span class="turquoise">a</span> объекта 
                         <span class="blue">window</span>, со значением 2:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 console.log(window.a);          // 2
 
 let string = "blah-blah-blah";
 // window.string = "blah-blah-blah";    // Одно и то же
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Глобальные функции</h2>
@@ -194,8 +190,7 @@ let string = "blah-blah-blah";
                         С объявлением функций в глобальном контексте та же ситуация: они становятся свойствами
                         (ну или уже методами) глобального объекта <span class="blue">window</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function helloUser(name) {
     console.log(`Good moorning, ${name}! How do you?`);
 }
@@ -206,8 +201,7 @@ window.helloUser("Tim");
 // window.helloUser = function helloUser(name) {
 //     console.log(`Good moorning, ${name}! How do you?`);
 // }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
 
             </section>
@@ -269,13 +263,11 @@ window.helloUser("Tim");
                         Через объект <span class="blue">document</span> можно получить доступ к вложенным
                         в него элементам head и body, через соответствующие ключи:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 console.log(document.head);
 
 console.log(document.body);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Доступ по имени тега доступен только в document, и только для head и body. 
                         Потому что в HTML документе всегда должны быть head и body в количестве 1 штуки.
@@ -300,8 +292,7 @@ console.log(document.body);
                     <h2>Свойство children</h2>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -328,12 +319,10 @@ console.log(document.body);
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let title = document.head.children[1];
 
 let body = document.body;
@@ -341,8 +330,7 @@ let main = body.children[0];
 let div = main.children[0];
 
 let aInside3dLi = div.children[0].children[2].children[0];
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -360,11 +348,9 @@ let aInside3dLi = div.children[0].children[2].children[0];
                     <p>
                         Выполняется это с помощью метода <span class="blue">document.getElementById</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let element = document.getElementById("someId");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Если элемента с указанным <span class="blue">id</span> не существует,
                         метод возвращает значение <span class="blue">null</span>.
@@ -374,8 +360,7 @@ let element = document.getElementById("someId");
                     <h2>Получение элемента по id</h2>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -402,12 +387,10 @@ let element = document.getElementById("someId");
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let socialDiv = document.getElementById("socials");
 
 let footer1 = document.getElementById("foot");
@@ -417,8 +400,7 @@ console.log(footer1 === footer2);       // true
 let fbLink1 = document.getElementById("fb_link");
 let fbLink2 = socialDiv.children[0].children[1].children[0];
 console.log(fbLink1 === fbLink2);
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>  
                 </section>
@@ -521,8 +503,7 @@ console.log(fbLink1 === fbLink2);
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -542,12 +523,10 @@ console.log(fbLink1 === fbLink2);
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let documentParent = document.parentElement;       // null
 
 let main = document.body.children[0];
@@ -557,8 +536,7 @@ console.log(main.parentElement);       // body
 let firstLink = document.getElementById("link1");
 
 console.log(firstLink.parentElement);      // li
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -568,8 +546,7 @@ console.log(firstLink.parentElement);      // li
                         Вот, например, функция, которая будет выводить всех родителей
                         переданного элемента до самого корня:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function showParents(el) {
 
     if (el instanceof Node === false) {
@@ -592,8 +569,7 @@ function showParents(el) {
 
     }
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Соседи</h2>
@@ -620,8 +596,7 @@ function showParents(el) {
                     <h3>Пример с ElementSibling</h3>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -641,12 +616,10 @@ function showParents(el) {
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let body = document.body;
 let prevSibling = body.previousElementSibling;     // head
 let nextSibling = body.nextElementSibling;     // null
@@ -662,8 +635,7 @@ console.log(isNodeOnlyChild(document));     // true
 console.log(isNodeOnlyChild(document.head));        // false
 console.log(isNodeOnlyChild(document.head.children[0]));        // false
 console.log(isNodeOnlyChild(document.body.children[0]));        // true
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -699,8 +671,7 @@ console.log(isNodeOnlyChild(document.body.children[0]));        // true
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -712,12 +683,10 @@ console.log(isNodeOnlyChild(document.body.children[0]));        // true
     &lt;div&gt;&lt;/div&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let body = document.body;
 
 console.log(body.children);     // 1 штука: [ div ]
@@ -725,8 +694,7 @@ console.log(body.children);     // 1 штука: [ div ]
 console.log(body.childNodes);   // 5 штук:  [ text, comment, text, div, text]
 
 // Как так?
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -737,20 +705,17 @@ console.log(body.childNodes);   // 5 штук:  [ text, comment, text, div, text
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;title&gt;Document&lt;/title&gt;
 &lt;/head&gt;&lt;body&gt;&lt;!-- Комментарий --&gt;&lt;div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let body = document.body;
 
 console.log(body.children);     // 1 штука: [ div ]
@@ -758,8 +723,7 @@ console.log(body.children);     // 1 штука: [ div ]
 console.log(body.childNodes);   // 2 штуки:  [ comment, div ]
 
 // О как
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                     <p>
@@ -780,8 +744,7 @@ console.log(body.childNodes);   // 2 штуки:  [ comment, div ]
                         Вот функция, которая показывает сколько есть и каких узлов, 
                         не являющихся элементами, в переданном узле.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function showNonElements(el) {
 
     if (el instanceof Node === false) {
@@ -816,8 +779,7 @@ function showNonElements(el) {
         console.log(el);
     }
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Крайние потомки</h2>
@@ -841,8 +803,7 @@ function showNonElements(el) {
                     <p>
                         Следующий алгоритм ищет и выводит самую длинную ветку DOM дерева:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function showParents(el) {
 
     if (el instanceof Node === false) {
@@ -892,8 +853,7 @@ function showLongestBranch() {
     showParents(dpNode);
 }
 showLongestBranch();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>                
                 <section>
                     <h2>Обход всего DOM дерева</h2>
@@ -904,8 +864,7 @@ showLongestBranch();
                         Следующая функция перебирает все элементы DOM дерева и выполняет для каждого элемента переданную
                         callback-функцию:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function eachNode(rootNode, callback) {
 
     if (!callback) {
@@ -939,8 +898,7 @@ function eachNode(rootNode, callback) {
 }
 
 // Пригодится в будущем
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1004,11 +962,9 @@ function eachNode(rootNode, callback) {
                     <p>
                         Метод имеет один обязательный параметр - название тега создаваемого элемента.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let newElement = document.createElement("tag-name");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Метод создаёт пустой и чистый элемент, не присоединённый к DOM дереву.
                         Т.е. все свойства указывающие на родителей, детей или соседей у него
@@ -1021,8 +977,7 @@ let newElement = document.createElement("tag-name");
                 </section>
                 <section>
                     <h3>Пример создания элементов</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let newParagraph = document.createElement("p");
 
 let newDiv = document.createElement("div");
@@ -1044,8 +999,7 @@ console.log(
     newUl.children.length === newVideo.children.length &&
     newVideo.children.length === 0
 );
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1080,11 +1034,9 @@ console.log(
                         Метод принимает один обязательный параметр - узел, который будет добавлен
                         в конец списка дочерних элементов текущего узла.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.appendChild(aChild);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Элемент, передаваемый в качестве параметра, присоединяется к элементу,
                         для которого этот метод вызывается.
@@ -1096,8 +1048,7 @@ element.appendChild(aChild);
                 </section>
                 <section>
                     <h2>Пример добавления элемента</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let div = document.createElement("div");
 console.log(div.children);          // HTMLCollection []
 
@@ -1116,8 +1067,7 @@ console.log(div.children);              // HTMLCollection [ h2, p ]
 console.log(paragraph.parentNode);      // div
 console.log(header.nextSibling);                // p
 console.log(paragraph.previousSibling);         // h2
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>appendChild в действии</h2>
@@ -1127,8 +1077,7 @@ console.log(paragraph.previousSibling);         // h2
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -1142,12 +1091,10 @@ console.log(paragraph.previousSibling);         // h2
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 function addListItemWithText(text) {
 
     let list = document.getElementById("list");
@@ -1165,8 +1112,7 @@ function addListItemWithText(text) {
 addListItemWithText("Пункт 1");
 addListItemWithText("Пункт 2");
 addListItemWithText("Пункт 3");
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -1194,11 +1140,9 @@ addListItemWithText("Пункт 3");
                         Метод принимает 2 обязательных параметра: 1 - добавляемый элемент, 2 - 
                         присутствующий элемент, перед которым нужно вставить первый.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let insertedNode = parentNode.insertBefore(newNode, referenceNode);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <ul>
                         <li><i>parentNode</i> - элемент, в который будет добавлен новый</li>
                         <li><i>newNode</i> и <i>insertedNode</i> - добавляемый/добавленный элемент</li>
@@ -1218,8 +1162,7 @@ let insertedNode = parentNode.insertBefore(newNode, referenceNode);
                         Давайте сами напишем метод insertAfter, используя метод
                         <span class="blue">insertBefore</span>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function insertAfter(parentNode, newNode, referenceNode) {
 
     if (referenceNode != null) {
@@ -1231,8 +1174,7 @@ function insertAfter(parentNode, newNode, referenceNode) {
         parentNode.appendChild(newNode);
     }
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Добавление существующего элемента</h2>
@@ -1265,11 +1207,9 @@ function insertAfter(parentNode, newNode, referenceNode) {
                     <p>
                         Таким образом, можно быстро создавать копии целых ветвей в DOM дереве.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let deepCopy = node.cloneNode(true); 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Хотя это поведение можно отключить, передав в параметрах значение
                         <span class="blue">false</span>. Тогда будет создана только копия 
@@ -1319,11 +1259,9 @@ let deepCopy = node.cloneNode(true);
                         Метод принимает 1 обязательный параметр - элемент, который необходимо
                         удалить из списка вложенных элементов.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let oldChild = node.removeChild(child);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Элемент <i>child</i> отсоединяется от элемента <i>node</i>.
                     </p>
@@ -1332,8 +1270,7 @@ let oldChild = node.removeChild(child);
                     <h3>Пример удаления</h3>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -1359,12 +1296,10 @@ let oldChild = node.removeChild(child);
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let list = document.getElementById("list");
 
 for (let i = 0; i < list.children.length; ++i) {
@@ -1375,8 +1310,7 @@ for (let i = 0; i < list.children.length; ++i) {
     listItem.removeChild(linkInsideItem);
 
 }
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -1386,8 +1320,7 @@ for (let i = 0; i < list.children.length; ++i) {
                         Следующая функция будет очищать (удалять всех детей) указанный
                         элемент:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function removeAllChildren(element) {
 
     while(element.firstChild) {
@@ -1398,8 +1331,7 @@ function removeAllChildren(element) {
 }
 
 removeAllChildren(document.body);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Замена элемента</h2>
@@ -1407,11 +1339,9 @@ removeAllChildren(document.body);
                         Метод <span class="blue">replaceChild</span> выполняет замену
                         одного элемента на другой элемент.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let replacedNode = parentNode.replaceChild(newChild, oldChild);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <ul>
                         <li><i>parentNode</i> - элемент, чьих детей подменяем</li>
                         <li><i>newChild</i> - новый элемент, который встанет на место <i>oldChild</i></li>
@@ -1459,11 +1389,9 @@ let replacedNode = parentNode.replaceChild(newChild, oldChild);
                         содержится ли указанный элемент у другом элементе, вне зависимости от
                         глубины вложенности.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 node.contains(otherNode)
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Метод возвращает <span class="blue">true</span>, если элемент
                         <i>otherNode</i> является самим элементом <i>node</i>, его
@@ -1476,8 +1404,7 @@ node.contains(otherNode)
                         Простой метод для проверки, присоединён ли элемент к основному DOM
                         дереву:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function isInPage(node) {
 
     return document.body.contains(node);
@@ -1486,8 +1413,7 @@ function isInPage(node) {
 
 isInPage(document.head);                        // false
 isInPage(document.body.lastElementChild);       // true
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1590,13 +1516,11 @@ isInPage(document.body.lastElementChild);       // true
                     <p>
                         Следующая запись на первый взгляд может показаться нормальной, но это неправильная запись:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 node.attributes.id = "uniqueId";            // неправильно
 node.attributes.name = "objName";           // неправильно
 node.attributes.href = "http://localhost:5500/index.html";     // неправильно
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Изменение значения атрибута через объект Attr</h3>
@@ -1604,23 +1528,19 @@ node.attributes.href = "http://localhost:5500/index.html";     // неправи
                         В объекте <span class="blue">Attr</span> значение атрибута хранится в свойстве <span class="blue">value</span>.
                         И если нужно изменять его, то нужно это делать именно через это свойство.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 node.attributes.id.value = "uniqueId";            // Ок
 node.attributes.name.value = "objName";           // Ок
 node.attributes.href.value = "http://localhost:5500/index.html";     // Ок
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Имя атрибута можно получить через свойство <span class="blue">name</span>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 console.log(node.attributes.role.name);       // "id"
 console.log(node.attributes.type.name);       // "type"
 console.log(node.attributes.tabindex.name);       // "tabindex"
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Схема объектов атрибутов</h2>
@@ -1633,8 +1553,7 @@ console.log(node.attributes.tabindex.name);       // "tabindex"
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -1660,12 +1579,10 @@ console.log(node.attributes.tabindex.name);       // "tabindex"
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 function showAttr(el) {
 
     if (el.attributes.length === 0) {
@@ -1683,8 +1600,7 @@ function showAttr(el) {
 
 let link1 =  document.getElementById("link_1");
 showAttr(link1);
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -1695,8 +1611,7 @@ showAttr(link1);
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -1722,12 +1637,10 @@ showAttr(link1);
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 
 let list =  document.getElementById("list");
 
@@ -1742,8 +1655,7 @@ do {
     item = item.nextElementSibling;
 
 } while (item != null);
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -1772,11 +1684,9 @@ do {
                     <p>
                         Он удаляет у элемента атрибут, по переданному названию.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let deletedAttr = node.attributes.removeNamedItem("name-of-attribute");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Но и для удаления есть варианты попроще.
                     </p>
@@ -1808,24 +1718,20 @@ let deletedAttr = node.attributes.removeNamedItem("name-of-attribute");
                         С помощью метода <span class="blue">getAttributeNames</span> можно получить массив из названий
                         атрибутов у текущего элемента.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let attrArray = element.getAttributeNames();
 
 let attrs = link1.getAttributeNames();      // [ "id", "name", "href" ]
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         А метод <span class="blue">getAttribute</span> позволяет по известному названию атрибута получить
                         его значение.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let attrValue = element.getAttribute("attrName");
 
 let linkAddress = link1.getAttribute("href");          // "http://example.com"
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Проверка наличия атрибутов</h2>
@@ -1852,8 +1758,7 @@ let linkAddress = link1.getAttribute("href");          // "http://example.com"
                         Воспользуемся нашей старой рекурсивной функцией для обхода всего дерева, для того чтобы найти
                         все элементы с атрибутами <i>href</i>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Обход DOM дерева
 function eachElement(rootElement, callback) {
 
@@ -1899,8 +1804,7 @@ eachElement(document, function(el) {
 
 });
 console.log(`A total of ${count} elements were found with href!`);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Удаление и добавление атрибутов</h2>
@@ -1908,20 +1812,16 @@ console.log(`A total of ${count} elements were found with href!`);
                         Удалить атрибут помогает метод <span class="blue">removeAttribute</span>, принимающий в качества
                         аргумента название удаляемого атрибута.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.removeAttribute("attribute-name");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Добавить новый атрибут или новое значение можно с помощью метода <span class="blue">setAttribute</span>.
                         Этот метод принимает 2 параметра: название атрибута и новое значение.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.setAttribute("attribute-name", "attributeValue");
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример с удалением/добавление атрибутов</h3>
@@ -1933,8 +1833,7 @@ element.setAttribute("attribute-name", "attributeValue");
                         Например, можно деактивировать все ссылки, удалив атрибут <i>href</i>, или "очистить" страницу,
                         удалив все атрибуты с css классами.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Обход DOM дерева
 function eachElement(rootElement, callback) {
 
@@ -1997,8 +1896,7 @@ eachElement(document, function (el) {
 
 
 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Работа с булевыми атрибутами</h2>
@@ -2009,11 +1907,9 @@ eachElement(document, function (el) {
                     <p>
                         В аргументах ему передаётся имя атрибута:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let isActive = element.toggleAttribute("attribute-name");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Дополнительно вторым параметром можно передавать булево значение, жестко задающее поведение:
                         <span class="blue">true</span>, если нужно активировать атрибут, <span class="blue">false</span> - если
@@ -2022,8 +1918,7 @@ let isActive = element.toggleAttribute("attribute-name");
                     <p>
                         Это получается то же самое, что <span class="blue">setAttribute</span>, только лишь для булевых атрибутов.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Force activating
 element.toggleAttribute("attribute-name", true);
 
@@ -2062,8 +1957,7 @@ element.toggleAttribute("attribute-name", false);
                     <p>
                         С помощью него можно и читать, и изменять <span class="blue">id</span>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let id = element.id;
 element.id = "newUniqueId";
 
@@ -2074,8 +1968,7 @@ console.log(superBlock.id);     // "id_123"
 
 let byOldId = document.getElementById("su_block");      // null
 let byNewId = document.getElementById("id_123");        // div
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример c id</h3>
@@ -2132,11 +2025,9 @@ let byNewId = document.getElementById("id_123");        // div
                     <p>
                         Обработчик события назначается элементу через функцию <span class="blue">addEventListener</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.addEventListener("click", Function);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <ul>
                         <li>element - элемент DOM, для которого будет обрабатываться событие</li>
                         <li>1 параметр, "click" - название события</li>
@@ -2163,8 +2054,7 @@ element.addEventListener("click", Function);
                         Следующая функция, используя старую добрую функцию <i>eachElement</i> для обхода всех элементов
                         DOM дерева, добавляет каждому элементу обработчик, который выводит информацию об этом элементе.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Обход DOM дерева
 function eachElement(rootElement, callback) {
 
@@ -2208,8 +2098,7 @@ eachElement(document, function (el) {
 
     });
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример click с appendChild</h2>
@@ -2266,14 +2155,12 @@ eachElement(document, function (el) {
                         так же как и рассмотренный только что <span class="blue">id</span>.
                         С помощью него можно просматривать и задавать значение атрибута.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let div = document.getElementById("main_cont");     // &lt;div class="container yello_sp1 thr2"&gt;
 console.log(div.className);             // "container yello_sp1 thr2"
 div.className = "container thr1";      
 console.log(div);                       // &lt;div class="container thr1"&gt;
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Однако не очень удобно работать с этим атрибутом, как со строкой. С одним элементом может быть сразу
                         связано несколько CSS классов, и пытаться извлечь только нужный класс из строки совершенно неудобно.
@@ -2322,15 +2209,13 @@ console.log(div);                       // &lt;div class="container thr1"&gt;
                     <p>
                         Методом <span class="blue">remove</span>, по аналогии, можно удалить класс(ы) у элемента.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.classList.add("class-name");
 element.classList.add("class1", "class2", "class3");
 
 element.classList.remove("class-name");
 element.classList.remove("class1", "class2", "class3");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Если попытаться добавить уже существующий класс, или удалить класс, которого у элемента нет -
                         ничего не произойдёт.
@@ -2370,8 +2255,7 @@ element.classList.remove("class1", "class2", "class3");
                         С помощью метода <span class="blue">contains()</span> можно проверить, есть ли в данный момент
                         указанный класс у заданного элемента.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.classList.contains("class-name");
 
 if (element.classList.contains("class1")) {
@@ -2379,8 +2263,7 @@ if (element.classList.contains("class1")) {
 } else {
     console.log("У элемента нет класса class1");
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Крестики-нолики</h3>
@@ -2409,16 +2292,14 @@ if (element.classList.contains("class1")) {
                         Этот метод бывает полезен когда у нас в стилях есть строго 2 состояния, в тех ситуациях, когда
                         нужно включать-выключать что-то, например, через чекбоксы.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.classList.toggle("class-name");
 
 element.classList.toggle("class-example");  //  Класс class-example добавлен
 element.classList.toggle("class-example");  //  Класс class-example убран
 element.classList.toggle("class-example");  //  Класс class-example добавлен
 element.classList.toggle("class-example");  //  Класс class-example убран
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример с переключением класса</h3>
@@ -2442,11 +2323,9 @@ element.classList.toggle("class-example");  //  Класс class-example убр�
                     <p>
                         Метод <span class="blue">replace()</span> позволяет заменить один класс другим.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.classList.replace("oldClass", "newClass");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         У элемента по ссылке <i>element</i> класс <i>oldClass</i> заменяется на класс <i>newClass</i>.
                     </p>
@@ -2502,8 +2381,7 @@ element.classList.replace("oldClass", "newClass");
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -2545,12 +2423,10 @@ element.classList.replace("oldClass", "newClass");
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let nav = document.getElementById("nav");
 console.log(nav.innerHTML);
         /*  &lt;ul class="navigation"&gt;
@@ -2570,8 +2446,7 @@ console.log(info.innerHTML);
             &lt;span&gt;Какой-то текст&lt;/span&gt;
             &lt;span&gt;2 раза&lt;/span&gt;
         */
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -2597,8 +2472,7 @@ console.log(info.innerHTML);
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 while (document.body.children.length) {
     document.body.removeChild(document.body.firstChild);
 }
@@ -2618,20 +2492,17 @@ li3.innerHTML = "Третий пункт";
 list.appendChild(li3);
 
 document.body.appendChild(list);
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 document.body.innerHTML = 
         `&lt;ul&gt;
             &lt;li&gt;Первый пункт&lt;/li&gt;
             &lt;li&gt;Второй пункт&lt;/li&gt;
             &lt;li&gt;Третий пункт&lt;/li&gt;
         &lt;/ul&gt;`;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -2676,8 +2547,7 @@ document.body.innerHTML =
                     <h2>Сравнение</h2>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let nav = document.getElementById("nav");
 console.log(nav.innerHTML);
         /*  &lt;ul class="navigation"&gt;
@@ -2697,12 +2567,10 @@ console.log(info.innerHTML);
             &lt;span&gt;Какой-то текст&lt;/span&gt;
             &lt;span&gt;2 раза&lt;/span&gt;
         */
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let nav = document.getElementById("nav");
 console.log(nav.outerHTML);
         /*  &lt;div id="nav" class="nav_box"&gt;
@@ -2726,8 +2594,7 @@ console.log(info.outerHTML);
                 &lt;span&gt;2 раза&lt;/span&gt;
             &lt;/div&gt;
         */
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -2796,15 +2663,13 @@ console.log(info.outerHTML);
                     <p>
                         С помощью всех этих методов можно настраивать плавную прокрутку, передавая специальный параметр:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.scrollBy({
     top: 100,
     left: 100,
     behavior: 'smooth'       // Обеспечивает плавную прокрутку
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример со скроллом</h3>
@@ -2919,13 +2784,11 @@ element.scrollBy({
                         И по этому имени эти самые элементы можно и получить в JS коде с помощью метода
                         document.<span class="blue">getElementsByName()</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let elements = document.getElementsByName("name");
 
 let firstElement = elements[0];
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Важно! Имя элемента <span class="blue">name</span> не является уникальным, в отличии от
                         <span class="blue">id</span>. Поэтому метод возвращает не элемент, а коллекцию элементов.
@@ -2947,8 +2810,7 @@ let firstElement = elements[0];
                         И он, как и предыдущий, возвращает сразу коллекцию элементов. Тут это уместно - элементов с
                         одним и тем же тегом может быть очень много на странице.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let elements = document.getElementsByTagName("tag-name");
 
 let element = elements[0];
@@ -2956,8 +2818,7 @@ let element = elements[0];
 for (let i = 0; i < elements.length; ++i) {
     console.log(elements[i]);
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>CSS классы</h2>
@@ -2967,15 +2828,13 @@ for (let i = 0; i < elements.length; ++i) {
                     <p>
                         Это выполняется при помощи метода document.<span class="blue">getElementsByClassName()</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let elements = document.getElementsByClassName("class-name");
 
 let el = elements[0];
 
 let elements2 = document.getElementsByClassName("class-name1 class-name2 class-name3");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Можно искать сразу по нескольким классам - передавая их одним строковым параметром, разделив
                         пробелами, как классы записываются в самом HTML теге. В таком случае, будут найдет те элементы,
@@ -3032,8 +2891,7 @@ let elements2 = document.getElementsByClassName("class-name1 class-name2 class-n
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 // Классическое получение по id
 let byId = document.getElementById("id");
 
@@ -3045,12 +2903,10 @@ let byName = document.getElementsByName("name");
 
 // Классическое получение по классу
 let byClass = document.getElementsByClassName("class");
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 // Получение по id через селектор
 let byId = document.querySelector("#id");
 
@@ -3062,8 +2918,7 @@ let byName = document.querySelectorAll("[name=name]");
 
 // Получение по классу через селектор
 let byClass = document.querySelectorAll(".class");
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -3071,8 +2926,7 @@ let byClass = document.querySelectorAll(".class");
                     <h3>10 способов написать селектор на один и тот же элемент</h3>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 
@@ -3103,12 +2957,10 @@ let byClass = document.querySelectorAll(".class");
 &lt;/body&gt;
 
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let target = document.querySelector(".target > i");
 
 target = document.querySelector("a + span > i");
@@ -3128,8 +2980,7 @@ target = document.querySelector("div a[href='ae/'] + .target > i");
 target = document.querySelector("#main_part > div > p > span.target > i");
 
 target = document.querySelector("body > main.container > div#main_part > div > p.article > span.target > i");
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -3137,8 +2988,7 @@ target = document.querySelector("body > main.container > div#main_part > div > p
                     <h3>Примеры разных способов</h3>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 
@@ -3186,12 +3036,10 @@ target = document.querySelector("body > main.container > div#main_part > div > p
 &lt;/body&gt;
 
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let body = document.body;
 let header = document.getElementsByTagName("header")[0];
 let navBox = document.querySelector("header > .nav_box");
@@ -3208,8 +3056,7 @@ let formDiv1_label = document.querySelector("form > div:nth-child(1) > label");
 let username_input = document.getElementsByName("user_name")[0];
 let email_input = document.getElementById("mail");
 // ...
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -3276,40 +3123,32 @@ let email_input = document.getElementById("mail");
                         Например, вот это выражение, поднимется на 2 родителя вверх по дереву, относительно текущего элемент,
                         и оттуда уже будет искать элемент с атрибутом <i>type</i>, равным <i>submit</i>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate('./../../div//*[@type="submit"]', div); 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         А вот это выражение, будет искать все <i>div</i>-ы, после которых находится <i>div</i>
                         с классом <i>button</i>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]]', document); 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Примеры XPath</h2>
                     <p>
                         Здесь производится поиск по текстовому контенту внутри элемента:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate("//span[text()='2 раза']", document); 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         А вот составное выражение, которое будет искать все <i>li</i> внутри <i>header</i>, и все <i>span</i>-ы
                         внутри <i>main</i> с классом <i>container</i>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate('//header//li | //main[@class="container"]//span', document); 
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Синтаксис XPath</h2>
@@ -3483,11 +3322,9 @@ let xpathResult = document.evaluate('//header//li | //main[@class="container"]//
                     <p>
                         Мы уже видели один пример использования осей, вот здесь:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]]', document); 
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Ось задаётся через специальный префикс, после которого идут 2 знака двоеточия:
                         <span class="purple">axes-name::</span>
@@ -3512,8 +3349,7 @@ let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]
                     <h3>Примеры с осями</h3>
                     <div class="flex">
                         <div class="c2">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 
@@ -3564,12 +3400,10 @@ let xpathResult = document.evaluate('//*[following-sibling::div[@class="button"]
 &lt;/body&gt;
 
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 // Найдёт div-ы, у которых в предках есть main, а также впереди присутствует другой div
 let xpathResult = document.evaluate('//div[ancestor::main][following-sibling::div]', document);
 
@@ -3582,8 +3416,7 @@ xpathResult = document.evaluate('//li[preceding-sibling::*][following-sibling::*
 // Найдёт все div-ы, у которых в предках есть form, за которой следует aside.
 // Также искомые div-ы не должны содержать класс button
 xpathResult = document.evaluate('//div[ancestor::form[following-sibling::aside]][not(@class="button")]', document); 
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -3614,11 +3447,9 @@ xpathResult = document.evaluate('//div[ancestor::form[following-sibling::aside]]
                         Ну, вы уже поняли, что поиск по XPath выражению выполняется с помощью метода
                         document.<span class="blue">evaluate()</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate("XPath-expression", contextNode);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         У этого метода 2 обязательных аргумента:
                     </p>
@@ -3653,16 +3484,14 @@ let xpathResult = document.evaluate("XPath-expression", contextNode);
                     <p>
                         Удобнее всего перебирать элементы из XPathResult с помощью цикла while:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let xpathResult = document.evaluate("/html/body/div[4]/div[2]/div/div/div/div[3]/div/span[2]/span", document);
 
 let element = null;
 while (element = xpathResult.iterateNext()) {
     console.log(element);
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -3704,8 +3533,7 @@ while (element = xpathResult.iterateNext()) {
                         Проверить, редактируемый ли элемент, или нет, можно с помощью свойства 
                         <span class="blue">isContentEditable</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 let div = document.querySelector("div.container");
 
 if (div.isContentEditable) {
@@ -3713,8 +3541,7 @@ if (div.isContentEditable) {
     div.contentEditable = "true";
 
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Документ. Режим дизайнера</h2>
@@ -3758,15 +3585,13 @@ if (div.isContentEditable) {
                     <p>
                         Пользовательские атрибуты в HTML разметке <u>обязаны начинаться на префикс <span class="blue">data-</span></u>:
                     </p>
-                    <pre>
-                        <code class="html">
+                    <pre><code class="html">
 &lt;a data-myattr="42"&gt;&lt;/a&gt;
 
 &lt;div class="item-title-area" data-test-id="item-title-area"&gt;&lt;/div&gt;
 
 &lt;button data-item="pen" data-hashid="ROwmmp" class="button button-editor-outline loves heart-button loved-0" title="Love"&gt;&lt;/button&gt;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Доступ в коде</h2>

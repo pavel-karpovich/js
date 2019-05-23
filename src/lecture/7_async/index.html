@@ -195,8 +195,7 @@
                         Конечно, мы опять начнём с функции <span class="blue">setTimeout()</span> - это самый простой
                         и наглядный пример асинхронного поведения в JavaScript.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // 1 - Выведет на консоль "Hello."
 console.log("Hello.");
 // 3 - Выведет на консоль "Goodbye" через 2 секунды
@@ -205,8 +204,7 @@ setTimeout(function() {
 }, 2000);
 // 2 - Выведет на консоль "Hello again!"
 console.log("Hello again!");
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Если бы мы писали аналог подобной программы на языке программирования, где присутствуют
                         синхронные операции (например, C# со Sleep на 2 секунды), то после вывода "Hello.",
@@ -245,16 +243,14 @@ console.log("Hello again!");
                     <p>
                         Программно это можно записать как следующий блок кода:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Звоним Алексу и ждём, пока он не скажет свои паспортные данные
 const passportData = callToRecievePassportData("Алекс");
 // Дождавшись, выводим их
 console.log("Паспортные данные Алекса: " + passportData);
 // И приступаем к другой работе
 doWork();
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Т.е. это стандартные код, простой вызов функции, как мы всегда это делали. Потому что мы
                         всегда писали синхронный код.
@@ -273,8 +269,7 @@ doWork();
                     <p>
                         Но как тогда записать такой код? Старая версия больше не будет работать.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Звоним Алексу и говорим ему, чтобы он перезвонил с результатом
 // Мы больше не можем получить результат через возвращаемое значение -
 // Значение здесь не возвращается, оно будет выдано нам в будущем
@@ -282,8 +277,7 @@ callToRecievePassportData("Алекс");
 // Алекс ищет паспорт, а мы продолжаем выполнять следующие команды
 // Т.е. занимаемся своими делами
 doWork();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Коллбэк</h2>
@@ -310,8 +304,7 @@ doWork();
                         Тогда рассмотренный пример с паспортными данными, в асинхронном варианте будет выглядеть
                         следующим образом:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Звоним Алексу и говорим ему, чтобы он перезвонил с результатом
 callToRecievePassportData("Алекс", function(passportData) {
     // Что будем делать, когда Алекс нам перезвонит и скажет свои данные
@@ -321,8 +314,7 @@ callToRecievePassportData("Алекс", function(passportData) {
 // Алекс ищет паспорт, а мы продолжаем выполнять следующие команды
 // Т.е. занимаемся своими делами
 doWork();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Значение коллбэка</h2>
@@ -398,8 +390,7 @@ doWork();
                 </section>
                 <section>
                     <h2>Примеры</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function loadDoc() {
     // Создаём объект XMLHttpRequest
     const xhttp = new XMLHttpRequest();
@@ -415,13 +406,11 @@ function loadDoc() {
     // Отправка
     xhttp.send();
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Использование XMLHttpRequest</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Объект XMLHttpRequest создаётся через конструктор
 const xhr = new XMLHttpRequest();
 
@@ -446,8 +435,7 @@ xhr.onreadystatechange = function() {
 
 button.innerHTML = 'Загружаю...';
 button.disabled = true;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -456,11 +444,9 @@ button.disabled = true;
                     <p>
                         Для инициализации и настройки запроса используется метод <span class="blue">open()</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 XMLHttpRequest.open(method, url, async?, user?, password?);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Метод принимает 2 обязательных параметра: <i>method</i> и <i>url</i>.
                     </p>
@@ -479,8 +465,7 @@ XMLHttpRequest.open(method, url, async?, user?, password?);
                         синхронным. Этот параметр запрещено использовать среди веб разработчиков! В скором времени
                         эту возможность планируют убрать из новых версий браузеров.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const request = new XMLHttpRequest();
 
 // Асинхронный запрос (по умолчанию)
@@ -491,8 +476,7 @@ request.open('POST', 'http://example.com', true);
 
 // СИНХРОННЫЙ запрос
 request.open('POST', 'http://example.com', false);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Синхронный XHR vs Асинхронный XHR</h3>
@@ -515,11 +499,9 @@ request.open('POST', 'http://example.com', false);
                     <p>
                         Метод <span class="blue">send()</span> используется для отправки запроса на сервер.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 XMLHttpRequest.send(body?);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         С помощью параметра этого метода <i>body</i> можно задавать тело HTTP запроса. Это используется для
                         отправки данных на сервер через многие HTTP методы, например, POST и PUT. Если же запрос
@@ -532,8 +514,7 @@ XMLHttpRequest.send(body?);
                 </section>
                 <section>
                     <h2>Пример с GET</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const xhr = new XMLHttpRequest();
 // GET запрос
 // Параметры передаются через адрес, в заголовке запроса
@@ -546,13 +527,11 @@ xhr.onload = function () {
 xhr.send(null);
 // Любые значения параметра будут игнорироваться,
 // Потому что это GET запрос
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пример с POST</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const xhr = new XMLHttpRequest();
 // POST запрос, параметры передаются в теле запроса
 xhr.open('POST', '/server', true);
@@ -571,8 +550,7 @@ xhr.send('name=viktor&password=VikTheBest111');
 // xhr.send(new Blob());
 // xhr.send(new Int8Array());
 // xhr.send(document);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -595,8 +573,7 @@ xhr.send('name=viktor&password=VikTheBest111');
                     <p>
                         Как сделать из обработчика коллбэк?
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function load(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -615,13 +592,11 @@ function load(url, callback) {
 load('https://developer.mozilla.org', function(res) {
     console.log('Результат XHR запроса: ' + res);
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пример 2</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const xhr = new XMLHttpRequest();
 xhr.open('GET', '/server', true);
 
@@ -641,8 +616,7 @@ xhr.ontimeout = function (e) {
 };
 
 xhr.send();
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -660,8 +634,7 @@ xhr.send();
                 </section>
                 <section>
                     <h2>Пример</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const reqestButton = document.querySelector('button.request');
 const abortButton = document.querySelector('button.abort');
 
@@ -679,13 +652,11 @@ abortButton.addEventListener('click', function() {
         xhr.abort();
     }
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример с заголовками</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const request = new XMLHttpRequest();
 request.open('GET', 'file.txt', true);
 request.send(null);
@@ -720,13 +691,11 @@ request.addEventListener('readystatechange', function() {
         console.log(headerMap);
     }
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пример 3</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const client = new XMLHttpRequest();
 client.open('GET', 'unicorns-are-teh-awesome.txt', true);
 
@@ -753,8 +722,7 @@ client.onreadystatechange = function() {
         }
     }
 }
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -793,8 +761,7 @@ client.onreadystatechange = function() {
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!doctype html&gt;
 &lt;html&gt;
     &lt;head&gt;&lt;/head&gt;
@@ -851,13 +818,11 @@ form.addEventListener('submit', function(e) {
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="separator"></div>
                         <div class="c1">
-                            <pre>
-                                <code class="php">
+                            <pre><code class="php">
 &lt;?php
 // Хранящиеся на сервере данные о логине и пароле пользователя
 $username = 'Bernie';
@@ -879,8 +844,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     echo json_encode(array('success' => false, 'error' => true));
 }
 ?&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -891,8 +855,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                     </p>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;html&gt;
     &lt;head&gt;&lt;/head&gt;
     &lt;body&gt;
@@ -944,13 +907,11 @@ input.addEventListener('keyup', showHint);
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="separator"></div>
                         <div class="c1">
-                            <pre>
-                                <code class="php">
+                            <pre><code class="php">
 &lt;?php
 // Массив из имён
 $a = ['Anna', 'Brittany', 'Cinderella', 'Diana', 'Eva', 'Fiona', 'Gunda', 'Hege', 'Inga',
@@ -988,8 +949,7 @@ if ($q !== '') {
 // с полученной строки $q, или список имён, если таковые имеются
 echo $hint === '' ? 'нет совпадений' : $hint;
 ?&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -1030,8 +990,7 @@ echo $hint === '' ? 'нет совпадений' : $hint;
                     <p>
                         Возьмём следующий блок кода. В функции <i>getData()</i> здесь есть ошибка.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function getData() {
     let data;
     const xhr = new XMLHttpRequest();
@@ -1047,8 +1006,7 @@ function getData() {
 
 var data = getData();
 console.log("The data is: " + data);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Как правильно структурировать и написать такой код, когда внутри функции выполняется
                         асинхронное действие и нам нужно вернуть из неё результат этой асинхронной операции?
@@ -1060,8 +1018,7 @@ console.log("The data is: " + data);
                         Это можно сделать только через коллбэк во внешней функции, потому что это единственный
                         способ получения результата асинхронного действия:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function getData(callback) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', 'example.php');
@@ -1077,13 +1034,11 @@ function getData(callback) {
 getData(funсtion cb(data) {
     console.log("The data is: " + data);
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Ещё один пример</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function loadAsset(url, type, callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url);
@@ -1100,8 +1055,7 @@ loadAsset('coffee.jpg', 'blob', function(blob) {
     image.src = objectURL;
     document.body.appendChild(image);
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1135,8 +1089,7 @@ loadAsset('coffee.jpg', 'blob', function(blob) {
                 </section>
                 <section>
                     <h2>Пирамида из скобочек</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 fs.readdir(source, function (err, files) {
     if (err) {
         console.log('Error finding files: ' + err);
@@ -1163,8 +1116,7 @@ fs.readdir(source, function (err, files) {
         });
     }
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -1195,8 +1147,7 @@ fs.readdir(source, function (err, files) {
                 </section>
                 <section>
                     <h2>Анатомия промиса</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Создаётся объект Promise, в который оборачивается асинхронная операция
 const takeTheTrashOut = new Promise(function(resolve, reject) {
     // Делаем всю работу
@@ -1224,16 +1175,14 @@ takeTheTrashOut.then(function(fromResolve) {
     console.log('Ну и что вышло?');
     console.log(fromReject);
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Чистый код</h2>
                     <p>
                         Промисы позволяют писать чистый код. Вы не можете переплыть океан, пока не построите лодку:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Функция Собрать древесину
 const getWood = function() {
     return new Promise((resolve, reject) {
@@ -1272,16 +1221,14 @@ getWood().then(function(res) {
     console.log(res);
     console.log('И что дальше?');
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Продолжение</h2>
                     <p>
                         Добавим реальной асинхронности с помощью функции <span class="blue">setTimeout()</span>:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Функция Собрать древесину
 const getWood = function() {
     return new Promise((resolve, reject) {
@@ -1328,13 +1275,11 @@ getWood().then(function(res) {
     console.log(res);
     console.log('И что дальше?');
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Тот же пример через коллбэки</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Функция Собрать древесину
 const getWood = function(callback) {
     setTimeout(function() {
@@ -1373,8 +1318,7 @@ getWood(function(res) {
         });
     });
 });                        
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Ещё</h2>

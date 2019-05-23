@@ -220,22 +220,18 @@
                 </section>
                 <section>
                     <h3>Пример событий в HTML</h3>
-                    <pre>
-                        <code class="html">
+                    <pre><code class="html">
 &lt;body onload="let a = document.body.createElement('div'); document.body.appendChild(a);"&gt;
     &lt;button onclick="this.innerHTML = Date()"&gt;The time is?&lt;/button&gt;
     &lt;img src="imag1.png" onmouseover="console.log('mouse over img')"/&gt;
 &lt;/body&gt;
-                        </code>
-                    </pre>
-                    <pre>
-                        <code class="html">
+                    </code></pre>
+                    <pre><code class="html">
 &lt;!-- Это работать не будет! --&gt;
 &lt;div onclick="myFunctionName" /&gt;
 &lt;!-- Этим способом нужно прописывать не имя функции-обработчика, а сами действия - вызов --&gt;
 &lt;div onclick="myFunctionName()" /&gt;
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Встроенный обработчик</h2>
@@ -254,19 +250,16 @@
                     <p>
                         И в это свойство нужно просто записать функцию-обработчик.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.onevent = function handler() { };
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         И, как и в предыдущем случае, нужно учитывать, что не для всех событий в JS есть встроенные свойства.
                     </p>
                 </section>
                 <section>
                     <h3>Примеры со встроенным обработчиком</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Событие click
 let div = document.getElementsByTagName("div");
 div.onclick = function() {
@@ -283,8 +276,7 @@ div.onmouseover = myAction();       // div.onmouseover = undefined
 
 // Событие copy
 div.oncopy = () => console.log("Don't copy code!!!");
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Проблема встроенного обработчика</h3>
@@ -296,8 +288,7 @@ div.oncopy = () => console.log("Don't copy code!!!");
                         Если у элемента свойством задан уже какой-то обработчик, то повторное назначение обработчика
                         не добавит второй, а перезапишет первый оригинальный.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 div.onclick = function () {
     console.log("Click handler 1");
 };
@@ -306,8 +297,7 @@ div.onclick = function () {
     console.log("Click handler 2");
 };
 div.click(); //  Click handler 2
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Добавление через метод</h2>
@@ -318,11 +308,9 @@ div.click(); //  Click handler 2
                     <p>
                         С помощью этого метода можно добавить обработчик на любое событие и в любых количествах.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 addEventListener("eventName", Function);
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Метод принимает 2 обязательных параметра: строку с названием события и саму функцию-обработчик.
                     </p>
@@ -336,8 +324,7 @@ addEventListener("eventName", Function);
                         С помощью <span class="blue">addEventListener()</span> можно добавить одновременно несколько обработчиков
                         одного и того же события для одного элемента:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 div.addEventListener("click", function() {
     console.log("Click handler 1");
 });
@@ -348,8 +335,7 @@ div.addEventListener("click", function() {
     console.log("Click handler 3");
 });
 div.click(); //  Click handler 1, Click handler 2, Click handler 3
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Порядок их вызова определяется порядком назначения.
                     </p>
@@ -380,8 +366,7 @@ div.click(); //  Click handler 1, Click handler 2, Click handler 3
                     <p>
                         Удаление происходит следующим образом:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 function clickHandler() {
     console.log("You click on me");
 }
@@ -406,8 +391,7 @@ div.addEventListener("mouseover", function() {
 div.addEventListener("mouseout", function onMouseOut() {
     console.log("But not me...");
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -449,13 +433,11 @@ div.addEventListener("mouseout", function onMouseOut() {
                     <p>
                         Обычно этот параметр называют просто <span class="blue">e</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 element.addEventListener("click", function(e) {
     console.log("Mouse Event Arguments: " + e);
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                     <p>
                         Любая функция-обработчик события может принимать такой параметр, для использования в своей логике
                         аргументов произошедшего события.
@@ -599,21 +581,18 @@ element.addEventListener("click", function(e) {
                         Чтобы зарегестрировать обработчик события для первой фазы, фазы погружения, нужно передать в качестве третьего
                         параметра значение <span class="blue">true</span>.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Регистрация обработчика для фазы погружения
 element.addEventListener("event", Function, true);
 
 // Регистрация обработчика для фазы всплытия
 element.addEventListener("event", Function);
 element.addEventListener("event", Function, false);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пример</h2>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 document.addEventListener("click", function() {
     console.log("1");
 }, true);
@@ -629,15 +608,13 @@ main.addEventListener("click", function() {
 document.addEventListener("click", function() {
     console.log("5");
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h3>Пример 2</h3>
                     <div class="flex">
                         <div class="c1">
-                            <pre>
-                                <code class="html">
+                            <pre><code class="html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -663,12 +640,10 @@ document.addEventListener("click", function() {
     &lt;/main&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                         <div class="c1">
-                            <pre>
-                                <code class="js">
+                            <pre><code class="js">
 let list = document.getElementById("list");
 list.addEventListener("click", function() {
     console.log("A");
@@ -687,8 +662,7 @@ let thirdSpan = document.querySelector("#list > li:nth-child(3) > span");
 thirdSpan.addEventListener("click", function() {
     console.log("D");
 });
-                                </code>
-                            </pre>
+                            </code></pre>
                         </div>
                     </div>
                 </section>
@@ -791,8 +765,7 @@ thirdSpan.addEventListener("click", function() {
                         Например, если мы не хотим, чтобы при клике на ссылку происходил переход на другую страницу,
                         то нужно в обработчике вызвать этот метод:
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const a = document.getElementById("link");
 
 a.addEventListener("click", function(e) {
@@ -801,8 +774,7 @@ a.addEventListener("click", function(e) {
     e.preventDefault();
 
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
             </section>
             <section>
@@ -881,8 +853,7 @@ a.addEventListener("click", function(e) {
                         <li>Привязка обработчиков</li>
                         <li>Генерация события</li>
                     </ol>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Создаём событие
 let event = new Event("build");
 
@@ -891,8 +862,7 @@ elem.addEventListener("build", function(e) { console.log("My own Event!") });
 
 // Генерация события - вызываем обработчики
 elem.dispatchEvent(event);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Конструктор Event</h2>
@@ -900,8 +870,7 @@ elem.dispatchEvent(event);
                         Вообще, с помощью конструктора <span class="blue">Event</span> можно программно генерировать
                         любые события: пользовательские и стандартные.
                     </p>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 // Стандартное событие клика мышкой
 let programClick = new Event("click");
 button.dispatchEvent(programClick);
@@ -917,8 +886,7 @@ fileInput.dispatchEvent(programLoad);
 // Пользовательское событие
 let myEvent = new Event("pigeon-fly");
 div.dispatchEvent(myEvent);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Объект Event</h2>
@@ -942,8 +910,7 @@ div.dispatchEvent(myEvent);
                 </section>
                 <section>
                     <h3>Пример</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const e = new MouseEvent("click", {
     bubbles: true,
     cancelable: true,
@@ -953,8 +920,7 @@ const e = new MouseEvent("click", {
     y: 100,
     which: 0
 });
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пользовательский тип события</h2>
@@ -973,8 +939,7 @@ const e = new MouseEvent("click", {
                 </section>
                 <section>
                     <h3>Пример CustomEvent</h3>
-                    <pre>
-                        <code class="js">
+                    <pre><code class="js">
 const event = new CustomEvent('build', {
     'detail': {
         'time': new Date(),
@@ -992,8 +957,7 @@ function eventHandler(e) {
 div.addEventListener('build', eventHandler);
 
 div.dispatchEvent(event);
-                        </code>
-                    </pre>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Пример</h2>

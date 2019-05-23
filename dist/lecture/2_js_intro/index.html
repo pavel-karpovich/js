@@ -331,13 +331,11 @@
 						Переменная в JS - это просто коробка, в которую можно положить что угодно и
 						заменить на что угодно. 
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let a = 42;    // сейчас a - это number
 a = 'bar'; // теперь string
 a = true;  // а теперь boolean
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Событийно ориентированная архитектура</h2>
@@ -404,8 +402,7 @@ a = true;  // а теперь boolean
 				</section>
 				<section>
 					<h3>Демонстрация var</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 a = 4;
 if ("2" == 4) {
 
@@ -422,8 +419,7 @@ a++;
 console.log(a);		// 3
 var a = 15;
 console.log(a);		// 15
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>let для переменных</h2>
@@ -442,8 +438,7 @@ console.log(a);		// 15
 				</section>
 				<section>
 					<h3>Демонстрация let</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let i = 2;
 console.log(i);		// 2
 //let i = 12;		// error
@@ -463,8 +458,7 @@ if (i == 2) {
 
 }
 console.log(i);		// 2
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						P.S. Кому интересно почему это так работает, можно погуглить в сторону лексического
 						окружения, или lexical environment.
@@ -487,8 +481,7 @@ console.log(i);		// 2
 				</section>
 				<section>
 					<h3>Демонстрация const</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 const i = 2;
 //i = "khe";		//error 
 //i++;      //error
@@ -496,21 +489,18 @@ const arr = [1];
 console.log(arr);       // [1]
 arr.push(2);
 console.log(arr);       // [1, 2]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h2>Всё равно равно</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let a = 2, b = 3;
 let v1 = (a = b);
 let v2 = (a == b);
 let v3 = (a === b);
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Сравнения</h2>
@@ -533,8 +523,7 @@ let v3 = (a === b);
 				</section>
 				<section>
 					<h2>Демонстрация сравнений</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 1 == "1";		// true
 1 === "1";		// false
 
@@ -543,8 +532,7 @@ let v3 = (a === b);
 
 [] != true;			// true
 [] !== true;		// true
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 			</section>
 			<section>
@@ -591,20 +579,16 @@ let v3 = (a === b);
 				</section>
 				<section>
 					<h3>Немножко JS-а</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let a;		// a === undefined
 
 let b = null;
-						</code>
-					</pre>
-					<pre>
-						<code class="js">
+					</code></pre>
+					<pre><code class="js">
 undefined == null;		// true
 undefined === null;		// false
 !undefined === !null;		// true
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Пора привыкать к такому.
 					</p>
@@ -621,12 +605,10 @@ undefined === null;		// false
 					<p>
 						А знаете что ещё?
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 NaN == NaN;			// false
 NaN === NaN;		// false
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						NaN не равен NaN. Не равен самому себе. И это число.
 					</p>
@@ -643,13 +625,11 @@ NaN === NaN;		// false
 						или через лямбда-выражение. Только в JS функции, записанные обычным образом, и записанные
 						при помощи лямбда выражения работают по разному. Но об этом попозже.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 function func_name(arg1, arg2, arg3) {
 	return arg2 + arg3;
 }
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Функции могут принимать параметры, а могут и не принимать, могут возвращать значение, а могут
 						и не возвращать.
@@ -657,8 +637,7 @@ function func_name(arg1, arg2, arg3) {
 				</section>
 				<section>
 					<h3>Примеры функций</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 function f1() {
 	console.log("empty");
 }
@@ -677,8 +656,7 @@ let r2 = f3(3); // NaN
 let r3 = f3(4, "5"); // 45undefined
 let r4 = f3(1, 2, 3); // 6
 let r5 = f3(1, 2, 3, 4); // 6 
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h3>JS всё равно</h3>
@@ -706,8 +684,7 @@ let r5 = f3(1, 2, 3, 4); // 6
 					<p>
 						Но функции можно объявлять и по-другому, через переменные:
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let func1 = function (arg1, arg2) {
 
 	if (typeof arg1 === "number" && typeof arg2 === "number") {
@@ -718,8 +695,7 @@ let func1 = function (arg1, arg2) {
 
 }
 func1(2, 5);
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Такой способ создания функций называется <span class="purple">функциональным выражением</span>.
 					</p>
@@ -761,15 +737,13 @@ func1(2, 5);
 						Для создания объектов в JS используется специальный синтаксис: фигурные скобки,
 						и внутри них перечисленные через запятую пары "ключ : значение".
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let obj_name = {
 	property1 : value1,
 	property2 : value2,
 	property3 : value3
 }
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						В качестве ключа, т.е. имени свойства, могут использоваться любые строки. Записывать
 						их можно как в кавычках, так и без.
@@ -777,8 +751,7 @@ let obj_name = {
 				</section>
 				<section>
 					<h3>Примеры создания объектов</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let auto = {
 	brand: 'BMW',
 	model: '2019 BMW i8 Roadster AWD',
@@ -809,28 +782,23 @@ let phone_book = {
 	call: call_josheph 
 }
 
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Доступ к свойствам объектов</h2>
 					<p>
 						Объекты JS поддерживают 2 формы записи для доступа к свойствам: через точку и через квадратные скобки.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 myobj.a = 2;
 myobj.b = "grrr";
 console.log(myobj.c);
-						</code>
-					</pre>
-					<pre>
-						<code class="js">
+					</code></pre>
+					<pre><code class="js">
 myobj["a"] = 2;
 myobj["b"] = "grr";
 console.log(myobj["c"]);
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Когда это возможно, рекомендуется использовать первую форму записи, через точку.
 					</p>
@@ -840,8 +808,7 @@ console.log(myobj["c"]);
 					<p>
 						Ключом для свойства объекта может выступать любая строка. Абсолютно.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let obj = {
 	"😘": "emoji",
 	"!": "character",
@@ -860,8 +827,7 @@ console.log(obj["∰"]);
 console.log(obj["✪✪✪✪"]);
 console.log(obj["☝💩🤡ஔ☔😱"] + " " + obj["☝💩🤡ஔ☔😱"]);
 
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Обращение к свойствам, которых нет</h2>
@@ -872,14 +838,12 @@ console.log(obj["☝💩🤡ஔ☔😱"] + " " + obj["☝💩🤡ஔ☔😱"]);
 						Обращение к свойству, которое никогда раньше не использовалось и не инициализировалось,
 						вернёт undefined.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let bj = {};
 console.log(bj.p);		// undefined
 console.log(bj.ee);		// undefined
 let int = bj.num;		// int === undefined
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Добавление свойств</h2>
@@ -887,8 +851,7 @@ let int = bj.num;		// int === undefined
 						Ну а чтобы добавить в объект новое свойство, нужно просто присвоить значение
 						по новому ключу.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let pers = {};
 console.log(pers);		// { }
 pers.name = "Nick";
@@ -898,8 +861,7 @@ console.log(pers);		// { name: "Nick", age: 25 }
 pers.weight = 82;
 pers.height = 175;
 console.log(pers);		// { name: "Nick", age: 25, weight: 82, height: 175 }
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h3>Особенность обращения через квадратные скобки</h3>
@@ -907,16 +869,14 @@ console.log(pers);		// { name: "Nick", age: 25, weight: 82, height: 175 }
 						У обращения к свойствам через квадратные скобки есть одно преимущество: возможность
 						использования переменных в качестве ключа.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let obj = { a: 1, b: 2, c: 3, d: 4 };
 let prop = "a";
 obj[prop] = 10;
 prop = "b";
 obj[prop] = 20;
 console.log(obj);	// { a: 10, b: 20, c: 3, d: 4 } 
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Иногда это позволяет создавать очень хитрые алгоритмы.
 					</p>
@@ -926,26 +886,22 @@ console.log(obj);	// { a: 10, b: 20, c: 3, d: 4 }
 					<p>
 						Для полного удаления свойства у объект существует оператор <span class="blue">delete</span>.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let shape = { color: "green", x: 24, y: 75, z: 43 };
 delete shape.z;
 delete shape["y"];
 console.log(shape);		// { color: "green", x: 24 }
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Но он работает очень медленно и использовать его не рекомендуется. Вместо этого
 						зачастую можно обойтись присвоением ненужному свойству значения <span class="blue">undefined</span>.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let shape = { color: "green", x: 24, y: 75, z: 43 };
 shape.z = undefined;
 shape["y"] = undefined;
 console.log(shape);		// { color: "green", x: 24, y: undefined, z: undefined }
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Функции как объекты</h2>
@@ -959,8 +915,7 @@ console.log(shape);		// { color: "green", x: 24, y: undefined, z: undefined }
 					<p>
 						Т.е. у функции есть свойства, и их можно свободно добавлять/убирать:
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 function highway_to_js() {
 	console.log("Welcome, buddy!");
 	return "Nope";
@@ -970,8 +925,7 @@ highway_to_js.secret = "run";
 
 highway_to_js();
 console.log(highway_to_js.secret);
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 			</section>
 			<section>
@@ -997,24 +951,20 @@ console.log(highway_to_js.secret);
 					<p>
 						Массив можно создавать с помощью класса Array и вызова конструктора:
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr0 = new Array();
 let arr1 = new Array("str1", null, "str2", {a: 32}, "str3", 23, 54.434, false);
 let arr2 = new Array(10);
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Но гораздо удобнее использовать встроенный синтаксис литералов массива: список значений,
 						взятый в квадратные скобки.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr0 = [];
 let arr1 = ["str1", null, "str2", {a: 32}, "str3", 23, 54.434, false];
 let arr2 = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Массив как объект</h2>
@@ -1028,13 +978,11 @@ let arr2 = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 						Например, свойство <span class="purple">length</span> у объекта массива всегда равно значению
 						его максимального числового ключа - 1.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr = ["t", "e"];
 arr[10000000] = "ы";
 console.log(arr.length);			// 9999999
-						</code>
-					</pre>
+					</code></pre>
 					<p>
 						Добавили один элемент, увеличили размер массива на 10 миллионов. Профит!
 					</p>
@@ -1056,8 +1004,7 @@ console.log(arr.length);			// 9999999
 				</section>
 				<section>
 					<h3>Примеры добавления</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr1 = [1, 2, 3];
 arr1.unshift("a");					// ["a", 1, 2, 3]
 arr1.unshift("b", "c", "d");				// ["b", "c", "d", "a", 1, 2, 3]
@@ -1069,8 +1016,7 @@ arr2.push("o", "oop", arr1);				// [true, false, null, 2, "o", "oop", ["b", "c",
 let arr3 = ["Pol", "Roger", "Tom"];
 arr3.splice(1, 0, "Nolan");				// ["Pol", "Nolan", "Roger", "Tom"]
 arr3.splice(2, 0, "Mickey", "Bred", "Sergio");		// ["Pol", "Nolan", "Mickey", "Bred", "Sergio", "Roger", "Tom"]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Удаление элементов из массива</h2>
@@ -1092,8 +1038,7 @@ arr3.splice(2, 0, "Mickey", "Bred", "Sergio");		// ["Pol", "Nolan", "Mickey", "B
 				</section>
 				<section>
 					<h3>Примеры удаления</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let people = [
 		{ name: "George", city: "London" }, 
 		{ name: "Ralf", city: "Copenhagen" }, 
@@ -1115,8 +1060,7 @@ let mas = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 mas.splice(2, 1);			// [1, 2, 4, 5, 6, 7, 8, 9]
 let del = mas.splice(4, 3);		// [1, 2, 4, 5, 9]
 console.log(del);			// [6, 7, 8]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Методы массива</h2>
@@ -1177,8 +1121,7 @@ console.log(del);			// [6, 7, 8]
 				</section>
 				<section>
 					<h3>Использование</h3>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let students = ["Markus", "Elly", "Tim"];
 let other = ["Jacky", "Sol", "Regina"];
 
@@ -1214,8 +1157,7 @@ console.log(arr);			// [0, 1, 1, 2, 2, 3, 5, 6, 7, 10, 22, 37, 75]
 
 let subArray = arr.slice(1, 9);		// [1, 1, 2, 2, 3, 5, 6, 7]
 let subArray2 = arr.slice(6);		// [5, 6, 7, 10, 22, 37, 75]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Всемогущий метод splice</h2>
@@ -1226,13 +1168,10 @@ let subArray2 = arr.slice(6);		// [5, 6, 7, 10, 22, 37, 75]
 						Метод <span class="purple">splice</span> позволяет удалить любое количество элементов из 
 						любого места в массиве, а затем вставить в это место любое количество элементов.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 arr.splice(позиция, сколько_удалять, добавляемые элементы...)
-						</code>
-					</pre>
-					<pre>
-						<code class="js">
+					</code></pre>
+					<pre><code class="js">
 let animals = ["cow", "cat", "dog", "bear", "tiger"];
 let deleted = animals.splice(1);
 console.log(animals);					// ["cow"]
@@ -1241,8 +1180,7 @@ console.log(deleted);					// ["cat", "dog", "bear", "tiger"]
 deleted.splice(0, 2);					// ["bear", "tiger"]
 animals.splice(1, 0, ...deleted);			// ["cow", "bear", "tiger"]
 animals.splice(0, 2, "horse", "pig", "elephant");	// ["horse", "pig", "elephant", "tiger"]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Функциональные методы массива</h2>
@@ -1278,8 +1216,7 @@ animals.splice(0, 2, "horse", "pig", "elephant");	// ["horse", "pig", "elephant"
 				</section>
 				<section>
 					<h2>Примеры функциональных методов</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let people = [
     { name: "Phillip", gender: "m", age: 36 },
     { name: "Lori", gender: "f", age: 40 },
@@ -1306,8 +1243,7 @@ let averageAge = people.reduce((summary, person) => summary += person.age, 0) / 
 let roundedAvgAge = averageAge.toFixed(2);
 
 let sortedByAge = people.sort((person1, person2) => person1.age > person2.age);
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 			</section>
 			<section>
@@ -1315,8 +1251,7 @@ let sortedByAge = people.sort((person1, person2) => person1.age > person2.age);
 				<p>
 					С помощью оператора <span class="blue">in</span> можно проверить, есть ли заданный ключ в указанном объекте.
 				</p>
-				<pre>
-					<code class="js">
+				<pre><code class="js">
 let soup = { freshness: 2, taste: 3, name: "borscht", "cook": "Anatoly" };
 if ('tast' in soup) {
 
@@ -1333,8 +1268,7 @@ if (0 in soup === false) {
 	console.log("There is no 0");
 
 }
-					</code>
-				</pre>
+				</code></pre>
 			</section>
 			<section>
 				<section>
@@ -1354,8 +1288,7 @@ if (0 in soup === false) {
 				</section>
 				<section>
 					<h2>Классический while</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 let sum = 0;
 while (sum < 20) {
@@ -1363,13 +1296,11 @@ while (sum < 20) {
     sum += arr.length;
 
 }
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Классический do while</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 let rnd, ind;
 do {
@@ -1379,13 +1310,11 @@ do {
 
 } while (ind === -1);
 arr.splice(ind, 1);
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>Классический for</h2>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let arr = ["File", 'Line', `Ending`, `Work`, 'Directory', "Warning"];
 
 for (let i = 0; i < arr.length; ++i) {
@@ -1397,16 +1326,14 @@ for (let i = 0; i < arr.length; ++i) {
     }
 }
 // arr = [`Ending`, 'Directory', "Warning"]
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>for in</h2>
 					<p>
 						Цикл <span class="blue">for in</span> используется для перебора свойств (ключей) объекта.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let data = {
 	id: "234BC34P2321ET12",
 	name: "Volodimir Tarasov",
@@ -1423,16 +1350,14 @@ for (let prop in data) {
 resStr += "/&gt;";
 console.log(resStr);
 // &lt;person id='234BC34P2321ET12' name='Volodimir Tarasov' birth='31.12.1991' number='ES377991' /&gt;
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>for of</h2>
 					<p>
 						Цикл <span class="blue">for of</span> используется для перебора элементов массива.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let dict = [
 	{ english: "trophy", russian: "трофей" },
 	{ english: "eggplant", russian: "баклажан" },
@@ -1449,16 +1374,14 @@ for (let word of dict) {
 
 	}
 }
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 				<section>
 					<h2>forEach</h2>
 					<p>
 						Метод <span class="blue">forEach</span> используется для написания циклов в функциональном стиле.
 					</p>
-					<pre>
-						<code class="js">
+					<pre><code class="js">
 let prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41];
 let ret = '';
 prime.forEach((value, index, array) => {
@@ -1472,8 +1395,7 @@ prime.forEach((value, index, array) => {
 });
 
 console.log(ret);
-						</code>
-					</pre>
+					</code></pre>
 				</section>
 			</section>
 			<section>
