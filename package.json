@@ -1,7 +1,7 @@
 {
-  "name": "reveal-template",
+  "name": "js",
   "version": "1.0.0",
-  "description": "The lectures about something",
+  "description": "Learning frontend JavaScript",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
