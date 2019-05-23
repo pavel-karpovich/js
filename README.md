@@ -94,4 +94,4 @@ DOM события. Категории событий. Обработка соб
 
 * Задание 9.
 
-{Скоро будет здесь}
+[*Юнит тесты*](https://docs.google.com/document/d/115s77TBrj1KuafrTNRUX1XwAbTrsMCUZzZeozO1ipLY/edit?usp=sharing "Юнит тесты") 
