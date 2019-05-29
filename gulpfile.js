@@ -22,7 +22,7 @@ const browserSync = require('browser-sync'),
 const srcPath = {
   'src': './src',
   'html': './src/**/*.html',
-  'img': './src/**/*.+(jpg|jpeg|png|svg|gif)',
+  'img': './src/**/*.+(jpg|jpeg|png|svg|gif|ico)',
   'css': ['./src/!(css|js)*/**/*.css'],
   'cssLint': './src/**/*.css',
   'js': './src/!(js|completed)*/**/*.js',
