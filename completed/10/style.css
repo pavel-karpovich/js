@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa:400,700&subset=cyrillic');
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-content: center;
+    background-color: #5bc0eb;
+}
+.welcome {
+    height: auto;
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    font-size: 4vw;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+.welcome > p {
+    margin: 0;
+}
+.welcome > p:first-child {
+    margin-bottom: 20px;
+}
+.welcome .name {
+    color: #E55934;
+}
+.welcome + div {
+    height: 25%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.button {
+    margin: 0 40px;
+    outline: none;
+    border: none;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+    font-size: 5vh;
+    padding: 20px 40px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: black solid 2px;
+    background-color: white;
+}
+
+.select {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.select > p {
+    font-size: 4vw;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+.select > ul {
+    width: 600px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: #7e64cc;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+    color: #4f4f69;
+    border-radius: 30px;
+    border: 4px solid #7e64cc;
+    overflow: hidden;
+}
+.select li {
+    height: 100px;
+    line-height: 100px;
+    /* padding-right: 60px; */
+    background-color: white;
+    user-select: none;
+    cursor: pointer;
+}
+.select li:not(:first-child) {
+    margin-top: 4px;
+}
+.select li:hover {
+    background-color: orange;
+}
+.animal {
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+.reload {
+    box-sizing: border-box;
+    height: 5vw;
+    width: 5vw;
+    padding: 1vw;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px 0 black;
+    margin-bottom: 40px;
+    background-color: white;
+}
+.reload > img {
+    width: 100%;
+    height: 100%;
+}
+.animal > img {
+    height: 60%;
+    box-shadow: 20px 20px 0 0 #f1f068;
+}
+.animal > p {
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+    text-shadow: 1px 1px 0 white;
+}

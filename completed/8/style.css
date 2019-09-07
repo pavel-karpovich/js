@@ -1,0 +1,391 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@font-face {
+    font-family: 'Izhitsa Cyrillic';
+    src: url('fonts/izhitsa-cyrillic.ttf');
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+.header {
+    background-color: #c2e9e9;
+    height: 50px;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.header > img {
+    margin: 2px 0 2px 60px;
+    cursor: pointer;
+}
+
+.header>button {
+    outline: none;
+    margin-top: -2px;
+}
+.new-game > svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    min-width: 1920px;
+    min-height: 1080px;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+@media (max-width: 1920px) {
+    .new-game > svg {
+        left: calc((100vw - 1920px) / 2);
+    }
+ }
+/* @media (max-height: 720px) {
+    .new-game {
+        bottom: calc((100vh - 1080px) / 2);
+    }
+} */
+.go-up {
+    transition: bottom 3s ease;
+    bottom: 100% !important;
+}
+.go-down {
+    transition: bottom 3s ease;
+    bottom: -100% !important;
+}
+.svg-bombs {
+    position: absolute;
+}
+
+.menu { 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: darkgreen;
+    top: 0;
+    -moz-user-select: none;
+    user-select: none;
+}
+.menu-shown {
+    transition: top .6s ease-out,
+        background-color .3s linear .45s;
+
+}
+.menu-hidden {
+    top: -100%;
+    background-color: transparent;
+    transition: top .6s ease-in,
+        background-color .2s linear;
+}
+
+.menu>div {
+    position: relative;
+    height: 450px;
+    width: 400px;
+    background: #fff;
+    border-radius: 20px 20px 4px 4px;
+    box-shadow: 0 0 32px 1px black;
+    background-image: url("img/background.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: border-box;
+    background-size: 101%;
+}
+
+.menu-close {
+    position: absolute;
+    color: #e02c2c;
+    top: 10px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.menu-close:hover {
+    color: #b12929;
+}
+
+.menu-content {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 50px;
+    padding-bottom: 20px;
+}
+
+.menu-content>img {
+    width: 80%;
+    align-self: center;
+    margin-top: -40px;
+}
+
+.menu-content>div {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.area-size {
+    margin-top: 30px;
+}
+
+.menu-content label {
+    font-size: 1.4rem;
+}
+
+.area-size>label::before {
+    content: "🗒️";
+}
+
+.area-size>div {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 10px 0;
+}
+
+.menu-content input {
+    height: 24px;
+    width: 30%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    transform: scaleY(1.2);
+}
+
+.area-size>div>span {
+    font-size: 1.2rem;
+    line-height: 34px;
+    margin: 0 4px 0 6px;
+    transform: scaleY(1.2);
+}
+
+.bombs>label::before {
+    content: "💣";
+}
+
+.menu-content .bombs>input {
+    margin-top: 10px;
+}
+
+.menu-content>button {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.4rem;
+    height: 60px;
+    width: 180px;
+    align-self: center;
+    margin-top: 30px;
+    background: #af6f41;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    animation: heartbeat 3s ease-in-out infinite both;
+}
+
+.menu-content>button:hover {
+    background: #daa077;
+}
+
+@keyframes heartbeat {
+    from {
+        transform: scale(1);
+        transform-origin: center center;
+        animation-timing-function: ease-out;
+    }
+
+    5% {
+        transform: scale(0.91);
+        animation-timing-function: ease-in;
+    }
+
+    8% {
+        transform: scale(0.98);
+        animation-timing-function: ease-out;
+    }
+
+    16% {
+        transform: scale(0.87);
+        animation-timing-function: ease-in;
+    }
+
+    22% {
+        transform: scale(1);
+        animation-timing-function: ease-out;
+    }
+}
+
+.game {
+    height: calc(100% - 50px);
+    background: #fff4a3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    -moz-user-select: none;
+    position: relative;
+}
+
+.game>span {
+    font-size: 8rem;
+    color: #77a4c5;
+    margin: 0 40px;
+    text-align: center;
+}
+
+.board-container {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+    text-align: center;
+    line-height: 100%;
+    white-space: nowrap;
+}
+.board-container::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+.game .board {
+    display: inline-flex;
+    vertical-align: middle;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 100px;
+}
+.game .board > div {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.board .cell {
+    box-sizing: border-box;
+    height: 26px;
+    width: 26px;
+    flex: 0 0 26px;
+    line-height: 26px;
+    border: 1px solid #444;
+    text-align: center;
+    -moz-user-select: none;
+    user-select: none;
+}
+.board .unknown {
+    background-color: #93EF81;
+    transition: background-color 1s linear;
+}
+.board .unknown:hover:not([class*="flag"]) {
+    background-color: rgb(73, 175, 52);
+    transition: none;
+}
+.board .safely {
+    background-color: rgb(238, 191, 138);
+    transition: none;
+}
+.board .bomb {
+    background-color: red;
+    transition: none;
+}
+.board .flag {
+    background-color: rgb(190, 190, 190);
+    transition: none;
+}
+
+.invisible {
+    display: none !important;
+}
+.game-bar {
+    height: 60px;
+    width: 300px;
+    border-radius: 30px;
+    border: 1px solid #222;
+    position: absolute;
+    bottom: 0;
+    left: calc(50% - 150px);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #eee;
+    font-size: 1.4rem;
+}
+.game-bar-drag {
+    box-sizing: border-box;
+    padding: 14px;
+    width: 52px;
+    cursor: move;
+}
+.game-bar-drag > img {
+    width: 21px;
+}
+.game-over-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 400px;
+    height: 140px;
+    background: #c2e9e9;
+    z-index: 10;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 black;
+}
+.game-over-popup > span {
+    font-family: "Roboto", serif;
+    font-size: 2.4rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #222;
+}
+.game-over-popup > img {
+    width: 60px;
+    transform-origin: center;
+    cursor: pointer;
+}
+.game-over-popup > img:hover {
+    transform: scale(1.04);
+}
+.game-win-popup {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 420px;
+    height: 120px;
+    background: #8cc63f;
+    z-index: 10;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 black;
+    box-sizing: border-box;
+    padding: 18px 0;
+}
+.game-win-popup > span {
+    font-family: "Roboto", serif;
+    font-size: 2rem;
+    color: #222;
+}

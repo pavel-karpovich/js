@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css?family=Yeseva+One&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,600i&subset=cyrillic');
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    font-family: 'Open Sans';
+    font-weight: 400;
+}
+body > header {
+    height: 60px;
+    background-color: #7161EF;
+}
+.content {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.riddle {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFECE4;
+    border-bottom: 1px solid #B2B2B2;
+    color: rgba(0,0,0,.75);
+    overflow: hidden;
+}
+.riddle > p {
+    margin: 0 100px;
+    font-size: 2.8rem;
+    text-align: center;
+}
+.main-area {
+    box-sizing: border-box;
+    height: 44%;
+    width: 100%;
+    background-color: #FFE7DB;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 100px;
+    overflow: auto;
+    font-family: 'Yeseva One';
+    text-align: center;
+    font-size: 5rem;
+}
+.main-area > div {
+    background-image: linear-gradient(rgba(32,32,32,.8), rgba(96,96,96,.7));
+    width: 12vh;
+    height: 12vh;
+    line-height: 12vh;
+    margin: 10px;
+    border: 2px solid #B2B2B2;
+    user-select: none;
+    color: transparent;
+}
+.main-area > div.revealed {
+    background-image: linear-gradient(#eee, #fff);
+    transition: color 1.2s ease-out;
+    color: rgba(0,0,0,.75);
+    cursor: default;
+}
+.manage {
+    height: 36%;
+    width: 100%;
+    display: flex;
+    background-color: #FFECE4;
+    border-top: 1px solid #B2B2B2;
+}
+.guess {
+    flex: 3;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-size: 3rem;
+    color: rgba(0,0,0,.75);
+}
+.guess > div {
+    box-sizing: border-box;
+    height: 120px;
+    line-height: 120px;
+    padding: 20px;
+}
+.guess > label {
+    width: 500px;
+    position: relative;
+}
+.guess input {
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Open Sans';
+    padding: 2px 10px;
+    outline: none;
+    border: none;
+    background: transparent;
+    border-bottom: 2px solid #b2b2b2;
+    color: #9e7b57;
+}
+.guess span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #7161EF;
+    will-change: width;
+    transition: width .8s ease;
+}
+input:focus + span {
+    width: 100%;
+}
+.stats {
+    flex: 2;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    color: rgba(0,0,0,.75);
+}
+.stats-score {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin-top: 80px;
+}
+.stats-score > div:first-child {
+    font-size: 3rem;
+}
+.stats-score > div:last-child {
+    font-size: 3.4rem;
+    font-weight: 600;
+    font-style: italic;
+    margin-top: -10px;
+    color: #2aa9dc;
+}
+.stats-count {
+    text-align: center;
+    font-size: 1.2rem;
+}
+.stats-count > span:last-child {
+    font-style: italic;
+}
+.letter {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.abc {
+    box-sizing: border-box;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    flex-flow: row wrap;
+    border: 2px solid #b2b2b2;
+    padding: 6px;
+    box-shadow: -4px 4px 20px 0 rgba(0,0,0,.3);
+}
+.abc > span {
+    background: white;
+    margin: 6px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid rgba(0,0,0,.75);
+    user-select: none;
+}
+span.green {
+    cursor: default;
+    background-color: #43af3c;
+    color: white;
+}
+span.red {
+    cursor: default;
+    background-color: #e23f3f;
+    color: white;
+}

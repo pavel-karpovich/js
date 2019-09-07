@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<title>События DOM</title>
+	<meta name="description" content="internet">
+	<meta name="keywords" content="internet">
+	<meta name="author" content="Pavel Karpovich">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="../../icon.png">
+	<link rel="stylesheet" href="../../css/bundle.min.css">
+	
+	<link rel="stylesheet" href="../../css/custom.css" />
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? "../../css/print/pdf.css" : "../../css/print/paper.css";
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="../../js/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<script src="../../js/theme.js"></script>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+                <section>
+                    <h1>Веб программирование. Фронтенд</h1>
+                    <h3>События DOM</h3>
+					<div>
+						<p style="display: inline-block;">
+							Карпович Павел / 
+						</p>
+						<a href="https://github.com/tgjmjgj" class="icon-button github">
+							<i class="fa fa-github"></i><span></span>
+						</a>
+						<a href="https://facebook.com/paradox7master" class="icon-button facebook">
+							<i class="fa fa-facebook"></i><span></span>
+						</a>
+					</div>
+                </section>
+				<section>
+					<h2>Содержание лекции</h2>
+					<nav id="presentable-toc" class="table-content"></nav>
+				</section>
+			</section>
+            <section>
+                <section>
+                    <h2>События DOM</h2>
+                    <p>
+                        Мы рассмотрели структурную составляющую DOM модели, но в ней остался ещё большой
+                        неразведанный пласт - <span class="purple">события</span>.
+                    </p>
+                    <p>
+                        С помощью событий строится вся интерактивность между пользователем и документом. Но они используются
+                        не только для этого. В DOM сокрыто по настоящему огромное количество разнообразных событий,
+                        многие из которых используются не для взаимодействия с пользователем, а для общения разных программных
+                        компонентов и системных уведомлений.
+                    </p>
+                </section>
+                <section>
+                    <h2>События</h2>
+                    <p>
+                        Вообще, сами по себе, события - это какие-то штуки, происходящие с HTML элементами. Потенциально, 
+                        любое изменение состояния системы может вызывать событие.
+                    </p>
+                    <p>
+                        Некоторые события генерируются в результате действий пользователя, некоторые в результате действий
+                        браузера, некоторые ещё каким-нибудь образом.
+                    </p>
+                    <p>
+                        Вот несколько примеров событий:
+                    </p>
+                    <ul>
+                        <li>Завершение загрузки HTML страницы</li>
+                        <li>Изменение значения в текстовом поле</li>
+                        <li>Нажатие на кнопку</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Обработка событий</h2>
+                    <p>
+                        Ну и главное, что позволяет делать API событий - это определять, какие программные действия должны
+                        выполняться при происхождении того или иного события.
+                    </p>
+                    <p>
+                        К любому DOM событию можно привязать Javascript функцию, которая будет выполняться при происхождении
+                        этого события.
+                    </p>
+                    <p>
+                        Я насчитал +- 262 события, присутствующих в настоящий момент в JS.
+                    </p>
+                    <p>
+                        Полный их перечень можно посмотреть <a href="https://developer.mozilla.org/en-US/docs/Web/Events">на MDN</a>
+                         (но лучше не надо).
+                    </p>
+                </section>
+                <section>
+                    <h2>Многообразие API</h2>
+                    <p>
+                        На самом деле событий так много, потому что среди них куча очень специфических событий, относящихся
+                        к какому-то узконаправленному компоненту Веб API.
+                    </p>
+                    <p>
+                        Например, есть такие категории событий:
+                    </p>
+                    <ul>
+                        <li>События виртуальной реальности</li>
+                        <li>События SVG</li>
+                        <li>События встроенной БД</li>
+                        <li>События вкладок</li>
+                        <li>События Ip-телефонии</li>
+                        <li>События SMS и USSD</li>
+                    </ul>
+                    <p>
+                        Основных используемых событий не так уж и много.
+                    </p>
+                </section>
+                <section>
+                    <h2>Основные события</h2>
+                    <p>
+                        Вот некоторые типы основных событий:
+                    </p>
+                    <ul>
+                        <li>События мыши</li>
+                        <li>События клавиатуры</li>
+                        <li>События изменения DOM дерева</li>
+                        <li>События фокуса</li>
+                        <li>События буфера обмена</li>
+                        <li>События форм</li>
+                        <li>События Drag & Drop</li>
+                        <li>События медиа</li>
+                        <li>События изменения значения</li>
+                    </ul>
+                    <p>
+                        На самом деле, самое главное событие всего одно, и мы его уже знаем - это событие <i>click</i>.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Примеры основных событий</h2>
+                    <p>
+                        Вот парочка событий, которые применяются наиболее часто:
+                    </p>
+                    <table>
+                        <tr>
+                            <th><span>Событие</span></th>
+                            <th>Описание</th>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">click</span></td>
+                            <td>Клик мышкой</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">DOMContentLoaded</span></td>
+                            <td>Загрузка всего DOM дерева</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">mouseover</span></td>
+                            <td>Наведение курсора мыши на элемент</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">mouseout</span></td>
+                            <td>Выход курсора мыши за пределы элемента</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">keydown</span></td>
+                            <td>Нажатие клавиши на клавиатуре</td>
+                        </tr>
+                        <tr>
+                            <td><span class="blue">change</span></td>
+                            <td>Изменение значения в элементе управления</td>
+                        </td>
+                    </table>
+                </section>
+                <section>
+                    <h2>Обработчики событий</h2>
+                    <p>
+                        <span class="purple">Обработчик события</span> - обычная функция, которая будет выполняться по
+                        происшествию какого-либо события.
+                    </p>
+                    <p>
+                        И существует 3 способа, как назначить событию обработчик.
+                    </p>
+                    <ul>
+                        <li>Через HTML</li>
+                        <li>Через встроенный обработчик</li>
+                        <li>Через добавление нового обработчика</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Обработчик в HTML <h3>(никогда так не делайте!)</h3></h2>
+                    <p>
+                        Для многих базовых DOM событий у HTML элементов есть подготовленные атрибуты для привязки обработчиков
+                        событий.
+                    </p>
+                    <p>
+                        Этим способом в качестве обработчика события привязывается не функция, а просто JS код.
+                    </p>
+                    <p>
+                        Атрибуты называются по имени события + приставка "on". Атрибут для обработчика события <i>click</i> -
+                        <span class="blue">onclick</span>, атрибут для обработчика события <i>change</i> - <span class="blue">onchange</span>,
+                        для события <i>load</i> - <span class="blue">onload</span> и т.д.
+                    </p>
+                    <p>
+                        Подобные атрибуты есть не для всех событий, поэтому нужно быть внимательными.
+                    </p>
+                    <p>
+                        В этот атрибут просто записывается Javascript код, взятый в кавычки.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример событий в HTML</h3>
+                    <pre><code class="html">
+&lt;body onload="let a = document.body.createElement('div'); document.body.appendChild(a);"&gt;
+    &lt;button onclick="this.innerHTML = Date()"&gt;The time is?&lt;/button&gt;
+    &lt;img src="imag1.png" onmouseover="console.log('mouse over img')"/&gt;
+&lt;/body&gt;
+                    </code></pre>
+                    <pre><code class="html">
+&lt;!-- Это работать не будет! --&gt;
+&lt;div onclick="myFunctionName" /&gt;
+&lt;!-- Этим способом нужно прописывать не имя функции-обработчика, а сами действия - вызов --&gt;
+&lt;div onclick="myFunctionName()" /&gt;
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Встроенный обработчик</h2>
+                    <p>
+                        Второй способ уже совершается через JS.
+                    </p>
+                    <p>
+                        Для того, чтобы привязать обработчик, необходимо получить объект нужного элемента страницы.
+                        И далее, у элемента можно обратиться к свойству с таким же названием, как у атрибутов из
+                        прошлого варианта.
+                    </p>
+                    <p>
+                        Для события <i>click</i> будет свойство <span class="blue">element.onclick</span>, для события
+                        <i>keydown</i> - свойство <span class="blue">element.onkeydown</span> и т.д.
+                    </p>
+                    <p>
+                        И в это свойство нужно просто записать функцию-обработчик.
+                    </p>
+                    <pre><code class="js">
+element.onevent = function handler() { };
+                    </code></pre>
+                    <p>
+                        И, как и в предыдущем случае, нужно учитывать, что не для всех событий в JS есть встроенные свойства.
+                    </p>
+                </section>
+                <section>
+                    <h3>Примеры со встроенным обработчиком</h3>
+                    <pre><code class="js">
+// Событие click
+let div = document.getElementsByTagName("div");
+div.onclick = function() {
+    console.log("Click-clack!");
+};
+// Событие mouseover
+function myAction() {
+    console.log("mouse over event!");
+}
+// Здесь уже идёт присваивание именно самой функции
+div.onmouseover = myAction;
+// Запись с вызовом работать не будет:
+div.onmouseover = myAction();       // div.onmouseover = undefined
+
+// Событие copy
+div.oncopy = () => console.log("Don't copy code!!!");
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Проблема встроенного обработчика</h3>
+                    <p>
+                        У такого способа назначения обработчика есть один большой недостаток - с помощью свойства
+                        можно назначать только один обработчик.
+                    </p>
+                    <p>
+                        Если у элемента свойством задан уже какой-то обработчик, то повторное назначение обработчика
+                        не добавит второй, а перезапишет первый оригинальный.
+                    </p>
+                    <pre><code class="js">
+div.onclick = function () {
+    console.log("Click handler 1");
+};
+// Первый обработчик сотрётся
+div.onclick = function () {
+    console.log("Click handler 2");
+};
+div.click(); //  Click handler 2
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Добавление через метод</h2>
+                    <p>
+                        И наконец, самый универсальный и функциональный вариант - добавление обработчика через
+                        метод <span class="blue">addEventListener</span>.
+                    </p>
+                    <p>
+                        С помощью этого метода можно добавить обработчик на любое событие и в любых количествах.
+                    </p>
+                    <pre><code class="js">
+addEventListener("eventName", Function);
+                    </code></pre>
+                    <p>
+                        Метод принимает 2 обязательных параметра: строку с названием события и саму функцию-обработчик.
+                    </p>
+                    <p>
+                        Можно использовать имя ранее описанной функции, можно создавать анонимную прямо здесь, без разницы.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример с addEventListener</h3>
+                    <p>
+                        С помощью <span class="blue">addEventListener()</span> можно добавить одновременно несколько обработчиков
+                        одного и того же события для одного элемента:
+                    </p>
+                    <pre><code class="js">
+div.addEventListener("click", function() {
+    console.log("Click handler 1");
+});
+div.addEventListener("click", function() {
+    console.log("Click handler 2");
+});
+div.addEventListener("click", function() {
+    console.log("Click handler 3");
+});
+div.click(); //  Click handler 1, Click handler 2, Click handler 3
+                    </code></pre>
+                    <p>
+                        Порядок их вызова определяется порядком назначения.
+                    </p>
+                </section>
+                <section>
+                    <h2>Удаление обработчика</h2>
+                    <p>
+                        Обработчик, добавленный через HTML атрибут, удаляется посредством обнуления значения атрибута.
+                    </p>
+                    <p>
+                        Обработчик, добавленный через JS свойство, удаляется посредством обнуления значения свойства.
+                    </p>
+                    <p>
+                        А обработчик, добавленный с помощью метода <span class="blue">addEventListener()</span>,
+                        удаляется при помощи метода <span class="blue">removeEventListener()</span>;
+                    </p>
+                </section>
+                <section>
+                    <h2>Метод removeEventListener</h2>
+                    <p>
+                        Метод <span class="blue">removeEventListener()</span> вызывается аналогично методу для добавления,
+                        с таким же набором параметров.
+                    </p>
+                    <p>
+                        Это значит, что для удаления обработчика, нужно иметь ссылку на назначенную функцию, или,
+                        проще говоря, у функции должно быть имя.
+                    </p>
+                    <p>
+                        Удаление происходит следующим образом:
+                    </p>
+                    <pre><code class="js">
+function clickHandler() {
+    console.log("You click on me");
+}
+
+// Добавили обработчик clickHandler
+div.addEventListner("click", clickHandler);
+
+// Через 10 секунд...
+setTimeout(function() {
+
+    // Сняли обработчик clickHandler
+    div.removeEventListener("click", clickHandler);
+
+}, 10000);
+
+// Вот такой обработчик нельзя удалить (простым способом)
+div.addEventListener("mouseover", function() {
+    console.log("I'am immortal, mwha-ha-how!");
+});
+
+// Чтобы можно было удалить, у функции должно быть имя
+div.addEventListener("mouseout", function onMouseOut() {
+    console.log("But not me...");
+});
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Типы событий</h2>
+                    <p>
+                        Мы раньше упомянули, что события бывают разных <i>типов</i>. Например, события мыши, события
+                        клавиатуры, события буфера обмена и т.д.
+                    </p>
+                    <p>
+                        Разные источники их проявления - это не единственные отличия между ними.
+                    </p>
+                    <p>
+                        Все функции-обработчики событий могут принимать один параметр - аргументы события. И у разных
+                        типов событий эти аргументы различаются. У всех событий мыши туда приходит один объект,
+                        у всех событий клавиатуры другой объект, и т.д. Для каждого типа событий свои особенные параметры.
+                    </p>
+                </section>
+                <section>
+                    <h2>Аргументы событий</h2>
+                    <p>
+                        Что вообще такое аргументы события? Это просто объект, который содержит всякую дополнительную
+                        полезную информацию о произошедшем событии.
+                    </p>
+                    <p>
+                        Для событий мыши там содержится информация, специфичная для мыши. Например, координаты курсора,
+                        или информация о том, какая из клавиш мыши была нажата.
+                    </p>
+                    <p>
+                        Для событий клавиатуры там содержится другая, своя информация: на какую клавишу было совершено
+                        нажатие, были ли в этот момент зажаты клавиши-модификаторы и т.д.
+                    </p>
+                </section>
+                <section>
+                    <h2>Аргументы в обработчике события</h2>
+                    <p>
+                        Аргументы события передаются в обработчики событий в виде единственного параметра функции.
+                    </p>
+                    <p>
+                        Обычно этот параметр называют просто <span class="blue">e</span>.
+                    </p>
+                    <pre><code class="js">
+element.addEventListener("click", function(e) {
+    console.log("Mouse Event Arguments: " + e);
+});
+                    </code></pre>
+                    <p>
+                        Любая функция-обработчик события может принимать такой параметр, для использования в своей логике
+                        аргументов произошедшего события.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Аргументы события мыши</h2>
+                    <p>
+                        В аргументы событий мыши передаётся объект <span class="blue">MouseEvent</span>, который имеет
+                        массу полезных свойств, характеризующих поведение мыши:
+                    </p>
+                    <ul>
+                        <li><span class="blue">clientX/Y, layerX/Y, offsetX/Y, pageX/Y, screenX/Y, x/y</span> - всевозможные относительные виды
+                        координат места на экране, в котором событие мыши произошло</li>
+                        <li><span class="blue">movementX/movementY</span> - сдвиг курсора мыши между вызовами события <i>mousemove</i></li>
+                        <li><span class="blue">altKey, ctrlKey, shiftKey</span> - были ли зажаты клавиши-модификаторы на клавиатуре</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Продолжение</h3>
+                    <ul>
+                        <li><span class="blue">detail</span> - сколько раз подряд произошло одинаковое событие мыши</li>
+                        <li><span class="blue">isTrusted</span> - показывает, было ли событие совершено пользователем, или скриптом</li>
+                        <li><span class="blue">type</span> - тип произошедшего события (click, mouseup)</li>
+                        <li><span class="blue">button, which</span> - показывает, какая кнопка мыши произвела событие</li>
+                        <li><span class="blue">target</span> - элемент, для которого выполняется обработчик</li>
+                        <li><span class="blue">timeStamp</span> - относительная временная метка события</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Примеры</h2>
+                    <p>
+                        которых нет
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Аргументы события клавиатуры</h2>
+                    <p>
+                        Объект <span class="blue">KeyboardEvent</span> содержит следующие полезные свойства:
+                    </p>
+                    <ul>
+                        <li><span class="blue">code, key, keyCode</span> - информация о нажатой клавише в разных формах</li>
+                        <li><span class="blue">altKey, ctrlKey, shiftKey</span> - были ли зажаты клавиши-модификаторы</li>
+                    </ul>
+                    <p>
+                        А большего и не надо.
+                    </p>
+                </section>
+                <section>
+                    <h2>Примеры</h2>
+                    <p>
+                        которых нет
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Погружение и всплытие</h2>
+                    <p>
+                        Это очень интересная тема, связанная со вложенной структурой интерфейса, и затрагивающая принципы
+                        работы всех событий, происходящих с элементами интерфейса страницы.
+                    </p>
+                    <p>
+                        Обработчик событий можно повесить на любой элемент на HTML странице.
+                    </p>
+                    <p>
+                        Представьте, что элементу <i>body</i> назначен какой-то обработчик события <i>click</i>. А внутри
+                        него на странице есть кнопка, которой тоже назначен обработчик события <i>click</i>. 
+                    </p>
+                    <p>
+                        Как тогда будут себя вести обработчики, если пользователь нажмёт на кнопку, которая внутри <i>body</i>?
+                        Ведь по сути, он в то же время нажмёт и на само <i>body</i>...
+                    </p>
+                </section>
+                <section>
+                    <h2>Погружение и всплытие</h2>
+                    <p>
+                        Или возьмём, например, событие перемещения мыши <i>mousemove</i>.
+                    </p>
+                    <p>
+                        Когда пользователь двигаем мышью над картинкой <i>img</i>, находящейся внутри <i>div</i>-а, 
+                        находящегося внутри <i>section</i>-а, находящегося внутри <i>main</i>.
+                    </p>
+                    <p>
+                        Над каким элементом он на самом деле двигает мышью?
+                    </p>
+                    <p>
+                        Над всеми сразу? Отчасти, это верный ответ.
+                    </p>
+                </section>
+                <section>
+                    <h2>Жизненный цикл события</h2>
+                    <p>
+                        Жизненный цикл события элемента интерфейса состоит из 3 фаз:
+                    </p>
+                    <ul>
+                        <li>1. Фаза перехвата (погружения)</li>
+                        <li>2. Фаза цели</li>
+                        <li>3. Фаза всплытия</li>
+                    </ul>
+                    <p>
+                        Каждое событие (практически), будь то клик, движение мышью или нажатие
+                        клавиши, проходит все эти три фазы.
+                    </p>
+                    <p>
+                        Можно считать, что жизненные фазы события определяют порядок выполнения обработчиков события.
+                    </p>
+                </section>
+                <section>
+                    <h2>Жизненный цикл события</h2>
+                    <img src="img/eventflow.png">
+                </section>
+                <section>
+                    <h2>Фазы</h2>
+                    <p>
+                        На первой <span class="purple">фазе погружения (перехвата)</span> происходит поиск и выполнение обработчиков для
+                        произошедшего события, сверху вниз по элементами DOM дерева, от <i>Window</i> до целевого элемента, на который
+                        было произведено нажатие, среди <u>обработчиков фазы погружения</u>.
+                    </p>
+                    <p>
+                        На второй <span class="purple">фазе цели</span> вызываются обработчики целевого элемента события.
+                    </p>
+                    <p>
+                        На третей <span class="purple">фазе всплытия</span> ищутся и вызываются обработчики по направлению снизу вверх от
+                        целевого элемента до объекта <i>Window</i>. Здесь используются <u>обработчики фазы всплытия</u>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Разные виды обработчиков</h2>
+                    <p>
+                        По умолчанию, все обработчики событий создаются для третей фазы, фазы всплытия.
+                    </p>
+                    <p>
+                        Это определяется третьим параметром функции <span class="blue">addEventListener()</span>, значение по умолчанию
+                        для которого равно <span class="blue">false</span>.
+                    </p>
+                    <p>
+                        Чтобы зарегистрировать обработчик события для первой фазы, фазы погружения, нужно передать в качестве третьего
+                        параметра значение <span class="blue">true</span>.
+                    </p>
+                    <pre><code class="js">
+// Регистрация обработчика для фазы погружения
+element.addEventListener("event", Function, true);
+
+// Регистрация обработчика для фазы всплытия
+element.addEventListener("event", Function);
+element.addEventListener("event", Function, false);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <pre><code class="js">
+document.addEventListener("click", function() {
+    console.log("1");
+}, true);
+main.addEventListener("click", function() {
+    console.log("2");
+}, true);
+span.addEventListener("click", function() {
+    console.log("3");
+});
+main.addEventListener("click", function() {
+    console.log("4");
+});
+document.addEventListener("click", function() {
+    console.log("5");
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h3>Пример 2</h3>
+                    <div class="flex">
+                        <div class="c1">
+                            <pre><code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main&gt;
+        &lt;ul id="list"&gt;
+            &lt;li&gt;
+                &lt;span&gt;Первый пункт&lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;span&gt;Второй пункт&lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;span&gt;Третий пункт&lt;/span&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;span&gt;Четвёртый пункт&lt;/span&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                            </code></pre>
+                        </div>
+                        <div class="c1">
+                            <pre><code class="js">
+let list = document.getElementById("list");
+list.addEventListener("click", function() {
+    console.log("A");
+});
+
+document.body.addEventListener("click", function() {
+    console.log("B");
+}, true);
+
+let secondListItem = document.querySelector("#list > li:nth-child(2)");
+secondListItem.addEventListener("click", function() {
+    console.log("C");
+}, true);
+
+let thirdSpan = document.querySelector("#list > li:nth-child(3) > span");
+thirdSpan.addEventListener("click", function() {
+    console.log("D");
+});
+                            </code></pre>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Связанные свойства</h2>
+                    <p>
+                        В объекте аргументов события есть свойство <span class="blue">target</span>, которое хранит ссылку на целевой
+                        элемент события, т.е. самый вложенный, конечный элемент, для которого происходит событие, и который будет 
+                        участвовать в целевой фазе.
+                    </p>
+                    <p>
+                        Также есть свойство <span class="blue">path</span>, в котором хранится массив из всех элементов, через которые
+                        проходит событие (т.е. все элементы, участвующие в фазах погружения и всплытия), начиная от <i>Window</i>,
+                        <i>document</i>, <i>html</i>, <i>body</i>, и до целевого элемента <span class="blue">target</span>.
+                    </p>
+                    <p>
+                        А информацию о текущей фазе можно узнать из свойства <span class="blue">eventPhase</span>.
+                    </p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Остановка продвижения события</h2>
+                    <p>
+                        Для того, чтобы прекратить дальнейшее продвижение события, в объекте аргументов события
+                        есть 2 метода:
+                    </p>
+                    <ul>
+                        <li><span class="blue">stopPropagation()</span></li>
+                        <li><span class="blue">stopImmediatePropagation()</span></li>
+                    </ul>
+                    <p>
+                        Вызвав в обработчике метод <span class="blue">e.stopPropagation()</span> можно остановить продвижение
+                        события по всем оставшимся элементам.
+                    </p>
+                    <p>
+                        Это довольно часто бывает полезно, когда требуется как-либо ограничить выполнение обработчика. Если
+                        остановить продвижение события в обработчике, вызывающемся самым первым, то все остальные обработчики
+                        этого события не будут вызваны.
+                    </p>
+                </section>
+                <section>
+                    <h2>Метод stopPropagation 1</h2>
+                    <img src="img/stop_propagation_1.png">
+                </section>
+                <section>
+                    <h2>Метод stopPropagation 2</h2>
+                    <img src="img/stop_propagation_2.png">
+                </section>
+                <section>
+                    <h2>Мгновенная остановка продвижения</h2>
+                    <p>
+                        Метод <span class="blue">stopPropagation()</span> останавливает продвижение события ко всем
+                        последующим элементам DOM дерева, но для текущего узла все обработчики будут выполнены, если их
+                        здесь несколько.
+                    </p>
+                    <p>
+                        Чтобы полностью прекратить выполнение всех последующих обработчиков, включая обработчики текущего
+                        узла, используется метод <span class="blue">stopImmediatePropagation()</span>.
+                    </p>
+                    <p>
+                        После вызова метода <span class="blue">stopImmediatePropagation()</span> гарантированно не будет
+                        вызвано больше ни одного обработчика для данного события.
+                    </p>
+                </section>
+                <section>
+                    <h2>stopPropagation vs stopImmediatePropagation</h2>
+                    <img src="img/stop_immediate_propagation_1.png">
+                </section>
+                <section>
+                    <h2>Метод stopImmediatePropagation</h2>
+                    <img src="img/stop_immediate_propagation_2.png">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Действие по умолчанию</h2>
+                    <p>
+                        Для многих событий на разных элементах интерфейса прописано стандартное поведение, например, при
+                        нажатии (событие <i>click</i>) на ссылку, должен осуществляться переход по ней; при нажатии
+                        на текстовое поле в это текстовое поле должен переходить фокус и появляться каретка ввода; при
+                        нажатии клавиши на клавиатуре (событие <i>keypress</i>), когда там находится фокус, должен
+                        происходить ввод нажатого символа в текстовое содержимое элемента.
+                    </p>
+                    <p>
+                        Всё это является действиями по умолчанию для конкретных элементов и событий. 
+                    </p>
+                    <p>
+                        И это стандартное поведение можно заблокировать, вызвав внутри обработчика метод
+                        <span class="blue">e.preventDefault()</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Метод preventDefault</h2>
+                    <blockquote>
+                        <span class="blue">preventDefault()</span> - метод из объекта аргументов события (е), с помощью
+                        которого можно отключить действие по умолчанию для текущего события.
+                    </blockquote>
+                    <p>
+                        Например, если мы не хотим, чтобы при клике на ссылку происходил переход на другую страницу,
+                        то нужно в обработчике вызвать этот метод:
+                    </p>
+                    <pre><code class="js">
+const a = document.getElementById("link");
+
+a.addEventListener("click", function(e) {
+
+    console.log("click");
+    e.preventDefault();
+
+});
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Делегирование событий</h2>
+                    <p>
+                        Если повесить обработчик на контейнерный элемент, внутри которого содержится много дочерних элементов, 
+                        то с помощью свойства <span class="blue">target</span> можно будет определить, для какого именно
+                        из внутренних элементов этого контейнера произошло событие. 
+                    </p>
+                    <p>
+                        Всегда лучше иметь один обработчик, чем десять.
+                    </p>
+                    <p>
+                        Такой приём называется <span class="purple">Делегирование событий</span>.
+                    </p>
+                </section>
+                <section>
+                    <h2>Делегирование событий</h2>
+                    <p>
+                        Если нескольким элементам нужен одинаковый обработчик, то нужно использовать делегирование. Т.е
+                        привязать обработчик к их общему родителю, и обращаться к нажатому элементу с помощью
+                        свойства <span class="blue">target</span>.
+                    </p>
+                    <img src="img/events_delegation.png">
+                </section>
+                <section>
+                    <h2>Дополнительные проверки</h2>
+                    <p>
+                        Но если в родительском элементе есть что-то ещё, кроме элементов, для которых нужно обрабатывать
+                        событие - какие-то другие элементы, или просто пустые отступы, то нужно добавлять проверку, что
+                        <span class="blue">target</span> - это именно то, что нужно.
+                    </p>
+                    <p>
+                        Если посмотреть на предыдущую картинку, то при нажатии на сам <i>span</i> - в <span class="blue">target</span>
+                        будет записан именно <i>span</i>, на которой было произведено нажатие.
+                    </p>
+                    <p>
+                        Но если кликнуть на свободную область между <i>span</i>-ами, то <span class="blue">target</span> будет
+                        указывать на родительский <i>div</i>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_bJOyNL"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="bJOyNL" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Random circles">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/bJOyNL/">
+                        Random circles</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                      </p>
+                      <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Пользовательские события</h2>
+                    <p>
+                        Можно создавать собственные события для своих нужд.
+                    </p>
+                    <p>
+                        Это позволяет реализовывать в JS приложении паттерн проектирования Издатель-подписчик.
+                    </p>
+                    <p>
+                        Т.е. в одном месте программы мы можем генерировать событие, и в другой части программы назначать
+                        обработчики на это событие.
+                    </p>
+                </section>
+                <section>
+                    <h2>Ключевые действия</h2>
+                    <ol>
+                        <li>Создание события</li>
+                        <li>Привязка обработчиков</li>
+                        <li>Генерация события</li>
+                    </ol>
+                    <pre><code class="js">
+// Создаём событие
+let event = new Event("build");
+
+// Назначаем обработчик
+elem.addEventListener("build", function(e) { console.log("My own Event!") });
+
+// Генерация события - вызываем обработчики
+elem.dispatchEvent(event);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Конструктор Event</h2>
+                    <p>
+                        Вообще, с помощью конструктора <span class="blue">Event</span> можно программно генерировать
+                        любые события: пользовательские и стандартные.
+                    </p>
+                    <pre><code class="js">
+// Стандартное событие клика мышкой
+let programClick = new Event("click");
+button.dispatchEvent(programClick);
+
+// Стандартное событие нажатия клавиши
+let programKeydown = new Event("keydown");
+textArea.dispatchEvent(programKeydown);
+
+// Стандартное событие загрузки ресурса
+let programLoad = new Event("load");
+fileInput.dispatchEvent(programLoad);
+
+// Пользовательское событие
+let myEvent = new Event("pigeon-fly");
+div.dispatchEvent(myEvent);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Объект Event</h2>
+                    <p>
+                        Объект, создающийся в результате вызова конструктора <span class="blue">new Event()</span>
+                        является объектом аргументов события - это тот объект, который приходит параметром в обработчики.
+                    </p>
+                    <p>
+                        Поэтому при программной генерации события его можно программно заполнять вспомогательной информацией.
+                    </p>
+                    <p>
+                        Помимо базового конструктора <span class="blue">Event</span> есть объекты и для более специфичных событий:
+                    </p>
+                    <ul>
+                        <li><span class="blue">MouseEvent</span></li>
+                        <li><span class="blue">KeyboardEvent</span></li>
+                        <li><span class="blue">FocusEvent</span></li>
+                        <li><span class="blue">WheelEvent</span></li>
+                        <li>и другие</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3>Пример</h3>
+                    <pre><code class="js">
+const e = new MouseEvent("click", {
+    bubbles: true,
+    cancelable: true,
+    clientX: 100,
+    clientY: 100,
+    x: 100,
+    y: 100,
+    which: 0
+});
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пользовательский тип события</h2>
+                    <p>
+                        В стандартные объекты <span class="blue">Event</span> можно записывать только стандартные свойства,
+                        их нельзя дополнять своими данными.
+                    </p>
+                    <p>
+                        Если в аргументах события нужно передавать какую-то дополнительную информацию, то на помощь приходят
+                        собственные типы событий: <span class="blue">CustomEvent</span>.
+                    </p>
+                    <p>
+                        Объект <span class="blue">CustomEvent</span> содержит свойство <span class="blue">detail</span>,
+                        в которое вы можете записать всё, что захотите.
+                    </p>
+                </section>
+                <section>
+                    <h3>Пример CustomEvent</h3>
+                    <pre><code class="js">
+const event = new CustomEvent('build', {
+    'detail': {
+        'time': new Date(),
+        'strength': 10
+    }
+});
+
+function eventHandler(e) {
+
+    console.log('The Event was triggered by: ' + e.target);
+    console.log('Event creation time is: ' + e.detail);
+
+}
+
+div.addEventListener('build', eventHandler);
+
+div.dispatchEvent(event);
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>Пример</h2>
+                    <style>
+                        .cp_embed_wrapper > iframe[id="cp_embed_MRLgvR"] {
+                            height: 500px;
+                        }
+                    </style>
+                    <p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="ParadoxMaster" data-slug-hash="MRLgvR" data-preview="true" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="Coin stack">
+                        <span>See the Pen <a href="https://codepen.io/ParadoxMaster/pen/MRLgvR/">
+                        Coin stack</a> by Pavel (<a href="https://codepen.io/ParadoxMaster">@ParadoxMaster</a>)
+                        on <a href="https://codepen.io">CodePen</a>.</span>
+                    </p>
+                    <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+                </section>
+            </section>
+		</div>
+	</div>
+
+	<aside id="presentable-icon" class="cpp">
+		<a title="Содержание лекции" href="#/0/1">
+			<i class="fa fa-list-ul fa-2x controls"></i>
+		</a>
+	</aside>
+	<aside id="presentable-icon-close">
+		<a title="К списку материалов" href="../../index.html#/1">
+			<i class="fa fa-times fa-2x controls"></i>
+		</a>
+	</aside>
+	<aside id="presentable-theme-picker">
+		<div id="hidden-bar" class="invisible">
+			<div>
+				<div data-theme="beige" class="theme-circle theme-beige"></div>
+				<div data-theme="black" class="theme-circle theme-black"></div>
+				<div data-theme="blood" class="theme-circle theme-blood"></div>
+				<div data-theme="league" class="theme-circle theme-league"></div>
+				<div data-theme="moon" class="theme-circle theme-moon"></div>
+				<div data-theme="night" class="theme-circle theme-night"></div>
+				<div data-theme="serif" class="theme-circle theme-serif"></div>
+				<div data-theme="simple" class="theme-circle theme-simple"></div>
+				<div data-theme="sky" class="theme-circle theme-sky"></div>
+				<div data-theme="solarized" class="theme-circle theme-solarized"></div>
+				<div data-theme="white" class="theme-circle theme-white"></div>
+			</div>
+		</div>
+		<div id="selected-theme" class="theme-circle"></div>
+	</aside>
+
+	<script src="../../js/bundle.min.js"></script>
+</body>
+
+</html>
